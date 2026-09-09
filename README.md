@@ -51,7 +51,8 @@ Yêu cầu Node.js 22.13+.
 ```bash
 npm ci
 npm run bpmn:validate -- examples/bpmn/purchasing.bpmn
-npm run bpmn:render -- examples/bpmn/purchasing.bpmn output/purchasing.html "Yêu cầu mua hàng"
+npm run bpmn:layout   -- examples/bpmn/purchasing.bpmn
+npm run bpmn:render   -- examples/bpmn/purchasing.bpmn output/purchasing.html "Yêu cầu mua hàng"
 ```
 
 Không cần chạy website để tạo/xem HTML. Có thể đưa hai lệnh vào pipeline, hoặc để agent tạo BPMN XML + DI rồi validate/render.
@@ -118,8 +119,16 @@ Mẫu minh họa, chưa phải đặc tả được phê duyệt để triển k
 | `vendor/archify/` | Helper upstream, license và revision nguồn |
 | `components/bpmn/` | Trang artifact, editor, controller và explorer |
 | `scripts/` | CLI validate/render, tạo mẫu, đóng gói source |
+| `scripts/check-layout.mjs` | Kiểm hình học BPMNDI: nhãn chồng nhau, node tràn lane, đường xuyên node |
 | `examples/bpmn/` | 6 file XML có BPMNDI |
 | `tests/`, `docs/` | Kiểm tra, kiến trúc, phạm vi QA |
+| `.claude/skills/bpmn-studio/` | Skill hướng dẫn Claude tự vẽ và render BPMN từ repo này |
+
+## Dùng với Claude
+
+`.claude/skills/bpmn-studio/SKILL.md` là bản hướng dẫn để Claude tạo diagram từ mô tả nghiệp vụ mà không cần đọc lại mã nguồn: quy ước tọa độ BPMNDI, bảng màu, danh sách rule mà `validate-bpmn.mjs` kiểm, và vòng lặp bắt buộc viết XML → validate → render.
+
+Claude Code đọc thẳng skill trong repo khi làm việc ở thư mục này. Để dùng ở mọi nơi khác (Cowork, claude.ai), lưu cùng nội dung đó thành một skill trong tài khoản.
 
 ## Mã nguồn và GitHub
 

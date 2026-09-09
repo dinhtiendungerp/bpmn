@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "bpmn:render": "node scripts/render-bpmn.mjs",
     "bpmn:validate": "node scripts/validate-bpmn.mjs",
+    "bpmn:layout": "node scripts/check-layout.mjs",
     "bpmn:examples": "node scripts/build-artifacts.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },
