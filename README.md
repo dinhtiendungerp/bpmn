@@ -58,7 +58,7 @@ npm run bpmn:render   -- examples/bpmn/purchasing.bpmn output/purchasing.html "Y
 Không cần chạy website để tạo/xem HTML. Có thể đưa hai lệnh vào pipeline, hoặc để agent tạo BPMN XML + DI rồi validate/render.
 
 ```bash
-# Tạo lại 6 mẫu XML và HTML
+# Tạo lại 14 mẫu XML và HTML
 npm run bpmn:examples
 
 # Chạy editor và trang diagram mặc định
@@ -96,6 +96,21 @@ Các ID phải có trên plane đang hiển thị. Tham khảo `scripts/build-ar
 | `timer` | Boundary Timer không ngắt, nhắc sau PT24H |
 | `blank` | Start Event để tạo quy trình mới |
 
+### Mẫu nghiệp vụ ERP
+
+Tổng quát hoá từ tài liệu đào tạo triển khai ERP, đã bỏ tên khách hàng và mọi chi tiết nhận dạng tổ chức; chỉ giữ vai trò nghiệp vụ phổ biến.
+
+| Tên file | Luồng | Cấu trúc đáng tham khảo |
+|---|---|---|
+| `PurchasePlanned` | Mua hàng | Chạy MRP, duyệt giá theo hợp đồng, vòng trả lại khi lệch giá |
+| `QcIncoming` | Chất lượng | Cách ly lô, hai kết cục đạt và không đạt trên hai lane khác nhau |
+| `SalesStandard` | Bán hàng | Bốn lane, gateway hạn mức tín dụng với vòng chỉnh đơn |
+| `SalesReturn` | Bán hàng | Nhánh hàng còn bán được hợp nhất lại trước khi xuất hóa đơn điều chỉnh |
+| `ProductionPlan` | Sản xuất | Vòng điều chỉnh khi chưa đủ năng lực sản xuất |
+| `ProductionCosting` | Sản xuất | Chuỗi tuyến tính hai lane, mẫu cho quy trình chốt kỳ |
+| `BankPayment` | Kế toán | Bốn lane có bên ngoài là ngân hàng, gateway thẩm định hồ sơ |
+| `PeriodClose` | Kế toán | Phê duyệt phân cấp: nhánh trọng yếu và không trọng yếu hợp nhất tại bước ghi sổ |
+
 Mẫu minh họa, chưa phải đặc tả được phê duyệt để triển khai cho khách hàng. Mẫu trống cố ý có cảnh báo chưa hoàn chỉnh. Sửa vị trí mẫu không tự tái bố trí các file người dùng đã lưu.
 
 ## Phạm vi hiện tại
@@ -112,7 +127,7 @@ Mẫu minh họa, chưa phải đặc tả được phê duyệt để triển k
 
 | Đường dẫn | Trách nhiệm |
 |---|---|
-| `public/diagrams/` | 6 HTML độc lập để mở/chia sẻ |
+| `public/diagrams/` | 14 HTML độc lập để mở/chia sẻ |
 | `lib/bpmn/artifact-runtime.mjs` | Chuyển ký hiệu/DI/quan hệ BPMN sang SVG semantic Archify |
 | `lib/bpmn/standalone.mjs` | Đóng gói template, viewer, XML, chương và menu file |
 | `public/vendor/archify/template.html` | Template/runtime Archify gốc |
@@ -120,13 +135,13 @@ Mẫu minh họa, chưa phải đặc tả được phê duyệt để triển k
 | `components/bpmn/` | Trang artifact, editor, controller và explorer |
 | `scripts/` | CLI validate/render, tạo mẫu, đóng gói source |
 | `scripts/check-layout.mjs` | Kiểm hình học BPMNDI: nhãn chồng nhau, node tràn lane, đường xuyên node |
-| `examples/bpmn/` | 6 file XML có BPMNDI |
+| `examples/bpmn/` | 14 file XML có BPMNDI |
 | `tests/`, `docs/` | Kiểm tra, kiến trúc, phạm vi QA |
 | `.claude/skills/bpmn-studio/` | Skill hướng dẫn Claude tự vẽ và render BPMN từ repo này |
 
 ## Dùng với Claude
 
-`.claude/skills/bpmn-studio/SKILL.md` là bản hướng dẫn để Claude tạo diagram từ mô tả nghiệp vụ mà không cần đọc lại mã nguồn: quy ước tọa độ BPMNDI, bảng màu, danh sách rule mà `validate-bpmn.mjs` kiểm, và vòng lặp bắt buộc viết XML → validate → render.
+`.claude/skills/bpmn-studio/SKILL.md` là bản hướng dẫn để Claude tạo diagram từ mô tả nghiệp vụ mà không cần đọc lại mã nguồn: quy ước tọa độ BPMNDI, bảng màu, danh sách rule mà `validate-bpmn.mjs` và `check-layout.mjs` kiểm, và vòng lặp bắt buộc viết XML → validate → kiểm bố cục → render.
 
 Claude Code đọc thẳng skill trong repo khi làm việc ở thư mục này. Để dùng ở mọi nơi khác (Cowork, claude.ai), lưu cùng nội dung đó thành một skill trong tài khoản.
 

@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {useCallback,useEffect,useRef,useState} from 'react';
-import {Workflow,Shapes,FolderOpen,History,CircleHelp,ChevronRight,ChevronDown,Plus,Search,Undo2,Redo2,MousePointer2,Hand,MoveRight,Maximize,Minus,Download,Upload,Play,Square,PanelLeftClose,PanelLeftOpen,SlidersHorizontal,CheckCheck,AlertTriangle,CheckCircle2,X,Code2,Presentation,Copy,Trash2,Save,Map,GitBranch,ArrowLeft,ArrowRight,FileCode2,Image,FileText,ShoppingCart,Warehouse,MessagesSquare,AlarmClock,Keyboard,Layers,Route,AlignLeft,AlignCenter,AlignStartVertical,AlignEndVertical,Palette,LoaderCircle,ShieldCheck,PanelRightOpen} from 'lucide-react';
+import {Workflow,Shapes,FolderOpen,History,CircleHelp,ChevronRight,ChevronDown,Plus,Search,Undo2,Redo2,MousePointer2,Hand,MoveRight,Maximize,Minus,Download,Upload,Play,Square,PanelLeftClose,PanelLeftOpen,SlidersHorizontal,CheckCheck,AlertTriangle,CheckCircle2,X,Code2,Presentation,Copy,Trash2,Save,Map,GitBranch,ArrowLeft,ArrowRight,FileCode2,Image,FileText,ShoppingCart,Warehouse,MessagesSquare,AlarmClock,Keyboard,Layers,Route,AlignLeft,AlignCenter,AlignStartVertical,AlignEndVertical,Palette,LoaderCircle,ShieldCheck,PanelRightOpen,ClipboardList,Receipt,CalendarRange,Calculator,Banknote,BookCheck} from 'lucide-react';
 import {SidebarProvider,Sidebar,SidebarHeader,SidebarContent,SidebarFooter,SidebarMenu,SidebarMenuItem,SidebarMenuButton} from '@/components/ui/sidebar';
 import {Tabs,TabsList,TabsTrigger} from '@/components/ui/tabs';
 import {Dialog,DialogContent,DialogHeader,DialogTitle,DialogDescription,DialogFooter} from '@/components/ui/dialog';
@@ -22,7 +22,7 @@ import {useStudio,type StudioController} from './useStudio';
 import './studio.css';
 import {Explorer} from './Explorer';
 
-const templateIcons:Record<string,any>={ShoppingCart,Warehouse,GitBranch,MessagesSquare,AlarmClock,Plus};
+const templateIcons:Record<string,any>={ShoppingCart,Warehouse,GitBranch,MessagesSquare,AlarmClock,Plus,ClipboardList,ShieldCheck,Receipt,Undo2,CalendarRange,Calculator,Banknote,BookCheck};
 function IconButton({label,children,onClick,active=false,disabled=false,...rest}:any){return <Tooltip><TooltipTrigger asChild><button className={'icon-button '+(active?'is-active':'')} aria-label={label} aria-pressed={active} onClick={onClick} disabled={disabled} {...rest}>{children}</button></TooltipTrigger><TooltipContent>{label}</TooltipContent></Tooltip>;}
 const formatDate=(date:string)=>new Date(date).toLocaleString('vi-VN',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
 function MiniProcess({color='blue'}:{color?:string}){return <svg className={'mini-process '+color} viewBox="0 0 300 100" aria-hidden="true"><path d="M35 50H75M135 50H161M189 50H225M175 64V82H105V64" fill="none" stroke="currentColor" strokeWidth="1.6"/><circle cx="25" cy="50" r="10" fill="white" stroke="currentColor" strokeWidth="2"/><rect x="75" y="32" width="60" height="36" rx="6" fill="white" stroke="currentColor" strokeWidth="1.7"/><path d="m175 36 14 14-14 14-14-14z" fill="white" stroke="currentColor" strokeWidth="1.7"/><path d="m171 46 8 8m0-8-8 8" stroke="currentColor"/><rect x="225" y="32" width="45" height="36" rx="6" fill="white" stroke="currentColor" strokeWidth="1.7"/><path d="M90 46h28m-28 8h18M236 46h23m-23 8h16" stroke="currentColor" opacity=".4" strokeWidth="2"/></svg>;}
