@@ -43,13 +43,18 @@ const specs = JSON.parse(await readFile(src, 'utf8'));
 const slug = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/gi, 'd')
   .replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase().slice(0, 60);
 
-const byStream = {};
+const byStream = {}, taken = new Set();
 for (const spec of specs) {
   const dir = new URL(`../examples/processes/${spec.stream}/`, import.meta.url);
   await mkdir(dir, {recursive: true});
-  const name = (spec.code ? spec.code + '-' : '') + slug(spec.name) + '.bpmn';
+  const base = (spec.code ? spec.code + '-' : '') + slug(spec.name);
+  // Hai quy trinh cung ten se de len nhau va mat file, nen them hau to thay vi ghi de.
+  let name = base + '.bpmn';
+  for (let n = 2; taken.has(spec.stream + '/' + name); n++) name = `${base}-${n}.bpmn`;
+  taken.add(spec.stream + '/' + name);
   await writeFile(new URL(name, dir), build(spec));
   (byStream[spec.stream] ||= []).push(name);
 }
 for (const [s, files] of Object.entries(byStream)) console.log(`${s}: ${files.length} quy trình`);
 console.log(`Tổng ${specs.length} file BPMN trong examples/processes/.`);
+if (taken.size !== specs.length) throw new Error(`Thieu file: ${specs.length} spec nhung chi ${taken.size} ten file.`);
