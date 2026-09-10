@@ -1,0 +1,7876 @@
+[
+ {
+  "varName": "autoAP01",
+  "id": "AP01",
+  "name": "Quản lý danh mục Cash / Bank Account",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Người duyệt"
+  ],
+  "width": 1326,
+  "nodes": [
+   {
+    "id": "AP01_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP01_T0",
+    "type": "userTask",
+    "name": "01 · Đề nghị / yêu cầu tạo\nmới",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP Kế toán. Phát sinh nhu cầu quản lý tài khoản tiền, ngân hàng - tạo mới hoặc thay đổi cấp tài khoản, đơn vị tiền tệ, mã Bank Account."
+   },
+   {
+    "id": "AP01_T1",
+    "type": "userTask",
+    "name": "02 · Kiểm tra / phê duyệt",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Người duyệt. Người có thẩm quyền (Kế toán trưởng/ BGĐ) kiểm tra và phê duyệt yêu cầu trước khi đưa vào hệ thống."
+   },
+   {
+    "id": "AP01_T2",
+    "type": "userTask",
+    "name": "03 · Tạo / cập nhật trên hệ\nthống",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · BP kế toán. Khai báo Cash/Bank Account: mã, tên, loại tiền, số dư đầu kỳ; có thể tách TK 112 thành level theo từng ngân hàng (theo từng ngân hàng)."
+   },
+   {
+    "id": "AP01_T3",
+    "type": "userTask",
+    "name": "04 · Thông báo người liên\nquan",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP kế toán. Thông báo cho các kế toán viên / phòng ban có liên quan về tài khoản mới hoặc thay đổi đã được áp dụng."
+   },
+   {
+    "id": "AP01_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1200
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP01_F0",
+    "from": "AP01_S",
+    "to": "AP01_T0"
+   },
+   {
+    "id": "AP01_F1",
+    "from": "AP01_T0",
+    "to": "AP01_T1"
+   },
+   {
+    "id": "AP01_F2",
+    "from": "AP01_T1",
+    "to": "AP01_T2"
+   },
+   {
+    "id": "AP01_F3",
+    "from": "AP01_T2",
+    "to": "AP01_T3"
+   },
+   {
+    "id": "AP01_F4",
+    "from": "AP01_T3",
+    "to": "AP01_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP02",
+  "id": "AP02",
+  "name": "Quản lý thu tiền mặt, ngân hàng",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán"
+  ],
+  "width": 1326,
+  "nodes": [
+   {
+    "id": "AP02_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP02_T0",
+    "type": "userTask",
+    "name": "01 · Tập hợp chứng từ liên\nquan",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Phòng kế toán. Tập hợp các chứng từ thu: phiếu nộp tiền, sao kê ngân hàng, hóa đơn bán hàng, hợp đồng. Đối chiếu trước khi vào hệ thống."
+   },
+   {
+    "id": "AP02_T1",
+    "type": "userTask",
+    "name": "02 · Lập phiếu thu / phiếu\nhạch toán",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · Phòng kế toán. Lập trên Cash Receipt Journal hoặc Bank Receipt - hỗ trợ thu công nợ KH theo từng hóa đơn, thu trước, thu khác loại tiền (tự động CLTG)."
+   },
+   {
+    "id": "AP02_T2",
+    "type": "userTask",
+    "name": "03 · Phê duyệt phiếu thu",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · Phòng kế toán. Người có thẩm quyền (Kế toán trưởng) duyệt phiếu thu/phiếu hạch toán trước khi ghi sổ chính thức."
+   },
+   {
+    "id": "AP02_T3",
+    "type": "serviceTask",
+    "name": "04 · Thu tiền & hạch toán hệ\nthống",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · Phòng kế toán. Thực hiện thu tiền (mặt/chuyển khoản); post phiếu - hệ thống tự cập nhật công nợ KH, sổ quỹ. Quản lý số phiếu trước/sau ghi sổ riêng biệt."
+   },
+   {
+    "id": "AP02_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1200
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP02_F0",
+    "from": "AP02_S",
+    "to": "AP02_T0"
+   },
+   {
+    "id": "AP02_F1",
+    "from": "AP02_T0",
+    "to": "AP02_T1"
+   },
+   {
+    "id": "AP02_F2",
+    "from": "AP02_T1",
+    "to": "AP02_T2"
+   },
+   {
+    "id": "AP02_F3",
+    "from": "AP02_T2",
+    "to": "AP02_T3"
+   },
+   {
+    "id": "AP02_F4",
+    "from": "AP02_T3",
+    "to": "AP02_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP03",
+  "id": "AP03",
+  "name": "Quản lý chi tiền mặt, ngân hàng",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận yêu cầu",
+   "Phòng Kế toán",
+   "Ban Giám đốc",
+   "Ngân hàng"
+  ],
+  "width": 2376,
+  "nodes": [
+   {
+    "id": "AP03_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP03_T0",
+    "type": "userTask",
+    "name": "01 · Lập bộ đề nghị thanh\ntoán",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Bộ phận yêu cầu. Các bộ phận/phòng ban có yêu cầu lập đề nghị thanh toán gửi BP. Kế toán; Trưởng bộ phận phê duyệt nội bộ."
+   },
+   {
+    "id": "AP03_T1",
+    "type": "userTask",
+    "name": "02 · Tiếp nhận & thẩm định",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Bộ phận kế toán. Kế toán kiểm tra & thẩm định bộ đề nghị thanh toán, trình phê duyệt lên các cấp lãnh đạo / TGĐ."
+   },
+   {
+    "id": "AP03_T2",
+    "type": "userTask",
+    "name": "03 · Tạo bút toán chi tiền",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · Bộ phận kế toán. Tạo bút toán thanh toán trên Payment Journal: tiền mặt hoặc chuyển khoản; tham chiếu hóa đơn cần thanh toán."
+   },
+   {
+    "id": "AP03_T3",
+    "type": "userTask",
+    "name": "04 · Kết xuất XML / Gửi lệnh",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · Bộ phận kế toán. Hai hình thức tích hợp e-banking: (1) File interface - kết xuất XML từ BC, import lên NH; (2) Host-to-host hoặc API - BC tự động gửi lệnh."
+   },
+   {
+    "id": "AP03_T4",
+    "type": "userTask",
+    "name": "05 · Duyệt lệnh chi trên hệ\nthống NH",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · Ban TGĐ. Ngân hàng yêu cầu người dùng duyệt lệnh thanh toán để đi lệnh trong trường hợp tích hợp e-banking."
+   },
+   {
+    "id": "AP03_T5",
+    "type": "userTask",
+    "name": "06 · Đi lệnh chuyển tiền",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · Ngân hàng. Ngân hàng thực hiện chuyển tiền theo lệnh đã được duyệt."
+   },
+   {
+    "id": "AP03_T6",
+    "type": "userTask",
+    "name": "07 · Trả thông tin sao kê về\nBC",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · Ngân hàng. Thông tin sao kê ngân hàng được gửi về màn hình Bank Reconciliation trên D365 BC."
+   },
+   {
+    "id": "AP03_T7",
+    "type": "userTask",
+    "name": "08 · Đối chiếu sao kê",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · Bộ phận kế toán. Trên Bank Reconciliation, kế toán kiểm tra các lệnh đã hoàn thành; trạng thái Payment Journal = Complete."
+   },
+   {
+    "id": "AP03_T8",
+    "type": "userTask",
+    "name": "09 · Hạch toán & in phiếu\nchi",
+    "lane": 1,
+    "x": 2040,
+    "doc": "Bước 9 · Bộ phận kế toán. Hệ thống ghi nhận hạch toán; kế toán in phiếu chi từ hệ thống (mẫu theo quy định hiện hành)."
+   },
+   {
+    "id": "AP03_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2250
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP03_F0",
+    "from": "AP03_S",
+    "to": "AP03_T0"
+   },
+   {
+    "id": "AP03_F1",
+    "from": "AP03_T0",
+    "to": "AP03_T1"
+   },
+   {
+    "id": "AP03_F2",
+    "from": "AP03_T1",
+    "to": "AP03_T2"
+   },
+   {
+    "id": "AP03_F3",
+    "from": "AP03_T2",
+    "to": "AP03_T3"
+   },
+   {
+    "id": "AP03_F4",
+    "from": "AP03_T3",
+    "to": "AP03_T4"
+   },
+   {
+    "id": "AP03_F5",
+    "from": "AP03_T4",
+    "to": "AP03_T5"
+   },
+   {
+    "id": "AP03_F6",
+    "from": "AP03_T5",
+    "to": "AP03_T6"
+   },
+   {
+    "id": "AP03_F7",
+    "from": "AP03_T6",
+    "to": "AP03_T7"
+   },
+   {
+    "id": "AP03_F8",
+    "from": "AP03_T7",
+    "to": "AP03_T8"
+   },
+   {
+    "id": "AP03_F9",
+    "from": "AP03_T8",
+    "to": "AP03_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP04",
+  "id": "AP04",
+  "name": "Quản lý tạm ứng và quyết toán tạm ứng",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận yêu cầu",
+   "Phòng Kế toán"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP04_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP04_T0",
+    "type": "userTask",
+    "name": "01 · Lập phiếu đề xuất tạm\nứng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Bộ phận yêu cầu. Nhân viên có nhu cầu tạm ứng/thanh toán lập Phiếu đề xuất, kèm chứng từ chứng minh mục đích sử dụng."
+   },
+   {
+    "id": "AP04_T1",
+    "type": "userTask",
+    "name": "02 · Kiểm tra hợp lệ & tiếp\nnhận phê duyệt",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Kế toán thanh toán. Kiểm tra chứng từ, hạn mức tạm ứng theo quy chế (≤5tr tiền mặt; >5tr chuyển khoản); xác định hình thức chi."
+   },
+   {
+    "id": "AP04_T2",
+    "type": "userTask",
+    "name": "03 · Lập phiếu chi / lệnh\nchuyển tiền",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · Kế toán thanh toán. Tạo bút toán trên Payment Journal - nhân viên là Vendor để ghi nhận tạm ứng (TK 141), hạn thanh toán = 20D. Gửi các cấp xin phê duyệt trước khi chi tiền (người duyệt: TBD)."
+   },
+   {
+    "id": "AP04_T3",
+    "type": "userTask",
+    "name": "04 · Quyết toán & kiểm tra\nhợp lệ",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · BP. yêu cầu / Kế toán. Đến hạn quyết toán, người nhận liệt kê các khoản chi kèm hóa đơn, chứng từ trình phê duyệt; kế toán đối chiếu tổng số tiền với chứng từ."
+   },
+   {
+    "id": "AP04_T4",
+    "type": "userTask",
+    "name": "05 · Cấn trừ công nợ nhân\nviên",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Kế toán / Thủ quỹ. Áp dụng Apply Entry - cấn trừ phần tạm ứng (141) với công nợ phải trả (331). Nếu tạm ứng lớn/nhỏ hơn thực chi: tạo bút toán bù trừ."
+   },
+   {
+    "id": "AP04_T5",
+    "type": "userTask",
+    "name": "06 · Hạch toán vào hệ thống",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Kế toán / Thủ quỹ. Tùy mục đích tạm ứng (mua hàng / công tác phí): hạch toán đối ứng chi phí (641, 642) hoặc cấn trừ NCC thực tế."
+   },
+   {
+    "id": "AP04_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP04_F0",
+    "from": "AP04_S",
+    "to": "AP04_T0"
+   },
+   {
+    "id": "AP04_F1",
+    "from": "AP04_T0",
+    "to": "AP04_T1"
+   },
+   {
+    "id": "AP04_F2",
+    "from": "AP04_T1",
+    "to": "AP04_T2"
+   },
+   {
+    "id": "AP04_F3",
+    "from": "AP04_T2",
+    "to": "AP04_T3"
+   },
+   {
+    "id": "AP04_F4",
+    "from": "AP04_T3",
+    "to": "AP04_T4"
+   },
+   {
+    "id": "AP04_F5",
+    "from": "AP04_T4",
+    "to": "AP04_T5"
+   },
+   {
+    "id": "AP04_F6",
+    "from": "AP04_T5",
+    "to": "AP04_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP05",
+  "id": "AP05",
+  "name": "Kiểm kê quỹ và đối chiếu sổ phụ ngân hàng",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Kế toán trưởng",
+   "Ban Giám đốc"
+  ],
+  "width": 3846,
+  "nodes": [
+   {
+    "id": "AP05_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP05_T0",
+    "type": "userTask",
+    "name": "01 · Kiểm kê quỹ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. kế toán. Kiểm kê đối chiếu sổ quỹ và số tiền thực tế"
+   },
+   {
+    "id": "AP05_T1",
+    "type": "userTask",
+    "name": "02 · Điều chỉnh chênh lệch",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · P. kế toán. Lập bút toán điều chỉnh nếu có chênh lệch"
+   },
+   {
+    "id": "AP05_T2",
+    "type": "userTask",
+    "name": "03 · Phê duyệt",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · P. kế toán. Phê duyệt phiếu hạch toán chênh lệch"
+   },
+   {
+    "id": "AP05_T3",
+    "type": "userTask",
+    "name": "04 · Hạch toán",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · P. kế toán. Ghi sổ điều chỉnh vào hệ thống"
+   },
+   {
+    "id": "AP05_T4",
+    "type": "userTask",
+    "name": "05 · Tập hợp sổ phụ NH",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP kế toán. Tập hợp sổ phụ ngân hàng"
+   },
+   {
+    "id": "AP05_T5",
+    "type": "userTask",
+    "name": "06 · Đối chiếu",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP kế toán. Đối chiếu sổ NH và hệ thống"
+   },
+   {
+    "id": "AP05_T6",
+    "type": "userTask",
+    "name": "07 · XL — nhập thiếu",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · BP kế toán. Xử lý chênh lệch do HT nhập thiếu"
+   },
+   {
+    "id": "AP05_T7",
+    "type": "userTask",
+    "name": "08 · XL — nhập dư",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · BP kế toán. Xử lý chênh lệch do HT nhập dư"
+   },
+   {
+    "id": "AP05_T8",
+    "type": "userTask",
+    "name": "09 · XL — nhập sai",
+    "lane": 0,
+    "x": 2040,
+    "doc": "Bước 9 · BP kế toán. Xử lý chênh lệch do HT nhập sai"
+   },
+   {
+    "id": "AP05_T9",
+    "type": "userTask",
+    "name": "10 · XL — NH sai",
+    "lane": 0,
+    "x": 2250,
+    "doc": "Bước 10 · BP kế toán. Xử lý chênh lệch do NH nhập sai"
+   },
+   {
+    "id": "AP05_T10",
+    "type": "userTask",
+    "name": "11 · Lập phiếu ĐC",
+    "lane": 0,
+    "x": 2460,
+    "doc": "Bước 11 · BP kế toán. Lập phiếu hạch toán điều chỉnh"
+   },
+   {
+    "id": "AP05_T11",
+    "type": "userTask",
+    "name": "12 · Phê duyệt ĐC",
+    "lane": 1,
+    "x": 2670,
+    "doc": "Bước 12 · KTT. KTT phê duyệt bút toán ĐC"
+   },
+   {
+    "id": "AP05_T12",
+    "type": "userTask",
+    "name": "13 · Phê duyệt ĐC",
+    "lane": 2,
+    "x": 2880,
+    "doc": "Bước 13 · TGĐ. TGĐ phê duyệt điều chỉnh"
+   },
+   {
+    "id": "AP05_T13",
+    "type": "userTask",
+    "name": "14 · Hạch toán",
+    "lane": 0,
+    "x": 3090,
+    "doc": "Bước 14 · BP kế toán. Hạch toán chứng từ vào hệ thống"
+   },
+   {
+    "id": "AP05_T14",
+    "type": "userTask",
+    "name": "15 · Ghi nhận đối chiếu",
+    "lane": 0,
+    "x": 3300,
+    "doc": "Bước 15 · BP kế toán. Ghi nhận kết quả Bank Reconciliation"
+   },
+   {
+    "id": "AP05_T15",
+    "type": "userTask",
+    "name": "16 · Thông báo NH",
+    "lane": 0,
+    "x": 3510,
+    "doc": "Bước 16 · BP kế toán. Thông báo NH lỗi sai nếu có"
+   },
+   {
+    "id": "AP05_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 3720
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP05_F0",
+    "from": "AP05_S",
+    "to": "AP05_T0"
+   },
+   {
+    "id": "AP05_F1",
+    "from": "AP05_T0",
+    "to": "AP05_T1"
+   },
+   {
+    "id": "AP05_F2",
+    "from": "AP05_T1",
+    "to": "AP05_T2"
+   },
+   {
+    "id": "AP05_F3",
+    "from": "AP05_T2",
+    "to": "AP05_T3"
+   },
+   {
+    "id": "AP05_F4",
+    "from": "AP05_T3",
+    "to": "AP05_T4"
+   },
+   {
+    "id": "AP05_F5",
+    "from": "AP05_T4",
+    "to": "AP05_T5"
+   },
+   {
+    "id": "AP05_F6",
+    "from": "AP05_T5",
+    "to": "AP05_T6"
+   },
+   {
+    "id": "AP05_F7",
+    "from": "AP05_T6",
+    "to": "AP05_T7"
+   },
+   {
+    "id": "AP05_F8",
+    "from": "AP05_T7",
+    "to": "AP05_T8"
+   },
+   {
+    "id": "AP05_F9",
+    "from": "AP05_T8",
+    "to": "AP05_T9"
+   },
+   {
+    "id": "AP05_F10",
+    "from": "AP05_T9",
+    "to": "AP05_T10"
+   },
+   {
+    "id": "AP05_F11",
+    "from": "AP05_T10",
+    "to": "AP05_T11"
+   },
+   {
+    "id": "AP05_F12",
+    "from": "AP05_T11",
+    "to": "AP05_T12"
+   },
+   {
+    "id": "AP05_F13",
+    "from": "AP05_T12",
+    "to": "AP05_T13"
+   },
+   {
+    "id": "AP05_F14",
+    "from": "AP05_T13",
+    "to": "AP05_T14"
+   },
+   {
+    "id": "AP05_F15",
+    "from": "AP05_T14",
+    "to": "AP05_T15"
+   },
+   {
+    "id": "AP05_F16",
+    "from": "AP05_T15",
+    "to": "AP05_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP06",
+  "id": "AP06",
+  "name": "Kiểm tra cuối kỳ & báo cáo vốn bằng tiền",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Người duyệt"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP06_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP06_T0",
+    "type": "userTask",
+    "name": "01 · Kiểm tra CLTG cuối kỳ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Kế toán. Kiểm tra lại các khoản chênh lệch lãi/lỗ tỷ giá - đối chiếu giá trị quy đổi VND của số dư gốc ngoại tệ."
+   },
+   {
+    "id": "AP06_T1",
+    "type": "userTask",
+    "name": "02 · In các báo cáo sổ",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. Kế toán. In sổ cái TK vốn bằng tiền + sổ chi tiết Cash Book, Bank Book theo VAS - lưu trữ và ký duyệt."
+   },
+   {
+    "id": "AP06_T2",
+    "type": "userTask",
+    "name": "03 · Đối chiếu",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · BP. Kế toán. Đối chiếu số liệu giữa sổ cái và sổ chi tiết để đảm bảo độ chính xác trước khi đóng kỳ."
+   },
+   {
+    "id": "AP06_T3",
+    "type": "userTask",
+    "name": "04 · Điều chỉnh & hạch toán",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. Kế toán. Lập phiếu hạch toán điều chỉnh nếu có sai sót, phê duyệt, hạch toán vào hệ thống."
+   },
+   {
+    "id": "AP06_T4",
+    "type": "userTask",
+    "name": "05 · Phê duyệt",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · Người duyệt. Phê duyệt phiếu hạch toán điều chỉnh"
+   },
+   {
+    "id": "AP06_T5",
+    "type": "userTask",
+    "name": "06 · Hạch toán & In sổ sau\nđiều chỉnh",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Kế toán. In lại sổ chi tiết sau khi hạch toán điều chỉnh để có bản số liệu cuối cùng."
+   },
+   {
+    "id": "AP06_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP06_F0",
+    "from": "AP06_S",
+    "to": "AP06_T0"
+   },
+   {
+    "id": "AP06_F1",
+    "from": "AP06_T0",
+    "to": "AP06_T1"
+   },
+   {
+    "id": "AP06_F2",
+    "from": "AP06_T1",
+    "to": "AP06_T2"
+   },
+   {
+    "id": "AP06_F3",
+    "from": "AP06_T2",
+    "to": "AP06_T3"
+   },
+   {
+    "id": "AP06_F4",
+    "from": "AP06_T3",
+    "to": "AP06_T4"
+   },
+   {
+    "id": "AP06_F5",
+    "from": "AP06_T4",
+    "to": "AP06_T5"
+   },
+   {
+    "id": "AP06_F6",
+    "from": "AP06_T5",
+    "to": "AP06_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP07",
+  "id": "AP07",
+  "name": "Phân loại tài sản cố định và quản lý thẻ chi tiết",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Bộ phận CNTT"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP07_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP07_T0",
+    "type": "userTask",
+    "name": "01 · Xây dựng tiêu chí phân\nloại",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Kế toán. TSCĐ phân theo hình thái (hữu hình, vô hình, thuê TC) hoặc đặc trưng kỹ thuật (nhà cửa, máy móc...). Quản lý theo địa điểm, bộ phận sử dụng."
+   },
+   {
+    "id": "AP07_T1",
+    "type": "userTask",
+    "name": "02 · Lập yêu cầu tạo\nmới/thay đổi",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. Kế toán. Khi phát sinh nhu cầu, lập phiếu yêu cầu tạo mới hoặc thay đổi mã nhóm TSCĐ; trình cấp có thẩm quyền."
+   },
+   {
+    "id": "AP07_T2",
+    "type": "userTask",
+    "name": "03 · Phê duyệt & cập nhật hệ\nthống",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · TGĐ / Phòng IT. TGĐ phê duyệt; Phòng IT tạo mới hoặc cập nhật mã FA Class, FA Subclass, Posting Group trên hệ thống."
+   },
+   {
+    "id": "AP07_T3",
+    "type": "userTask",
+    "name": "04 · Tiếp nhận hồ sơ TS",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. Kế toán. Tiếp nhận hồ sơ mua hoặc yêu cầu thay đổi - kiểm tra tính hợp lệ chứng từ."
+   },
+   {
+    "id": "AP07_T4",
+    "type": "userTask",
+    "name": "05 · Phê duyệt & tạo thẻ TS",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · TGĐ / BP. Kế toán. Phê duyệt mua TS hoặc thay đổi đơn vị/người quản lý; tạo Fixed Asset Card hoặc cập nhật thông tin (Posting Group, Subclass, Location, Department)."
+   },
+   {
+    "id": "AP07_T5",
+    "type": "userTask",
+    "name": "06 · Thông báo người liên\nquan",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Kế toán. Thông báo người chịu trách nhiệm quản lý TS hoặc BP. Kế toán có liên quan về các thay đổi đã thực hiện."
+   },
+   {
+    "id": "AP07_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP07_F0",
+    "from": "AP07_S",
+    "to": "AP07_T0"
+   },
+   {
+    "id": "AP07_F1",
+    "from": "AP07_T0",
+    "to": "AP07_T1"
+   },
+   {
+    "id": "AP07_F2",
+    "from": "AP07_T1",
+    "to": "AP07_T2"
+   },
+   {
+    "id": "AP07_F3",
+    "from": "AP07_T2",
+    "to": "AP07_T3"
+   },
+   {
+    "id": "AP07_F4",
+    "from": "AP07_T3",
+    "to": "AP07_T4"
+   },
+   {
+    "id": "AP07_F5",
+    "from": "AP07_T4",
+    "to": "AP07_T5"
+   },
+   {
+    "id": "AP07_F6",
+    "from": "AP07_T5",
+    "to": "AP07_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP08",
+  "id": "AP08",
+  "name": "Mua mới TSCĐ",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "yêu cầu",
+   "Thủ trưởng đơn vị",
+   "Bộ phận Cung ứng",
+   "Phòng Kế toán",
+   "Ban Giám đốc"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP08_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP08_T0",
+    "type": "userTask",
+    "name": "01 · Lập đề xuất mua TSCĐ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. yêu cầu. Bộ phận có nhu cầu mua TS lập đề xuất, gửi đi phê duyệt theo cấp."
+   },
+   {
+    "id": "AP08_T1",
+    "type": "userTask",
+    "name": "02 · Phê duyệt đề xuất",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Thủ trưởng đơn vị. Tiếp nhận đề xuất mua TSCĐ và phê duyệt làm căn cứ triển khai mua hàng."
+   },
+   {
+    "id": "AP08_T2",
+    "type": "userTask",
+    "name": "03 · Quy trình tạo mới TS &\nmua hàng",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · BP. mua hàng. Sau khi phiếu được duyệt, BP. cung ứng triển khai quy trình mua TS; tham chiếu quy trình AP 2.2 ghi nhận hóa đơn mua TSCĐ."
+   },
+   {
+    "id": "AP08_T3",
+    "type": "userTask",
+    "name": "04 · Hoàn thành đơn hàng",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · BP. mua hàng. Kiểm tra thông tin trên Purchase Order; post Purchase Receipt khi hàng về; thông tin các BP. liên quan."
+   },
+   {
+    "id": "AP08_T4",
+    "type": "userTask",
+    "name": "05 · Hạch toán công nợ &\nnguyên giá",
+    "lane": 3,
+    "x": 1200,
+    "doc": "Bước 5 · Phòng kế toán. Căn cứ hóa đơn mua, biên bản giao nhận: nếu ghi công nợ - hạch toán Purchase Invoice; nếu thanh toán trực tiếp - hạch toán FA G/L Journal."
+   },
+   {
+    "id": "AP08_T5",
+    "type": "userTask",
+    "name": "06 · Phê duyệt phiếu hạch\ntoán",
+    "lane": 4,
+    "x": 1410,
+    "doc": "Bước 6 · Lãnh đạo TCKT/BLĐ. Phê duyệt phiếu hạch toán hoặc hóa đơn mua tài sản trước khi đưa vào ghi sổ chính thức."
+   },
+   {
+    "id": "AP08_T6",
+    "type": "serviceTask",
+    "name": "07 · Hạch toán vào hệ thống",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · Phòng kế toán. Post phiếu/hóa đơn - tạo FA Ledger Entries; tự động sinh thẻ TSCĐ với nguyên giá và sẵn sàng tính khấu hao."
+   },
+   {
+    "id": "AP08_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 3,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP08_F0",
+    "from": "AP08_S",
+    "to": "AP08_T0"
+   },
+   {
+    "id": "AP08_F1",
+    "from": "AP08_T0",
+    "to": "AP08_T1"
+   },
+   {
+    "id": "AP08_F2",
+    "from": "AP08_T1",
+    "to": "AP08_T2"
+   },
+   {
+    "id": "AP08_F3",
+    "from": "AP08_T2",
+    "to": "AP08_T3"
+   },
+   {
+    "id": "AP08_F4",
+    "from": "AP08_T3",
+    "to": "AP08_T4"
+   },
+   {
+    "id": "AP08_F5",
+    "from": "AP08_T4",
+    "to": "AP08_T5"
+   },
+   {
+    "id": "AP08_F6",
+    "from": "AP08_T5",
+    "to": "AP08_T6"
+   },
+   {
+    "id": "AP08_F7",
+    "from": "AP08_T6",
+    "to": "AP08_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP09",
+  "id": "AP09",
+  "name": "Tăng TSCĐ từ Xây dựng cơ bản dở dang",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Bộ phận Cung ứng",
+   "quản lý CT"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP09_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP09_T0",
+    "type": "userTask",
+    "name": "01 · Tạo dimension CIP",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. kế toán. Tại thời điểm bắt đầu công trình, kế toán tạo mã dimension (Project Code) để tập hợp chi phí XDCB dở dang."
+   },
+   {
+    "id": "AP09_T1",
+    "type": "userTask",
+    "name": "02 · Gửi thông tin dimension\ncho BP. mua hàng",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. kế toán. BP. cung ứng tạo PO và gán dimension đã tạo - mọi chi phí mua phục vụ công trình tự động được tập hợp."
+   },
+   {
+    "id": "AP09_T2",
+    "type": "userTask",
+    "name": "03 · Hoàn thành đơn hàng",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. mua hàng. Kiểm tra thông tin trên Purchase Order; post Purchase Receipt khi nhận hàng/dịch vụ; thông tin các BP. liên quan."
+   },
+   {
+    "id": "AP09_T3",
+    "type": "userTask",
+    "name": "04 · Tập hợp chi phí XDCB",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. kế toán. Ghi nhận các chi phí có liên quan vào TK 241 (XDCB dở dang) hoặc 242 (chi phí trả trước dài hạn) theo dimension."
+   },
+   {
+    "id": "AP09_T4",
+    "type": "userTask",
+    "name": "05 · Biên bản nghiệm thu",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP. quản lý CT. Khi công trình hoàn thành, BP. quản lý gửi biên bản nghiệm thu sang Kế toán; tham khảo quy trình FA 1.2 tạo mã TSCĐ mới."
+   },
+   {
+    "id": "AP09_T5",
+    "type": "userTask",
+    "name": "06 · Tạo phiếu kết chuyển\n(Reclass)",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. kế toán. Lập phiếu hạch toán kết chuyển nguyên giá XDCB dở dang sang nguyên giá TSCĐ mới qua FA Reclassification Journal."
+   },
+   {
+    "id": "AP09_T6",
+    "type": "userTask",
+    "name": "07 · Phê duyệt & ghi nhận",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · TGĐ / BP. kế toán. TGĐ phê duyệt; Kế toán hạch toán bút toán - toàn bộ chi phí được kết chuyển vào nguyên giá; khấu hao bắt đầu từ tháng tiếp theo."
+   },
+   {
+    "id": "AP09_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP09_F0",
+    "from": "AP09_S",
+    "to": "AP09_T0"
+   },
+   {
+    "id": "AP09_F1",
+    "from": "AP09_T0",
+    "to": "AP09_T1"
+   },
+   {
+    "id": "AP09_F2",
+    "from": "AP09_T1",
+    "to": "AP09_T2"
+   },
+   {
+    "id": "AP09_F3",
+    "from": "AP09_T2",
+    "to": "AP09_T3"
+   },
+   {
+    "id": "AP09_F4",
+    "from": "AP09_T3",
+    "to": "AP09_T4"
+   },
+   {
+    "id": "AP09_F5",
+    "from": "AP09_T4",
+    "to": "AP09_T5"
+   },
+   {
+    "id": "AP09_F6",
+    "from": "AP09_T5",
+    "to": "AP09_T6"
+   },
+   {
+    "id": "AP09_F7",
+    "from": "AP09_T6",
+    "to": "AP09_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP10",
+  "id": "AP10",
+  "name": "Khấu hao TSCĐ",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Kế toán trưởng"
+  ],
+  "width": 1326,
+  "nodes": [
+   {
+    "id": "AP10_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP10_T0",
+    "type": "userTask",
+    "name": "01 · Tính giá trị & tỷ lệ\nphân bổ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. kế toán. Tính tỷ lệ phân bổ chi phí KH cho TSCĐ toàn Cty - khai báo FA Allocation theo % cho từng TK chi phí."
+   },
+   {
+    "id": "AP10_T1",
+    "type": "userTask",
+    "name": "02 · Tính & kiểm tra khấu\nhao",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. kế toán. Hai cách: (1) Thủ công - lập bút toán; (2) Tự động - chạy Calculate Depreciation. Kiểm tra giá trị, TK, dimension trên FA Journal."
+   },
+   {
+    "id": "AP10_T2",
+    "type": "userTask",
+    "name": "03 · Điều chỉnh & phê duyệt",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. kế toán / KTT. Điều chỉnh thủ công nếu phát hiện sai sót; KTT phê duyệt bút toán khấu hao trước khi đưa vào ghi sổ."
+   },
+   {
+    "id": "AP10_T3",
+    "type": "userTask",
+    "name": "04 · Hạch toán & xử lý sai\nsót",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. kế toán. Post FA Journal. Nếu sai sau hạch toán: dùng Cancel FA Ledger Entries để ghi đảo, điều chỉnh và chạy lại."
+   },
+   {
+    "id": "AP10_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1200
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP10_F0",
+    "from": "AP10_S",
+    "to": "AP10_T0"
+   },
+   {
+    "id": "AP10_F1",
+    "from": "AP10_T0",
+    "to": "AP10_T1"
+   },
+   {
+    "id": "AP10_F2",
+    "from": "AP10_T1",
+    "to": "AP10_T2"
+   },
+   {
+    "id": "AP10_F3",
+    "from": "AP10_T2",
+    "to": "AP10_T3"
+   },
+   {
+    "id": "AP10_F4",
+    "from": "AP10_T3",
+    "to": "AP10_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP11",
+  "id": "AP11",
+  "name": "Thanh lý, điều chuyển và sáp nhập tài sản cố định",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "kiểm soát",
+   "Phòng Kế toán"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP11_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP11_T0",
+    "type": "userTask",
+    "name": "01 · Tiếp nhận biên bản &\ngửi hồ sơ TS",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. kiểm soát. Phòng kiểm soát tiếp nhận quyết định, biên bản thanh lý từ Phòng HC; kiểm tra thông tin sổ sách kế toán; gửi hồ sơ TSCĐ thanh lý cho kế toán."
+   },
+   {
+    "id": "AP11_T1",
+    "type": "serviceTask",
+    "name": "02 · Lập phiếu hạch toán\nhoặc hóa đơn bán",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · BP. kế toán. Quyết định: thanh lý không thu tiền - lập FA Journal (hệ thống tự tính nguyên giá, KH lũy kế, GTCL); bán có thu tiền - lập Sales Invoice (Type=FA)."
+   },
+   {
+    "id": "AP11_T2",
+    "type": "userTask",
+    "name": "03 · Phê duyệt & hạch toán\nhệ thống",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. kế toán. Phê duyệt chứng từ; post phiếu/hóa đơn - tạo FA Ledger Entries với Disposal Date; thẻ TSCĐ tự động đóng (Inactive)."
+   },
+   {
+    "id": "AP11_T3",
+    "type": "userTask",
+    "name": "04 · Tiếp nhận quyết định &\nphân loại",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · BP. yêu cầu / kế toán. BP. yêu cầu chuyển thông tin TS sang Kế toán; phân loại: nếu điều chuyển - bước FA 2.5.40; nếu tách/sáp nhập - thực hiện FA 1.2 tạo mã TSCĐ mới trước."
+   },
+   {
+    "id": "AP11_T4",
+    "type": "userTask",
+    "name": "05 · Thay đổi FA Card / Lập\nReclass",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · BP. kế toán. Điều chuyển: thay đổi Location, Department trên FA Card. Tách/Gộp: dùng FA Reclassification Journal - bút toán tự sinh trên FA G/L Journal với tỷ trọng nguyên giá và KH lũy kế."
+   },
+   {
+    "id": "AP11_T5",
+    "type": "userTask",
+    "name": "06 · Phê duyệt & hạch toán",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · TGĐ / BP. kế toán. TGĐ phê duyệt chứng từ; Kế toán post vào hệ thống - thẻ TS gốc giảm và thẻ TS mới tăng tương ứng."
+   },
+   {
+    "id": "AP11_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP11_F0",
+    "from": "AP11_S",
+    "to": "AP11_T0"
+   },
+   {
+    "id": "AP11_F1",
+    "from": "AP11_T0",
+    "to": "AP11_T1"
+   },
+   {
+    "id": "AP11_F2",
+    "from": "AP11_T1",
+    "to": "AP11_T2"
+   },
+   {
+    "id": "AP11_F3",
+    "from": "AP11_T2",
+    "to": "AP11_T3"
+   },
+   {
+    "id": "AP11_F4",
+    "from": "AP11_T3",
+    "to": "AP11_T4"
+   },
+   {
+    "id": "AP11_F5",
+    "from": "AP11_T4",
+    "to": "AP11_T5"
+   },
+   {
+    "id": "AP11_F6",
+    "from": "AP11_T5",
+    "to": "AP11_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP12",
+  "id": "AP12",
+  "name": "Kiểm kê tài sản cố định và xuất kho công cụ dụng cụ",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP12_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP12_T0",
+    "type": "userTask",
+    "name": "01 · Lập KH kiểm kê & in\ndanh sách TSCĐ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. HC + Kế toán. Phòng HC phối hợp Kế toán lập kế hoạch kiểm kê. In danh sách TS từ hệ thống và kiểm kê thực tế."
+   },
+   {
+    "id": "AP12_T1",
+    "type": "userTask",
+    "name": "02 · Lập biên bản & phê\nduyệt xử lý chênh lệch",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · Phòng kế toán + BLĐ. Nếu có chênh lệch - lập biên bản xử lý, BLĐ phê duyệt. Lập phiếu hạch toán xử lý theo quyết định."
+   },
+   {
+    "id": "AP12_T2",
+    "type": "userTask",
+    "name": "03 · Hạch toán & thông báo",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · Phòng kế toán. Phê duyệt phiếu hạch toán; post vào hệ thống; thông báo cho các phòng ban có liên quan kết quả kiểm kê."
+   },
+   {
+    "id": "AP12_T3",
+    "type": "userTask",
+    "name": "04 · Tiếp nhận hồ sơ & nhập\nItem Journal",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. kế toán. Tiếp nhận yêu cầu xuất CCDC; nhập bút toán xuất dùng qua Item Journal - quản lý số lượng tại kho nhà máy."
+   },
+   {
+    "id": "AP12_T4",
+    "type": "userTask",
+    "name": "05 · Hạch toán chi phí trong\nkỳ",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP. kế toán. Nếu giá trị nhỏ - chọn nhóm Gen Bus Posting Group hạch toán trực tiếp vào chi phí trong kỳ."
+   },
+   {
+    "id": "AP12_T5",
+    "type": "userTask",
+    "name": "06 · Hạch toán chi phí trả\ntrước & kết chuyển",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. kế toán. Nếu giá trị lớn cần phân bổ - hạch toán vào chi phí trả trước (ngắn/dài hạn); cuối kỳ điều chỉnh sau Adjust Cost; tạo mã FA chi phí trả trước và kết chuyển qua FA G/L Journal."
+   },
+   {
+    "id": "AP12_T6",
+    "type": "userTask",
+    "name": "07 · Điều chỉnh sau Adjust\nCost",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · BP. kế toán. Kiểm tra và điều chỉnh phân bổ CCDC nếu Adjust Cost thay đổi giá trị xuất kho"
+   },
+   {
+    "id": "AP12_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP12_F0",
+    "from": "AP12_S",
+    "to": "AP12_T0"
+   },
+   {
+    "id": "AP12_F1",
+    "from": "AP12_T0",
+    "to": "AP12_T1"
+   },
+   {
+    "id": "AP12_F2",
+    "from": "AP12_T1",
+    "to": "AP12_T2"
+   },
+   {
+    "id": "AP12_F3",
+    "from": "AP12_T2",
+    "to": "AP12_T3"
+   },
+   {
+    "id": "AP12_F4",
+    "from": "AP12_T3",
+    "to": "AP12_T4"
+   },
+   {
+    "id": "AP12_F5",
+    "from": "AP12_T4",
+    "to": "AP12_T5"
+   },
+   {
+    "id": "AP12_F6",
+    "from": "AP12_T5",
+    "to": "AP12_T6"
+   },
+   {
+    "id": "AP12_F7",
+    "from": "AP12_T6",
+    "to": "AP12_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP13",
+  "id": "AP13",
+  "name": "Thực hiện các bút toán cuối kỳ",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP13_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP13_T0",
+    "type": "userTask",
+    "name": "01 · In báo cáo TSCĐ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Kế toán. Cuối kỳ in các báo cáo FA Depreciation Book, FA Card, FA Analysis - lưu trữ và ký phê duyệt theo quy định."
+   },
+   {
+    "id": "AP13_T1",
+    "type": "userTask",
+    "name": "02 · Đối chiếu sổ cái",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. Kế toán. Đối chiếu giá trị nguyên giá, KH lũy kế trên báo cáo FA với sổ cái GL - đảm bảo số liệu thống nhất."
+   },
+   {
+    "id": "AP13_T2",
+    "type": "userTask",
+    "name": "03 · Điều chỉnh nếu có",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · BP. Kế toán. Nếu phát hiện sai sót - tìm hiểu nguyên nhân, lập phiếu điều chỉnh trên FA Journal hoặc Cancel FA Ledger Entries."
+   },
+   {
+    "id": "AP13_T3",
+    "type": "userTask",
+    "name": "04 · Thực hiện GL 5.1, 5.2,\n5.3 đầy đủ",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. Kế toán. Đóng kỳ ghi sổ, kết chuyển KQKD, đánh giá CLTG, đối chiếu sổ sách, điều chỉnh số liệu - hoàn tất các bước theo từng quy trình."
+   },
+   {
+    "id": "AP13_T4",
+    "type": "userTask",
+    "name": "05 · Tạo kỳ kế toán năm mới",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Kế toán. Người có thẩm quyền (Kế toán trưởng) tạo các kỳ kế toán cho năm mới - định kỳ 12 tháng, năm tài chính từ 01/01 đến 31/12."
+   },
+   {
+    "id": "AP13_T5",
+    "type": "userTask",
+    "name": "06 · Tạo bộ số chứng từ năm\nmới",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Kế toán. Tùy theo quy ước đánh số chứng từ - tạo thêm các bộ số chứng từ cho năm mới (vd: PT2026/0001, PC2026/0001…)."
+   },
+   {
+    "id": "AP13_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP13_F0",
+    "from": "AP13_S",
+    "to": "AP13_T0"
+   },
+   {
+    "id": "AP13_F1",
+    "from": "AP13_T0",
+    "to": "AP13_T1"
+   },
+   {
+    "id": "AP13_F2",
+    "from": "AP13_T1",
+    "to": "AP13_T2"
+   },
+   {
+    "id": "AP13_F3",
+    "from": "AP13_T2",
+    "to": "AP13_T3"
+   },
+   {
+    "id": "AP13_F4",
+    "from": "AP13_T3",
+    "to": "AP13_T4"
+   },
+   {
+    "id": "AP13_F5",
+    "from": "AP13_T4",
+    "to": "AP13_T5"
+   },
+   {
+    "id": "AP13_F6",
+    "from": "AP13_T5",
+    "to": "AP13_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP14",
+  "id": "AP14",
+  "name": "Hệ thống tài khoản và danh mục nhóm hạch toán",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "yêu cầu",
+   "Người duyệt",
+   "Phòng Kế toán",
+   "Kế toán trưởng"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP14_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP14_T0",
+    "type": "userTask",
+    "name": "01 · Lập yêu cầu tạo\nmới/thay đổi",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP yêu cầu. Thiết kế hệ thống TK theo TT99, khai báo Dimension, bộ số chứng từ, kỳ kế toán"
+   },
+   {
+    "id": "AP14_T1",
+    "type": "userTask",
+    "name": "02 · Phê duyệt yêu cầu",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Người duyệt. Người có thẩm quyền phê duyệt các yêu cầu thay đổi, bổ sung"
+   },
+   {
+    "id": "AP14_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra trong hệ thống\nđã có chưa",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · BP kế toán. BP kế toán kiểm tra xem hệ thống đã có chưa trước khi cập nhật"
+   },
+   {
+    "id": "AP14_T3",
+    "type": "userTask",
+    "name": "04 · Cập nhật mã & thông báo\nngười liên quan",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · BP kế toán. BP kế toán cập nhật dữ liệu vào hệ thống"
+   },
+   {
+    "id": "AP14_T4",
+    "type": "userTask",
+    "name": "05 · Xây dựng cách thức hạch\ntoán cho từng nhóm",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP kế toán. BP kế toán sẽ xây dựng cách thức cho các nhóm hạch toán TK phải thu/ phải trả/ Hàng tồn kho.."
+   },
+   {
+    "id": "AP14_T5",
+    "type": "userTask",
+    "name": "06 · Lập phiếu yêu cầu tạo\nmới/thay đổi",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · BP kế toán. Lập phiếu YC và gửi KTT phê duyệt"
+   },
+   {
+    "id": "AP14_T6",
+    "type": "userTask",
+    "name": "07 · Kiểm tra/phê duyệt yêu\ncầu",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · KTT. KTT kiểm tra và phê duyệt"
+   },
+   {
+    "id": "AP14_T7",
+    "type": "userTask",
+    "name": "08 · Tạo mới/cập nhật &\nthông báo người liên",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · BP kế toán. Các thay đổi được cập nhật vào hệ thống"
+   },
+   {
+    "id": "AP14_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP14_F0",
+    "from": "AP14_S",
+    "to": "AP14_T0"
+   },
+   {
+    "id": "AP14_F1",
+    "from": "AP14_T0",
+    "to": "AP14_T1"
+   },
+   {
+    "id": "AP14_F2",
+    "from": "AP14_T1",
+    "to": "AP14_T2"
+   },
+   {
+    "id": "AP14_F3",
+    "from": "AP14_T2",
+    "to": "AP14_T3"
+   },
+   {
+    "id": "AP14_F4",
+    "from": "AP14_T3",
+    "to": "AP14_T4"
+   },
+   {
+    "id": "AP14_F5",
+    "from": "AP14_T4",
+    "to": "AP14_T5"
+   },
+   {
+    "id": "AP14_F6",
+    "from": "AP14_T5",
+    "to": "AP14_T6"
+   },
+   {
+    "id": "AP14_F7",
+    "from": "AP14_T6",
+    "to": "AP14_T7"
+   },
+   {
+    "id": "AP14_F8",
+    "from": "AP14_T7",
+    "to": "AP14_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP15",
+  "id": "AP15",
+  "name": "Lập dự toán và điều chỉnh ngân sách",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "BLĐ",
+   "liên quan",
+   "Người duyệt"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP15_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP15_T0",
+    "type": "userTask",
+    "name": "01 · Xây dựng tiêu chí & lập\ndự toán",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. kế toán & BP liên quan. DN cần lập kế hoạch giám sát & kiểm soát các nguồn tài chính - dự tính các khoản thu chi cho thời kỳ nhất định."
+   },
+   {
+    "id": "AP15_T1",
+    "type": "userTask",
+    "name": "02 · Phê duyệt dự toán",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · BLĐ. Người có quyền phê duyệt dự toán trước khi đưa vào hệ thống quản lý."
+   },
+   {
+    "id": "AP15_T2",
+    "type": "userTask",
+    "name": "03 · Tạo dự toán trên GL\nBudget",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · P. kế toán. Kiểm tra dự toán đã tồn tại; tạo mới - khai báo mã, tên, các tiêu chí phân tích, công thức; import từ Excel."
+   },
+   {
+    "id": "AP15_T3",
+    "type": "userTask",
+    "name": "04 · So sánh thực tế vs dự\ntoán & phân tích",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · BP. liên quan. Trong quá trình SXKD, các khoản phát sinh, sự cố ngoài ngân sách phải ghi nhận và đối chiếu; phân tích nguyên nhân chênh lệch."
+   },
+   {
+    "id": "AP15_T4",
+    "type": "userTask",
+    "name": "05 · Lập yêu cầu điều chỉnh",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP. liên quan. Dựa trên kết quả so sánh và phân tích, lập đề xuất điều chỉnh ngân sách sát thực tế."
+   },
+   {
+    "id": "AP15_T5",
+    "type": "userTask",
+    "name": "06 · Phê duyệt điều chỉnh",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · Người duyệt. Dựa trên kết quả so sánh và phân tích, người có quyền phê duyệt."
+   },
+   {
+    "id": "AP15_T6",
+    "type": "userTask",
+    "name": "07 · Tìm kiếm & điều chỉnh\nkế hoạch",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · BP. kế toán. Tìm kiếm bảng kế hoạch trên hệ thống và điều chỉnh lại theo các yêu cầu đã được phê duyệt."
+   },
+   {
+    "id": "AP15_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP15_F0",
+    "from": "AP15_S",
+    "to": "AP15_T0"
+   },
+   {
+    "id": "AP15_F1",
+    "from": "AP15_T0",
+    "to": "AP15_T1"
+   },
+   {
+    "id": "AP15_F2",
+    "from": "AP15_T1",
+    "to": "AP15_T2"
+   },
+   {
+    "id": "AP15_F3",
+    "from": "AP15_T2",
+    "to": "AP15_T3"
+   },
+   {
+    "id": "AP15_F4",
+    "from": "AP15_T3",
+    "to": "AP15_T4"
+   },
+   {
+    "id": "AP15_F5",
+    "from": "AP15_T4",
+    "to": "AP15_T5"
+   },
+   {
+    "id": "AP15_F6",
+    "from": "AP15_T5",
+    "to": "AP15_T6"
+   },
+   {
+    "id": "AP15_F7",
+    "from": "AP15_T6",
+    "to": "AP15_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP16",
+  "id": "AP16",
+  "name": "Bút toán trích trước, phân bổ và điều chỉnh",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Kế toán trưởng"
+  ],
+  "width": 2586,
+  "nodes": [
+   {
+    "id": "AP16_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP16_T0",
+    "type": "userTask",
+    "name": "01 · Tạo Standard Journal",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · KT tổng hợp. Tạo hoặc gọi mẫu bút toán lặp lại"
+   },
+   {
+    "id": "AP16_T1",
+    "type": "userTask",
+    "name": "02 · Cập nhật số tiền",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · KT tổng hợp. Cập nhật số tiền thực tế cho kỳ"
+   },
+   {
+    "id": "AP16_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra & Post",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · KT tổng hợp. Kiểm tra cân đối ghi sổ"
+   },
+   {
+    "id": "AP16_T3",
+    "type": "userTask",
+    "name": "04 · Phê duyệt",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · KTT. Phê duyệt bút toán"
+   },
+   {
+    "id": "AP16_T4",
+    "type": "userTask",
+    "name": "05 · Kết chuyển 911",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · KT tổng hợp. Kết chuyển DT/CP xác định KQKD"
+   },
+   {
+    "id": "AP16_T5",
+    "type": "userTask",
+    "name": "06 · Lưu mẫu",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · KT tổng hợp. Lưu Standard Journal cho kỳ sau"
+   },
+   {
+    "id": "AP16_T6",
+    "type": "userTask",
+    "name": "07 · Xác định nội dung ĐC",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · KT tổng hợp. Xác định bút toán cần điều chỉnh"
+   },
+   {
+    "id": "AP16_T7",
+    "type": "userTask",
+    "name": "08 · Nhập bút toán ĐC",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · KT tổng hợp. Nhập bút toán đỏ/đảo"
+   },
+   {
+    "id": "AP16_T8",
+    "type": "userTask",
+    "name": "09 · Phê duyệt",
+    "lane": 1,
+    "x": 2040,
+    "doc": "Bước 9 · KTT. Phê duyệt bút toán ĐC"
+   },
+   {
+    "id": "AP16_T9",
+    "type": "userTask",
+    "name": "10 · Post",
+    "lane": 0,
+    "x": 2250,
+    "doc": "Bước 10 · KT tổng hợp. Ghi sổ bút toán ĐC"
+   },
+   {
+    "id": "AP16_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 2460
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP16_F0",
+    "from": "AP16_S",
+    "to": "AP16_T0"
+   },
+   {
+    "id": "AP16_F1",
+    "from": "AP16_T0",
+    "to": "AP16_T1"
+   },
+   {
+    "id": "AP16_F2",
+    "from": "AP16_T1",
+    "to": "AP16_T2"
+   },
+   {
+    "id": "AP16_F3",
+    "from": "AP16_T2",
+    "to": "AP16_T3"
+   },
+   {
+    "id": "AP16_F4",
+    "from": "AP16_T3",
+    "to": "AP16_T4"
+   },
+   {
+    "id": "AP16_F5",
+    "from": "AP16_T4",
+    "to": "AP16_T5"
+   },
+   {
+    "id": "AP16_F6",
+    "from": "AP16_T5",
+    "to": "AP16_T6"
+   },
+   {
+    "id": "AP16_F7",
+    "from": "AP16_T6",
+    "to": "AP16_T7"
+   },
+   {
+    "id": "AP16_F8",
+    "from": "AP16_T7",
+    "to": "AP16_T8"
+   },
+   {
+    "id": "AP16_F9",
+    "from": "AP16_T8",
+    "to": "AP16_T9"
+   },
+   {
+    "id": "AP16_F10",
+    "from": "AP16_T9",
+    "to": "AP16_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP17",
+  "id": "AP17",
+  "name": "Giao dịch nội bộ (Intercompany Transaction)",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận CNTT",
+   "Bộ phận yêu cầu"
+  ],
+  "width": 1116,
+  "nodes": [
+   {
+    "id": "AP17_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP17_T0",
+    "type": "userTask",
+    "name": "01 · Thiết lập phân hệ\nIntercompany",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Bộ phận IT. Khai báo Intercompany Setup, IC Chart of Account (mapping TK với công ty con), IC Dimension và IC Partner Code cho đơn vị thành viên."
+   },
+   {
+    "id": "AP17_T1",
+    "type": "userTask",
+    "name": "02 · Thực hiện giao dịch IC\ntại",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Các BP. ở. Triển khai quy trình mua/bán nội bộ, hạch toán, thanh toán giữa và đơn vị thành viên: PO/SO, IC Journal cho cho vay/thanh toán nội bộ. Tự động cấn trừ công nợ theo thứ tự thời gian hóa đơn."
+   },
+   {
+    "id": "AP17_T2",
+    "type": "serviceTask",
+    "name": "03 · Nhận dữ liệu giao dịch\ntừ",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · Các BP. ở đơn vị thành viên. Hệ thống tự khởi tạo giao dịch ngược tại công ty đối ứng: tạo Sales Order/Invoice → đơn vị thành viên tự động nhận Purchase Order/Invoice. Bên nhận vào IC Journal kiểm tra và Post thủ công sau khi tiền về."
+   },
+   {
+    "id": "AP17_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 990
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP17_F0",
+    "from": "AP17_S",
+    "to": "AP17_T0"
+   },
+   {
+    "id": "AP17_F1",
+    "from": "AP17_T0",
+    "to": "AP17_T1"
+   },
+   {
+    "id": "AP17_F2",
+    "from": "AP17_T1",
+    "to": "AP17_T2"
+   },
+   {
+    "id": "AP17_F3",
+    "from": "AP17_T2",
+    "to": "AP17_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP18",
+  "id": "AP18",
+  "name": "Hợp nhất dữ liệu (GL Consolidation)",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận CNTT",
+   "Hệ thống",
+   "Phòng Kế toán"
+  ],
+  "width": 1326,
+  "nodes": [
+   {
+    "id": "AP18_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP18_T0",
+    "type": "userTask",
+    "name": "01 · Thiết lập phân hệ\nConsolidation",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Bộ phận IT. Tạo 1 công ty hợp nhất không có giao dịch; thiết lập Business Unit Card cho từng công ty con, khai báo % tỷ lệ sở hữu (100% cho đơn vị thành viên)."
+   },
+   {
+    "id": "AP18_T1",
+    "type": "serviceTask",
+    "name": "02 · Đẩy dữ liệu hợp nhất",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Hệ thống. Hệ thống tự lấy dữ liệu GL Entries từ công ty mẹ () và công ty con (đơn vị thành viên) tại thời điểm đóng sổ tháng/năm."
+   },
+   {
+    "id": "AP18_T2",
+    "type": "serviceTask",
+    "name": "03 · Xử lý bút toán loại trừ",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · Kế toán. Kế toán hạch toán bút toán loại trừ trên Elimination Journal. NWV đề xuất phát triển thêm chức năng mapping TK Nợ-Có để hệ thống tự nhận bút toán cần loại trừ."
+   },
+   {
+    "id": "AP18_T3",
+    "type": "userTask",
+    "name": "04 · Kiểm tra báo cáo hợp\nnhất",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · Kế toán. Lọc và kết xuất 3 bộ BCTC: Bảng Cân đối kế toán, Báo cáo KQKD, Báo cáo LCTT trực tiếp. Lưu ý BC không hỗ trợ Thuyết minh BCTC trực tiếp."
+   },
+   {
+    "id": "AP18_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 1200
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP18_F0",
+    "from": "AP18_S",
+    "to": "AP18_T0"
+   },
+   {
+    "id": "AP18_F1",
+    "from": "AP18_T0",
+    "to": "AP18_T1"
+   },
+   {
+    "id": "AP18_F2",
+    "from": "AP18_T1",
+    "to": "AP18_T2"
+   },
+   {
+    "id": "AP18_F3",
+    "from": "AP18_T2",
+    "to": "AP18_T3"
+   },
+   {
+    "id": "AP18_F4",
+    "from": "AP18_T3",
+    "to": "AP18_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP19",
+  "id": "AP19",
+  "name": "Xây dựng yêu cầu quản trị tài chính kế toán",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "BLĐ / BGĐ",
+   "Phòng Kế toán",
+   "liên quan"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP19_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP19_T0",
+    "type": "userTask",
+    "name": "01 · Yêu cầu báo cáo quản\ntrị nội bộ",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BLĐ / BGĐ. BLĐ / BGĐ yêu cầu lập báo cáo quản trị với mong muốn quản trị hiệu quả hoạt động kinh doanh."
+   },
+   {
+    "id": "AP19_T1",
+    "type": "userTask",
+    "name": "02 · Tập hợp & phân tích khả\nnăng triển khai",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · P. kế toán. Tập hợp các chỉ tiêu cần quản lý, tiêu thức phân bổ kiểm soát; phân tích khả năng quản lý qua hệ thống ERP và đề xuất huấn luyện/quy định đi kèm."
+   },
+   {
+    "id": "AP19_T2",
+    "type": "userTask",
+    "name": "03 · Tạo Analysis View tập\nhợp số liệu",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · P. kế toán. Kiểm tra Analysis View đã có; nếu chưa - tạo mới qua chức năng Analysis View, khai báo mã, tên, chỉ tiêu phân tích, tài khoản theo dõi."
+   },
+   {
+    "id": "AP19_T3",
+    "type": "userTask",
+    "name": "04 · Tạo Financial Reports /\nAccount Schedule",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · P. kế toán. Xây dựng các biểu mẫu báo cáo cần lấy với công thức tương ứng; tạo Account Schedule trên hệ thống - khai báo mã, tên, công thức, phạm vi, giới hạn, cách trình bày."
+   },
+   {
+    "id": "AP19_T4",
+    "type": "userTask",
+    "name": "05 · Kiểm tra công thức &\nđiều chỉnh",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · P. kế toán. Kiểm tra công thức báo cáo có lấy đúng số liệu không bằng cách xem báo cáo với tập số liệu giới hạn; điều chỉnh lại công thức nếu sai."
+   },
+   {
+    "id": "AP19_T5",
+    "type": "userTask",
+    "name": "06 · Thông báo & hướng dẫn\nngười sử dụng",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · BP. liên quan. Sau khi báo cáo đã có thể đưa vào sử dụng - kế toán tạo hướng dẫn xem báo cáo và thông báo cho các bộ phận liên quan."
+   },
+   {
+    "id": "AP19_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP19_F0",
+    "from": "AP19_S",
+    "to": "AP19_T0"
+   },
+   {
+    "id": "AP19_F1",
+    "from": "AP19_T0",
+    "to": "AP19_T1"
+   },
+   {
+    "id": "AP19_F2",
+    "from": "AP19_T1",
+    "to": "AP19_T2"
+   },
+   {
+    "id": "AP19_F3",
+    "from": "AP19_T2",
+    "to": "AP19_T3"
+   },
+   {
+    "id": "AP19_F4",
+    "from": "AP19_T3",
+    "to": "AP19_T4"
+   },
+   {
+    "id": "AP19_F5",
+    "from": "AP19_T4",
+    "to": "AP19_T5"
+   },
+   {
+    "id": "AP19_F6",
+    "from": "AP19_T5",
+    "to": "AP19_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP20",
+  "id": "AP20",
+  "name": "Thực hiện kiểm soát số liệu quản trị",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán"
+  ],
+  "width": 1536,
+  "nodes": [
+   {
+    "id": "AP20_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP20_T0",
+    "type": "userTask",
+    "name": "01 · Chọn báo cáo cần xem",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Kế toán. Kế toán dựa trên các biểu mẫu/hướng dẫn được cung cấp - vào hệ thống tìm đúng báo cáo cần xem."
+   },
+   {
+    "id": "AP20_T1",
+    "type": "userTask",
+    "name": "02 · Cập nhật Analysis View",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. Kế toán. Trước khi xem báo cáo, Analysis View cần được cập nhật lại số liệu mới nhất."
+   },
+   {
+    "id": "AP20_T2",
+    "type": "userTask",
+    "name": "03 · Xem báo cáo Analysis by\nDimension/Account",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · BP. Kế toán. Chạy báo cáo để theo dõi, kiểm soát tình hình hoạt động theo các tiêu chí; xuất Excel phân tích/tổng hợp theo nhu cầu."
+   },
+   {
+    "id": "AP20_T3",
+    "type": "userTask",
+    "name": "04 · Phân tích & đánh giá",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. Kế toán. Dựa trên kết quả báo cáo - phân tích, đánh giá tình hình hoạt động của từng chi nhánh/đơn vị quản lý."
+   },
+   {
+    "id": "AP20_T4",
+    "type": "userTask",
+    "name": "05 · Đưa ra quyết định quản\ntrị",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Kế toán. Hỗ trợ BLĐ hoặc tự đưa ra các quyết định quản trị dựa trên kết quả phân tích."
+   },
+   {
+    "id": "AP20_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1410
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP20_F0",
+    "from": "AP20_S",
+    "to": "AP20_T0"
+   },
+   {
+    "id": "AP20_F1",
+    "from": "AP20_T0",
+    "to": "AP20_T1"
+   },
+   {
+    "id": "AP20_F2",
+    "from": "AP20_T1",
+    "to": "AP20_T2"
+   },
+   {
+    "id": "AP20_F3",
+    "from": "AP20_T2",
+    "to": "AP20_T3"
+   },
+   {
+    "id": "AP20_F4",
+    "from": "AP20_T3",
+    "to": "AP20_T4"
+   },
+   {
+    "id": "AP20_F5",
+    "from": "AP20_T4",
+    "to": "AP20_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP21",
+  "id": "AP21",
+  "name": "Thực hiện các bút toán cuối kỳ",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán"
+  ],
+  "width": 1326,
+  "nodes": [
+   {
+    "id": "AP21_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP21_T0",
+    "type": "userTask",
+    "name": "01 · Đóng kỳ ghi sổ & mở kỳ\nriêng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Kế toán tổng hợp. Cuối mỗi kỳ, KTT đóng kỳ ghi sổ kế toán tổng hợp - không cho người dùng tiếp tục hạch toán; khai báo kỳ ghi sổ riêng cho từng người dùng."
+   },
+   {
+    "id": "AP21_T1",
+    "type": "userTask",
+    "name": "02 · Bút toán phân bổ, kết\nchuyển & bổ sung",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · Kế toán tổng hợp. Cuối kỳ thực hiện thao tác phân bổ trên sổ cái (GL 3.1). Nếu sót chứng từ - thực hiện bút toán bổ sung trên sổ cái (GL 3.2)."
+   },
+   {
+    "id": "AP21_T2",
+    "type": "userTask",
+    "name": "03 · Đánh giá CLTG cuối kỳ",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · Kế toán tổng hợp. Xem xét các khoản vốn bằng tiền, phải thu, phải trả, nợ vay có gốc ngoại tệ; đánh giá lại với tỷ giá bình quân liên ngân hàng để điều chỉnh lãi/lỗ CLTG."
+   },
+   {
+    "id": "AP21_T3",
+    "type": "userTask",
+    "name": "04 · Đóng kỳ & kết chuyển\nKQKD",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · Kế toán tổng hợp. Sau khi xác định lãi/lỗ trên BC KQKD - kết chuyển lãi/lỗ sang TK lợi nhuận giữ lại; chuyển bút toán cho người có thẩm quyền phê duyệt trước khi hạch toán."
+   },
+   {
+    "id": "AP21_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1200
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP21_F0",
+    "from": "AP21_S",
+    "to": "AP21_T0"
+   },
+   {
+    "id": "AP21_F1",
+    "from": "AP21_T0",
+    "to": "AP21_T1"
+   },
+   {
+    "id": "AP21_F2",
+    "from": "AP21_T1",
+    "to": "AP21_T2"
+   },
+   {
+    "id": "AP21_F3",
+    "from": "AP21_T2",
+    "to": "AP21_T3"
+   },
+   {
+    "id": "AP21_F4",
+    "from": "AP21_T3",
+    "to": "AP21_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP22",
+  "id": "AP22",
+  "name": "Đối chiếu sổ sách và điều chỉnh cuối kỳ",
+  "stream": "R2R",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán",
+   "Kế toán trưởng",
+   "Ban Giám đốc"
+  ],
+  "width": 4266,
+  "nodes": [
+   {
+    "id": "AP22_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP22_T0",
+    "type": "userTask",
+    "name": "01 · In sổ cái",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · KT tổng hợp. In sổ cái sổ chi tiết"
+   },
+   {
+    "id": "AP22_T1",
+    "type": "userTask",
+    "name": "02 · In BCTC",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · KT tổng hợp. In CĐKT KQKD LCTT"
+   },
+   {
+    "id": "AP22_T2",
+    "type": "userTask",
+    "name": "03 · In BC thuế",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · KT tổng hợp. In bảng kê thuế GTGT"
+   },
+   {
+    "id": "AP22_T3",
+    "type": "userTask",
+    "name": "04 · Đối chiếu Sub-ledger",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · KT tổng hợp. Đối chiếu sổ phụ vs sổ cái"
+   },
+   {
+    "id": "AP22_T4",
+    "type": "userTask",
+    "name": "05 · Đối chiếu nội bộ",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · KT tổng hợp. Đối chiếu công nợ nội bộ"
+   },
+   {
+    "id": "AP22_T5",
+    "type": "userTask",
+    "name": "06 · Kiểm tra chênh lệch",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · KT tổng hợp. Liệt kê khoản cần điều chỉnh"
+   },
+   {
+    "id": "AP22_T6",
+    "type": "userTask",
+    "name": "07 · Phê duyệt",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · KTT. KTT review và phê duyệt"
+   },
+   {
+    "id": "AP22_T7",
+    "type": "userTask",
+    "name": "08 · Gửi BTC/Kiểm toán",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · KT tổng hợp. Gửi BCTC cho BTC/Kiểm toán"
+   },
+   {
+    "id": "AP22_T8",
+    "type": "userTask",
+    "name": "09 · Tổng hợp ĐC",
+    "lane": 0,
+    "x": 2040,
+    "doc": "Bước 9 · KT tổng hợp. Tổng hợp bút toán ĐC từ GL 5.2"
+   },
+   {
+    "id": "AP22_T9",
+    "type": "userTask",
+    "name": "10 · Lập bút toán ĐC",
+    "lane": 0,
+    "x": 2250,
+    "doc": "Bước 10 · KT tổng hợp. Nhập bút toán ĐC trên Gen Journal"
+   },
+   {
+    "id": "AP22_T10",
+    "type": "userTask",
+    "name": "11 · Phê duyệt",
+    "lane": 1,
+    "x": 2460,
+    "doc": "Bước 11 · KTT. KTT phê duyệt bút toán ĐC"
+   },
+   {
+    "id": "AP22_T11",
+    "type": "userTask",
+    "name": "12 · Phê duyệt",
+    "lane": 2,
+    "x": 2670,
+    "doc": "Bước 12 · TGĐ. TGĐ phê duyệt nếu trọng yếu"
+   },
+   {
+    "id": "AP22_T12",
+    "type": "userTask",
+    "name": "13 · Post",
+    "lane": 0,
+    "x": 2880,
+    "doc": "Bước 13 · KT tổng hợp. Ghi sổ bút toán ĐC"
+   },
+   {
+    "id": "AP22_T13",
+    "type": "userTask",
+    "name": "14 · Đối chiếu lại",
+    "lane": 0,
+    "x": 3090,
+    "doc": "Bước 14 · KT tổng hợp. Đối chiếu lại sau ĐC"
+   },
+   {
+    "id": "AP22_T14",
+    "type": "userTask",
+    "name": "15 · Đóng kỳ",
+    "lane": 0,
+    "x": 3300,
+    "doc": "Bước 15 · KT tổng hợp. Đóng Accounting Period"
+   },
+   {
+    "id": "AP22_T15",
+    "type": "userTask",
+    "name": "16 · Mở kỳ mới",
+    "lane": 0,
+    "x": 3510,
+    "doc": "Bước 16 · KT tổng hợp. Khai báo kỳ KT mới"
+   },
+   {
+    "id": "AP22_T16",
+    "type": "userTask",
+    "name": "17 · No. Series mới",
+    "lane": 0,
+    "x": 3720,
+    "doc": "Bước 17 · KT tổng hợp. Khai báo bộ số CT năm mới"
+   },
+   {
+    "id": "AP22_T17",
+    "type": "userTask",
+    "name": "18 · Xác nhận",
+    "lane": 1,
+    "x": 3930,
+    "doc": "Bước 18 · KTT. Xác nhận đóng sổ cuối kỳ"
+   },
+   {
+    "id": "AP22_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 4140
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP22_F0",
+    "from": "AP22_S",
+    "to": "AP22_T0"
+   },
+   {
+    "id": "AP22_F1",
+    "from": "AP22_T0",
+    "to": "AP22_T1"
+   },
+   {
+    "id": "AP22_F2",
+    "from": "AP22_T1",
+    "to": "AP22_T2"
+   },
+   {
+    "id": "AP22_F3",
+    "from": "AP22_T2",
+    "to": "AP22_T3"
+   },
+   {
+    "id": "AP22_F4",
+    "from": "AP22_T3",
+    "to": "AP22_T4"
+   },
+   {
+    "id": "AP22_F5",
+    "from": "AP22_T4",
+    "to": "AP22_T5"
+   },
+   {
+    "id": "AP22_F6",
+    "from": "AP22_T5",
+    "to": "AP22_T6"
+   },
+   {
+    "id": "AP22_F7",
+    "from": "AP22_T6",
+    "to": "AP22_T7"
+   },
+   {
+    "id": "AP22_F8",
+    "from": "AP22_T7",
+    "to": "AP22_T8"
+   },
+   {
+    "id": "AP22_F9",
+    "from": "AP22_T8",
+    "to": "AP22_T9"
+   },
+   {
+    "id": "AP22_F10",
+    "from": "AP22_T9",
+    "to": "AP22_T10"
+   },
+   {
+    "id": "AP22_F11",
+    "from": "AP22_T10",
+    "to": "AP22_T11"
+   },
+   {
+    "id": "AP22_F12",
+    "from": "AP22_T11",
+    "to": "AP22_T12"
+   },
+   {
+    "id": "AP22_F13",
+    "from": "AP22_T12",
+    "to": "AP22_T13"
+   },
+   {
+    "id": "AP22_F14",
+    "from": "AP22_T13",
+    "to": "AP22_T14"
+   },
+   {
+    "id": "AP22_F15",
+    "from": "AP22_T14",
+    "to": "AP22_T15"
+   },
+   {
+    "id": "AP22_F16",
+    "from": "AP22_T15",
+    "to": "AP22_T16"
+   },
+   {
+    "id": "AP22_F17",
+    "from": "AP22_T16",
+    "to": "AP22_T17"
+   },
+   {
+    "id": "AP22_F18",
+    "from": "AP22_T17",
+    "to": "AP22_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP23",
+  "id": "AP23",
+  "name": "Quản lý hàng hóa (NVL, TP, BTP)",
+  "stream": "MFG",
+  "code": "MD-01",
+  "LH": 176,
+  "lanes": [
+   "hòng R&D",
+   "Bộ phận CNTT",
+   "Phòng Kế toán"
+  ],
+  "width": 2586,
+  "nodes": [
+   {
+    "id": "AP23_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP23_T0",
+    "type": "userTask",
+    "name": "01 · Nghiên cứu phát triển\nSP mới",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Phòng R&D. Phòng R&D phát triển sản phẩm mới, phát sinh yêu cầu tạo mã hàng."
+   },
+   {
+    "id": "AP23_T1",
+    "type": "userTask",
+    "name": "02 · Kiểm tra tồn tại trên\nHT",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · BP. CNTT. Kiểm tra mã hàng đã tồn tại chưa trên hệ thống."
+   },
+   {
+    "id": "AP23_T2",
+    "type": "userTask",
+    "name": "03 · Tạo mới NVL",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. CNTT. Tạo mã NVL: thông tin chung và tham số kế hoạch."
+   },
+   {
+    "id": "AP23_T3",
+    "type": "userTask",
+    "name": "04 · Mã hóa thông tin (nếu\ncần)",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Điền thông tin mã hóa cho mặt hàng cần bảo mật."
+   },
+   {
+    "id": "AP23_T4",
+    "type": "userTask",
+    "name": "05 · Tạo mới BTP cấp 1, cấp\n2",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · BP. CNTT. Tạo các mã BTP tương ứng với thông tin SX và kế hoạch."
+   },
+   {
+    "id": "AP23_T5",
+    "type": "userTask",
+    "name": "06 · Tạo mới TP cuối",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · BP. CNTT. Tạo mã TP với thông tin chung, SX, tham số kế hoạch."
+   },
+   {
+    "id": "AP23_T6",
+    "type": "userTask",
+    "name": "07 · Khai báo SKU",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · BP. CNTT. Khai báo tham số bổ sung hàng (Stockkeeping Unit)."
+   },
+   {
+    "id": "AP23_T7",
+    "type": "userTask",
+    "name": "08 · Gửi yêu cầu phê duyệt",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · BP. CNTT. Gửi yêu cầu phê duyệt mã mới cho BP Sản xuất."
+   },
+   {
+    "id": "AP23_T8",
+    "type": "userTask",
+    "name": "09 · Kiểm tra nhóm hạch toán",
+    "lane": 2,
+    "x": 2040,
+    "doc": "Bước 9 · P. Kế toán. Kiểm tra và bổ sung thông tin nhóm hạch toán."
+   },
+   {
+    "id": "AP23_T9",
+    "type": "userTask",
+    "name": "10 · Release cho phòng ban",
+    "lane": 2,
+    "x": 2250,
+    "doc": "Bước 10 · P. Kế toán. Mặt hàng được gỡ chặn, cho phép giao dịch."
+   },
+   {
+    "id": "AP23_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2460
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP23_F0",
+    "from": "AP23_S",
+    "to": "AP23_T0"
+   },
+   {
+    "id": "AP23_F1",
+    "from": "AP23_T0",
+    "to": "AP23_T1"
+   },
+   {
+    "id": "AP23_F2",
+    "from": "AP23_T1",
+    "to": "AP23_T2"
+   },
+   {
+    "id": "AP23_F3",
+    "from": "AP23_T2",
+    "to": "AP23_T3"
+   },
+   {
+    "id": "AP23_F4",
+    "from": "AP23_T3",
+    "to": "AP23_T4"
+   },
+   {
+    "id": "AP23_F5",
+    "from": "AP23_T4",
+    "to": "AP23_T5"
+   },
+   {
+    "id": "AP23_F6",
+    "from": "AP23_T5",
+    "to": "AP23_T6"
+   },
+   {
+    "id": "AP23_F7",
+    "from": "AP23_T6",
+    "to": "AP23_T7"
+   },
+   {
+    "id": "AP23_F8",
+    "from": "AP23_T7",
+    "to": "AP23_T8"
+   },
+   {
+    "id": "AP23_F9",
+    "from": "AP23_T8",
+    "to": "AP23_T9"
+   },
+   {
+    "id": "AP23_F10",
+    "from": "AP23_T9",
+    "to": "AP23_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP24",
+  "id": "AP24",
+  "name": "Quản lý Định mức BOM",
+  "stream": "MFG",
+  "code": "MD-02",
+  "LH": 176,
+  "lanes": [
+   "hòng R&D",
+   "Bộ phận CNTT",
+   "Bộ phận Sản xuất"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP24_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP24_T0",
+    "type": "userTask",
+    "name": "01 · Nghiên cứu, đề xuất SP\nmới",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Phòng R&D. R&D nghiên cứu phát triển sản phẩm nguyên liệu sào mới."
+   },
+   {
+    "id": "AP24_T1",
+    "type": "userTask",
+    "name": "02 · Ban hành thông tin định\nmức",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · Phòng R&D. Ban hành thông tin về sản phẩm mới cho các bộ phận."
+   },
+   {
+    "id": "AP24_T2",
+    "type": "userTask",
+    "name": "03 · Khai báo Định mức BTP",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. CNTT. Khai báo BOM cho BTP, NVL trong BOM đã mã hóa trước."
+   },
+   {
+    "id": "AP24_T3",
+    "type": "userTask",
+    "name": "04 · Khai báo Định mức đóng\ngói TP",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Khai báo BOM cho TP theo quy cách đóng gói (SKU)."
+   },
+   {
+    "id": "AP24_T4",
+    "type": "userTask",
+    "name": "05 · Chạy thử sản phẩm mới",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Sản xuất. Chạy thử và ghi nhận thông số đầu vào cho Routing."
+   },
+   {
+    "id": "AP24_T5",
+    "type": "userTask",
+    "name": "06 · Khai báo Định mức tái\nchế",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · BP. CNTT. Khai báo BOM cho sản phẩm tái chế."
+   },
+   {
+    "id": "AP24_T6",
+    "type": "userTask",
+    "name": "07 · Khai báo Kịch bản SX",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · BP. CNTT. Khai báo kịch bản SX thông thường và tái chế."
+   },
+   {
+    "id": "AP24_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP24_F0",
+    "from": "AP24_S",
+    "to": "AP24_T0"
+   },
+   {
+    "id": "AP24_F1",
+    "from": "AP24_T0",
+    "to": "AP24_T1"
+   },
+   {
+    "id": "AP24_F2",
+    "from": "AP24_T1",
+    "to": "AP24_T2"
+   },
+   {
+    "id": "AP24_F3",
+    "from": "AP24_T2",
+    "to": "AP24_T3"
+   },
+   {
+    "id": "AP24_F4",
+    "from": "AP24_T3",
+    "to": "AP24_T4"
+   },
+   {
+    "id": "AP24_F5",
+    "from": "AP24_T4",
+    "to": "AP24_T5"
+   },
+   {
+    "id": "AP24_F6",
+    "from": "AP24_T5",
+    "to": "AP24_T6"
+   },
+   {
+    "id": "AP24_F7",
+    "from": "AP24_T6",
+    "to": "AP24_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP25",
+  "id": "AP25",
+  "name": "Quản lý Work Center",
+  "stream": "MFG",
+  "code": "MD-03",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận CNTT",
+   "Phòng Kế toán"
+  ],
+  "width": 1536,
+  "nodes": [
+   {
+    "id": "AP25_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP25_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh dây chuyền\nmới?",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. CNTT. Kiểm tra cần tạo mới dây chuyền hay điều chỉnh."
+   },
+   {
+    "id": "AP25_T1",
+    "type": "userTask",
+    "name": "02 · Tạo Work Center mới",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. CNTT. Tạo WC mới trên hệ thống khi cần."
+   },
+   {
+    "id": "AP25_T2",
+    "type": "userTask",
+    "name": "03 · Điều chỉnh thông tin WC",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · BP. CNTT. Cập nhật thông tin WC nếu không cần tạo mới."
+   },
+   {
+    "id": "AP25_T3",
+    "type": "userTask",
+    "name": "04 · Tính toán lịch SX nguồn\nlực",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Tính toán năng lực sản xuất cho nguồn lực mới."
+   },
+   {
+    "id": "AP25_T4",
+    "type": "userTask",
+    "name": "05 · Kiểm tra thông tin\nPosting",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · P. Kế toán. Kiểm tra và bổ sung thông tin Posting cho WC/MC."
+   },
+   {
+    "id": "AP25_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 1410
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP25_F0",
+    "from": "AP25_S",
+    "to": "AP25_T0"
+   },
+   {
+    "id": "AP25_F1",
+    "from": "AP25_T0",
+    "to": "AP25_T1"
+   },
+   {
+    "id": "AP25_F2",
+    "from": "AP25_T1",
+    "to": "AP25_T2"
+   },
+   {
+    "id": "AP25_F3",
+    "from": "AP25_T2",
+    "to": "AP25_T3"
+   },
+   {
+    "id": "AP25_F4",
+    "from": "AP25_T3",
+    "to": "AP25_T4"
+   },
+   {
+    "id": "AP25_F5",
+    "from": "AP25_T4",
+    "to": "AP25_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP26",
+  "id": "AP26",
+  "name": "Quản lý Routing",
+  "stream": "MFG",
+  "code": "MD-04",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Sản xuất",
+   "Bộ phận CNTT"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP26_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP26_T0",
+    "type": "userTask",
+    "name": "01 · Yêu cầu chỉnh sửa/thêm\nRouting",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Sản xuất. Nhận thấy cần điều chỉnh Routing cho phù hợp thực tế."
+   },
+   {
+    "id": "AP26_T1",
+    "type": "userTask",
+    "name": "02 · Routing đã tồn tại?",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · BP. CNTT. Kiểm tra Routing đã có chưa trên hệ thống."
+   },
+   {
+    "id": "AP26_T2",
+    "type": "userTask",
+    "name": "03 · Tạo mới Routing cho BTP",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. CNTT. Tạo mới Routing cho các mặt hàng BTP."
+   },
+   {
+    "id": "AP26_T3",
+    "type": "userTask",
+    "name": "04 · Khai báo công đoạn BTP",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Khai báo Run time, Setup time, Wait time cho BTP."
+   },
+   {
+    "id": "AP26_T4",
+    "type": "userTask",
+    "name": "05 · Khai báo Routing cho TP",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · BP. CNTT. Khai báo Routing cho Thành phẩm."
+   },
+   {
+    "id": "AP26_T5",
+    "type": "userTask",
+    "name": "06 · Khai báo công đoạn TP",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · BP. CNTT. Khai báo chi tiết thời gian cho TP."
+   },
+   {
+    "id": "AP26_T6",
+    "type": "userTask",
+    "name": "07 · Chỉnh sửa Routing",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · BP. CNTT. Chỉnh sửa theo yêu cầu từ Sản xuất."
+   },
+   {
+    "id": "AP26_T7",
+    "type": "userTask",
+    "name": "08 · Certified routing",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · BP. CNTT. Xác nhận Routing sẵn sàng cho sản xuất."
+   },
+   {
+    "id": "AP26_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP26_F0",
+    "from": "AP26_S",
+    "to": "AP26_T0"
+   },
+   {
+    "id": "AP26_F1",
+    "from": "AP26_T0",
+    "to": "AP26_T1"
+   },
+   {
+    "id": "AP26_F2",
+    "from": "AP26_T1",
+    "to": "AP26_T2"
+   },
+   {
+    "id": "AP26_F3",
+    "from": "AP26_T2",
+    "to": "AP26_T3"
+   },
+   {
+    "id": "AP26_F4",
+    "from": "AP26_T3",
+    "to": "AP26_T4"
+   },
+   {
+    "id": "AP26_F5",
+    "from": "AP26_T4",
+    "to": "AP26_T5"
+   },
+   {
+    "id": "AP26_F6",
+    "from": "AP26_T5",
+    "to": "AP26_T6"
+   },
+   {
+    "id": "AP26_F7",
+    "from": "AP26_T6",
+    "to": "AP26_T7"
+   },
+   {
+    "id": "AP26_F8",
+    "from": "AP26_T7",
+    "to": "AP26_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP27",
+  "id": "AP27",
+  "name": "Lập kế hoạch sản xuất",
+  "stream": "MFG",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Sản xuất"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP27_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP27_T0",
+    "type": "userTask",
+    "name": "01 · Dự báo doanh số BH",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Sản xuất. Đầu vào từ bộ phận Kinh doanh (Sales Budget)."
+   },
+   {
+    "id": "AP27_T1",
+    "type": "userTask",
+    "name": "02 · Sao chép dự báo → KH SX",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · BP. Sản xuất. Sao chép dữ liệu dự báo BH thành Demand Forecast."
+   },
+   {
+    "id": "AP27_T2",
+    "type": "userTask",
+    "name": "03 · Điều chỉnh KH SX",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · BP. Sản xuất. GĐ Sản xuất điều chỉnh KH chi tiết theo doanh số dự báo."
+   },
+   {
+    "id": "AP27_T3",
+    "type": "userTask",
+    "name": "04 · Chạy MPS",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · BP. Sản xuất. Chạy MPS cho TP và BTP, quét dữ liệu KH + tồn kho."
+   },
+   {
+    "id": "AP27_T4",
+    "type": "userTask",
+    "name": "05 · Kiểm tra khả năng SX",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Sản xuất. GĐ Xưởng kiểm tra lịch hệ thống đề xuất."
+   },
+   {
+    "id": "AP27_T5",
+    "type": "userTask",
+    "name": "06 · Điều chỉnh KH SX tổng",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Sản xuất. Điều chỉnh lại cho hợp lý."
+   },
+   {
+    "id": "AP27_T6",
+    "type": "userTask",
+    "name": "07 · Tạo Firm Planned PO",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · BP. Sản xuất. Tạo lệnh SX từ màn hình Kế hoạch."
+   },
+   {
+    "id": "AP27_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP27_F0",
+    "from": "AP27_S",
+    "to": "AP27_T0"
+   },
+   {
+    "id": "AP27_F1",
+    "from": "AP27_T0",
+    "to": "AP27_T1"
+   },
+   {
+    "id": "AP27_F2",
+    "from": "AP27_T1",
+    "to": "AP27_T2"
+   },
+   {
+    "id": "AP27_F3",
+    "from": "AP27_T2",
+    "to": "AP27_T3"
+   },
+   {
+    "id": "AP27_F4",
+    "from": "AP27_T3",
+    "to": "AP27_T4"
+   },
+   {
+    "id": "AP27_F5",
+    "from": "AP27_T4",
+    "to": "AP27_T5"
+   },
+   {
+    "id": "AP27_F6",
+    "from": "AP27_T5",
+    "to": "AP27_T6"
+   },
+   {
+    "id": "AP27_F7",
+    "from": "AP27_T6",
+    "to": "AP27_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP28",
+  "id": "AP28",
+  "name": "Sản xuất sơ chế và tinh chế",
+  "stream": "MFG",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Sản xuất",
+   "Phòng Kế toán"
+  ],
+  "width": 3216,
+  "nodes": [
+   {
+    "id": "AP28_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP28_T0",
+    "type": "userTask",
+    "name": "01 · Kế hoạch sản xuất",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · GĐ. Sản xuất. Có Lịch SX từ Firm Planned PO."
+   },
+   {
+    "id": "AP28_T1",
+    "type": "userTask",
+    "name": "02 · Kiểm tra tồn kho/năng\nlực",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · GĐ. Sản xuất. Kiểm tra NVL và năng lực SX trong ngày."
+   },
+   {
+    "id": "AP28_T2",
+    "type": "userTask",
+    "name": "03 · Phát hành LSX trong\nngày",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · GĐ. Sản xuất. Ban hành các LSX (Released)."
+   },
+   {
+    "id": "AP28_T3",
+    "type": "userTask",
+    "name": "04 · Điều chỉnh thông tin\nLSX",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · GĐ. Sản xuất. Điều chỉnh thông tin trên LSX nếu cần."
+   },
+   {
+    "id": "AP28_T4",
+    "type": "userTask",
+    "name": "05 · Yêu cầu NVL",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Sản xuất. In phiếu yêu cầu NVL từ LSX."
+   },
+   {
+    "id": "AP28_T5",
+    "type": "userTask",
+    "name": "06 · Tạo phiếu yêu cầu NL/VT",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Sản xuất. Tập hợp nhu cầu NVL và tạo phiếu chuyển kho."
+   },
+   {
+    "id": "AP28_T6",
+    "type": "userTask",
+    "name": "07 · Nhập kho NVL SX",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · BP. Sản xuất. Nhận hàng chuyển kho, nhập kho vật tư SX."
+   },
+   {
+    "id": "AP28_T7",
+    "type": "userTask",
+    "name": "08 · Cài đặt máy, đưa NVL\nvào",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · BP. Sản xuất. Setup dây chuyền, ghi nhận thời gian cài đặt."
+   },
+   {
+    "id": "AP28_T8",
+    "type": "userTask",
+    "name": "09 · Ghi sổ NVL nguyên liệu\ntiêu hao",
+    "lane": 0,
+    "x": 2040,
+    "doc": "Bước 9 · BP. Sản xuất. Ghi sổ xuất kho tiêu hao theo thực tế (Manual)."
+   },
+   {
+    "id": "AP28_T9",
+    "type": "userTask",
+    "name": "10 · Thực thi sản xuất",
+    "lane": 0,
+    "x": 2250,
+    "doc": "Bước 10 · BP. Sản xuất. Cập nhật tiến độ qua các công đoạn."
+   },
+   {
+    "id": "AP28_T10",
+    "type": "userTask",
+    "name": "11 · Ghi sổ TP nguyên liệu\nthu được",
+    "lane": 0,
+    "x": 2460,
+    "doc": "Bước 11 · BP. Sản xuất. Ghi nhận lượng TP nguyên liệu sau sản xuất."
+   },
+   {
+    "id": "AP28_T11",
+    "type": "userTask",
+    "name": "12 · Kiểm tra LSX hoàn thành",
+    "lane": 0,
+    "x": 2670,
+    "doc": "Bước 12 · GĐ. Sản xuất. Kiểm tra tình trạng các lệnh sau hoàn thành."
+   },
+   {
+    "id": "AP28_T12",
+    "type": "userTask",
+    "name": "13 · Kết thúc lệnh",
+    "lane": 1,
+    "x": 2880,
+    "doc": "Bước 13 · P. Kế toán. Kiểm tra giá trị LSX và chuyển Finished."
+   },
+   {
+    "id": "AP28_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 3090
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP28_F0",
+    "from": "AP28_S",
+    "to": "AP28_T0"
+   },
+   {
+    "id": "AP28_F1",
+    "from": "AP28_T0",
+    "to": "AP28_T1"
+   },
+   {
+    "id": "AP28_F2",
+    "from": "AP28_T1",
+    "to": "AP28_T2"
+   },
+   {
+    "id": "AP28_F3",
+    "from": "AP28_T2",
+    "to": "AP28_T3"
+   },
+   {
+    "id": "AP28_F4",
+    "from": "AP28_T3",
+    "to": "AP28_T4"
+   },
+   {
+    "id": "AP28_F5",
+    "from": "AP28_T4",
+    "to": "AP28_T5"
+   },
+   {
+    "id": "AP28_F6",
+    "from": "AP28_T5",
+    "to": "AP28_T6"
+   },
+   {
+    "id": "AP28_F7",
+    "from": "AP28_T6",
+    "to": "AP28_T7"
+   },
+   {
+    "id": "AP28_F8",
+    "from": "AP28_T7",
+    "to": "AP28_T8"
+   },
+   {
+    "id": "AP28_F9",
+    "from": "AP28_T8",
+    "to": "AP28_T9"
+   },
+   {
+    "id": "AP28_F10",
+    "from": "AP28_T9",
+    "to": "AP28_T10"
+   },
+   {
+    "id": "AP28_F11",
+    "from": "AP28_T10",
+    "to": "AP28_T11"
+   },
+   {
+    "id": "AP28_F12",
+    "from": "AP28_T11",
+    "to": "AP28_T12"
+   },
+   {
+    "id": "AP28_F13",
+    "from": "AP28_T12",
+    "to": "AP28_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP29",
+  "id": "AP29",
+  "name": "Sản xuất đóng gói thành phẩm",
+  "stream": "MFG",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Sản xuất",
+   "Phòng Kế toán",
+   "Hệ thống"
+  ],
+  "width": 3636,
+  "nodes": [
+   {
+    "id": "AP29_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP29_T0",
+    "type": "userTask",
+    "name": "01 · Kế hoạch sản xuất",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · GĐ. Sản xuất. Có Lịch SX từ Firm Planned PO."
+   },
+   {
+    "id": "AP29_T1",
+    "type": "userTask",
+    "name": "02 · Kiểm tra tồn kho/năng\nlực",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · GĐ. Sản xuất. Kiểm tra NVL với Kho và năng lực SX."
+   },
+   {
+    "id": "AP29_T2",
+    "type": "userTask",
+    "name": "03 · Phát hành LSX trong\nngày",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · GĐ. Sản xuất. Xác nhận đủ tồn kho, ban hành LSX (Released)."
+   },
+   {
+    "id": "AP29_T3",
+    "type": "userTask",
+    "name": "04 · Điều chỉnh LSX (nếu có)",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · GĐ. Sản xuất. Điều chỉnh thông tin trên LSX."
+   },
+   {
+    "id": "AP29_T4",
+    "type": "userTask",
+    "name": "05 · Yêu cầu NVL/VT",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · BP. Sản xuất. In phiếu yêu cầu NVL và tạo phiếu chuyển kho."
+   },
+   {
+    "id": "AP29_T5",
+    "type": "userTask",
+    "name": "06 · Nhập kho NVL SX",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Sản xuất. Nhận hàng chuyển kho, nhập kho VT và NVL."
+   },
+   {
+    "id": "AP29_T6",
+    "type": "userTask",
+    "name": "07 · Setup máy cho BTP",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · BP. Sản xuất. Shopfloor App: ghi nhận thời gian Setup công đoạn BTP."
+   },
+   {
+    "id": "AP29_T7",
+    "type": "userTask",
+    "name": "08 · Thực thi SX BTP",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · BP. Sản xuất. Shopfloor App: theo dõi sản xuất BTP."
+   },
+   {
+    "id": "AP29_T8",
+    "type": "userTask",
+    "name": "09 · Ghi nhận đầu ra BTP",
+    "lane": 0,
+    "x": 2040,
+    "doc": "Bước 9 · BP. Sản xuất. Ghi nhận sản lượng BTP đã sản xuất."
+   },
+   {
+    "id": "AP29_T9",
+    "type": "userTask",
+    "name": "10 · Setup máy cho TP",
+    "lane": 0,
+    "x": 2250,
+    "doc": "Bước 10 · BP. Sản xuất. Shopfloor App: ghi nhận thời gian Setup TP."
+   },
+   {
+    "id": "AP29_T10",
+    "type": "userTask",
+    "name": "11 · Thực thi SX TP",
+    "lane": 0,
+    "x": 2460,
+    "doc": "Bước 11 · BP. Sản xuất. Shopfloor App: theo dõi sản xuất TP."
+   },
+   {
+    "id": "AP29_T11",
+    "type": "userTask",
+    "name": "12 · Ghi nhận đầu ra TP",
+    "lane": 0,
+    "x": 2670,
+    "doc": "Bước 12 · BP. Sản xuất. Ghi nhận sản lượng TP đã đóng gói."
+   },
+   {
+    "id": "AP29_T12",
+    "type": "userTask",
+    "name": "13 · Kiểm tra LSX hoàn thành",
+    "lane": 0,
+    "x": 2880,
+    "doc": "Bước 13 · GĐ. Sản xuất. Kiểm tra tình trạng lệnh."
+   },
+   {
+    "id": "AP29_T13",
+    "type": "userTask",
+    "name": "14 · Kết thúc lệnh",
+    "lane": 1,
+    "x": 3090,
+    "doc": "Bước 14 · P. Kế toán. Kiểm tra giá trị và chuyển Finished."
+   },
+   {
+    "id": "AP29_T14",
+    "type": "serviceTask",
+    "name": "15 · Tự động xuất tiêu hao\nNVL",
+    "lane": 2,
+    "x": 3300,
+    "doc": "Bước 15 · Hệ thống. Backward Flushing: tự động trừ NVL theo BOM."
+   },
+   {
+    "id": "AP29_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 3510
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP29_F0",
+    "from": "AP29_S",
+    "to": "AP29_T0"
+   },
+   {
+    "id": "AP29_F1",
+    "from": "AP29_T0",
+    "to": "AP29_T1"
+   },
+   {
+    "id": "AP29_F2",
+    "from": "AP29_T1",
+    "to": "AP29_T2"
+   },
+   {
+    "id": "AP29_F3",
+    "from": "AP29_T2",
+    "to": "AP29_T3"
+   },
+   {
+    "id": "AP29_F4",
+    "from": "AP29_T3",
+    "to": "AP29_T4"
+   },
+   {
+    "id": "AP29_F5",
+    "from": "AP29_T4",
+    "to": "AP29_T5"
+   },
+   {
+    "id": "AP29_F6",
+    "from": "AP29_T5",
+    "to": "AP29_T6"
+   },
+   {
+    "id": "AP29_F7",
+    "from": "AP29_T6",
+    "to": "AP29_T7"
+   },
+   {
+    "id": "AP29_F8",
+    "from": "AP29_T7",
+    "to": "AP29_T8"
+   },
+   {
+    "id": "AP29_F9",
+    "from": "AP29_T8",
+    "to": "AP29_T9"
+   },
+   {
+    "id": "AP29_F10",
+    "from": "AP29_T9",
+    "to": "AP29_T10"
+   },
+   {
+    "id": "AP29_F11",
+    "from": "AP29_T10",
+    "to": "AP29_T11"
+   },
+   {
+    "id": "AP29_F12",
+    "from": "AP29_T11",
+    "to": "AP29_T12"
+   },
+   {
+    "id": "AP29_F13",
+    "from": "AP29_T12",
+    "to": "AP29_T13"
+   },
+   {
+    "id": "AP29_F14",
+    "from": "AP29_T13",
+    "to": "AP29_T14"
+   },
+   {
+    "id": "AP29_F15",
+    "from": "AP29_T14",
+    "to": "AP29_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP30",
+  "id": "AP30",
+  "name": "Sản xuất có hàng tái chế",
+  "stream": "MFG",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Sản xuất"
+  ],
+  "width": 1536,
+  "nodes": [
+   {
+    "id": "AP30_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP30_T0",
+    "type": "userTask",
+    "name": "01 · Kế hoạch sản xuất",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · GĐ. Sản xuất. Có Lịch SX từ Firm Planned PO."
+   },
+   {
+    "id": "AP30_T1",
+    "type": "userTask",
+    "name": "02 · Quyết định tái chế",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · GĐ. Sản xuất. Kiểm tra tồn kho NVL và quyết định dùng NL tái chế."
+   },
+   {
+    "id": "AP30_T2",
+    "type": "userTask",
+    "name": "03 · Tạo LSX dung dịch tái\nchế",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · GĐ. Sản xuất. Tạo LSX với BOM tái chế khi có quyết định."
+   },
+   {
+    "id": "AP30_T3",
+    "type": "userTask",
+    "name": "04 · Điều chỉnh LSX (BOM tái\nchế)",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · GĐ. Sản xuất. Chuyển Firm Plan thành Kịch bản tái chế."
+   },
+   {
+    "id": "AP30_T4",
+    "type": "userTask",
+    "name": "05 · Phát hành LSX tái chế",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · GĐ. Sản xuất. Phát hành và thực hiện SX như quy trình lon/lọ."
+   },
+   {
+    "id": "AP30_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1410
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP30_F0",
+    "from": "AP30_S",
+    "to": "AP30_T0"
+   },
+   {
+    "id": "AP30_F1",
+    "from": "AP30_T0",
+    "to": "AP30_T1"
+   },
+   {
+    "id": "AP30_F2",
+    "from": "AP30_T1",
+    "to": "AP30_T2"
+   },
+   {
+    "id": "AP30_F3",
+    "from": "AP30_T2",
+    "to": "AP30_T3"
+   },
+   {
+    "id": "AP30_F4",
+    "from": "AP30_T3",
+    "to": "AP30_T4"
+   },
+   {
+    "id": "AP30_F5",
+    "from": "AP30_T4",
+    "to": "AP30_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP31",
+  "id": "AP31",
+  "name": "Kiểm tra chất lượng trong SX",
+  "stream": "MFG",
+  "code": "QC-01",
+  "LH": 176,
+  "lanes": [
+   "Hệ thống",
+   "Bộ phận Quản lý chất lượng",
+   "Bộ phận Sản xuất",
+   "Bộ phận Kho"
+  ],
+  "width": 2796,
+  "nodes": [
+   {
+    "id": "AP31_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP31_T0",
+    "type": "serviceTask",
+    "name": "01 · LSX được ban hành",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Hệ thống. LSX được GĐ Sản xuất ban hành."
+   },
+   {
+    "id": "AP31_T1",
+    "type": "serviceTask",
+    "name": "02 · Tạo Lệnh QC trước SX",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · Hệ thống. Tự động tạo lệnh QC kiểm tra môi trường."
+   },
+   {
+    "id": "AP31_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra chất lượng",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BP. QC. Kiểm tra hiện trường bằng QC App trên tablet."
+   },
+   {
+    "id": "AP31_T3",
+    "type": "userTask",
+    "name": "04 · Cập nhật kết quả QC",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · BP. QC. Nhập kết quả vào Phiếu QC trên App/Web."
+   },
+   {
+    "id": "AP31_T4",
+    "type": "userTask",
+    "name": "05 · Kết quả đạt?",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · BP. QC. Đánh giá Pass/Fail. Đạt → cho phép SX."
+   },
+   {
+    "id": "AP31_T5",
+    "type": "userTask",
+    "name": "06 · Thông báo ngưng SX",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · BP. QC. Thông báo BP Sản xuất ngưng SX nếu không đạt."
+   },
+   {
+    "id": "AP31_T6",
+    "type": "userTask",
+    "name": "07 · Xử lý vấn đề",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · BP. SX & CĐ. Sản xuất và Cơ điện xử lý theo yêu cầu."
+   },
+   {
+    "id": "AP31_T7",
+    "type": "userTask",
+    "name": "08 · Phản hồi team QC",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · BP. SX & CĐ. Phản hồi để QC kiểm tra lại."
+   },
+   {
+    "id": "AP31_T8",
+    "type": "serviceTask",
+    "name": "09 · Tạo Lệnh QC cho TP công\nđoạn",
+    "lane": 0,
+    "x": 2040,
+    "doc": "Bước 9 · Hệ thống. Tự động tạo QC khi nhập thành phẩm qua từng công đoạn"
+   },
+   {
+    "id": "AP31_T9",
+    "type": "userTask",
+    "name": "10 · Lấy mẫu, kiểm tra TP",
+    "lane": 1,
+    "x": 2250,
+    "doc": "Bước 10 · BP. QC. Lấy mẫu, kiểm định và ghi nhận kết quả."
+   },
+   {
+    "id": "AP31_T10",
+    "type": "userTask",
+    "name": "11 · Tiêu hủy / Chuyển kho\ntái chế",
+    "lane": 3,
+    "x": 2460,
+    "doc": "Bước 11 · BP. SX & Kho. Xuất kho tiêu hủy hoặc chuyển kho chờ tái chế."
+   },
+   {
+    "id": "AP31_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 3,
+    "x": 2670
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP31_F0",
+    "from": "AP31_S",
+    "to": "AP31_T0"
+   },
+   {
+    "id": "AP31_F1",
+    "from": "AP31_T0",
+    "to": "AP31_T1"
+   },
+   {
+    "id": "AP31_F2",
+    "from": "AP31_T1",
+    "to": "AP31_T2"
+   },
+   {
+    "id": "AP31_F3",
+    "from": "AP31_T2",
+    "to": "AP31_T3"
+   },
+   {
+    "id": "AP31_F4",
+    "from": "AP31_T3",
+    "to": "AP31_T4"
+   },
+   {
+    "id": "AP31_F5",
+    "from": "AP31_T4",
+    "to": "AP31_T5"
+   },
+   {
+    "id": "AP31_F6",
+    "from": "AP31_T5",
+    "to": "AP31_T6"
+   },
+   {
+    "id": "AP31_F7",
+    "from": "AP31_T6",
+    "to": "AP31_T7"
+   },
+   {
+    "id": "AP31_F8",
+    "from": "AP31_T7",
+    "to": "AP31_T8"
+   },
+   {
+    "id": "AP31_F9",
+    "from": "AP31_T8",
+    "to": "AP31_T9"
+   },
+   {
+    "id": "AP31_F10",
+    "from": "AP31_T9",
+    "to": "AP31_T10"
+   },
+   {
+    "id": "AP31_F11",
+    "from": "AP31_T10",
+    "to": "AP31_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP32",
+  "id": "AP32",
+  "name": "Tính giá thành sản xuất",
+  "stream": "MFG",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Sản xuất",
+   "Phòng Kế toán"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP32_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP32_T0",
+    "type": "userTask",
+    "name": "01 · Kiểm tra LSX, cập nhật\nOutput",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Sản xuất. Hàng ngày cập nhật Output và Consumption từ báo cáo SX."
+   },
+   {
+    "id": "AP32_T1",
+    "type": "userTask",
+    "name": "02 · Chuyển LSX → Finished",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · P.SX & Kế toán. Chuyển trạng thái LSX đã hoàn thành sang Finished."
+   },
+   {
+    "id": "AP32_T2",
+    "type": "userTask",
+    "name": "03 · Ghi nhận CP nhân công,\nSX chung",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · P. Kế toán. Hạch toán chi phí vào General Journal theo nhà máy"
+   },
+   {
+    "id": "AP32_T3",
+    "type": "userTask",
+    "name": "04 · Kiểm tra LSX cuối tháng",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · P. Kế toán. Kiểm tra toàn bộ Output/Consumption trước phân bổ."
+   },
+   {
+    "id": "AP32_T4",
+    "type": "userTask",
+    "name": "05 · Adjust Cost / Post to\nG/L",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · P. Kế toán. Cập nhật giá vốn NVL vào sổ cái."
+   },
+   {
+    "id": "AP32_T5",
+    "type": "userTask",
+    "name": "06 · Phân bổ CP cho từng LSX",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · P. Kế toán. Dùng công cụ chuyên dụngân bổ theo thời gian."
+   },
+   {
+    "id": "AP32_T6",
+    "type": "userTask",
+    "name": "07 · Adjust Cost / Post to\nG/L (lần 2)",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · P. Kế toán. Đẩy kết quả phân bổ vào sổ cái."
+   },
+   {
+    "id": "AP32_T7",
+    "type": "userTask",
+    "name": "08 · BC Inventory Valuation\n- WIP",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · P. Kế toán. Kiểm tra chi phí NVL và SX chung đã phân bổ đúng."
+   },
+   {
+    "id": "AP32_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP32_F0",
+    "from": "AP32_S",
+    "to": "AP32_T0"
+   },
+   {
+    "id": "AP32_F1",
+    "from": "AP32_T0",
+    "to": "AP32_T1"
+   },
+   {
+    "id": "AP32_F2",
+    "from": "AP32_T1",
+    "to": "AP32_T2"
+   },
+   {
+    "id": "AP32_F3",
+    "from": "AP32_T2",
+    "to": "AP32_T3"
+   },
+   {
+    "id": "AP32_F4",
+    "from": "AP32_T3",
+    "to": "AP32_T4"
+   },
+   {
+    "id": "AP32_F5",
+    "from": "AP32_T4",
+    "to": "AP32_T5"
+   },
+   {
+    "id": "AP32_F6",
+    "from": "AP32_T5",
+    "to": "AP32_T6"
+   },
+   {
+    "id": "AP32_F7",
+    "from": "AP32_T6",
+    "to": "AP32_T7"
+   },
+   {
+    "id": "AP32_F8",
+    "from": "AP32_T7",
+    "to": "AP32_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP33",
+  "id": "AP33",
+  "name": "Quản lý thông tin Khách hàng",
+  "stream": "O2C",
+  "code": "MD-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận yêu cầu",
+   "Phòng Kinh doanh",
+   "Bộ phận CNTT",
+   "Phòng Kế toán"
+  ],
+  "width": 2376,
+  "nodes": [
+   {
+    "id": "AP33_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP33_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh nhu cầu giao\ndịch với Khách hàng mới",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Các phòng ban. Phòng Kinh doanh, Cửa hàng hoặc Phòng XNK phát sinh giao dịch với Khách hàng chưa có trong danh sách; đề nghị tạo Khách hàng mới."
+   },
+   {
+    "id": "AP33_T1",
+    "type": "userTask",
+    "name": "02 · Thu thập thông tin\nKhách hàng",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · P. Kinh doanh / Cửa hàng. Thu thập hồ sơ pháp lý: tên pháp nhân, Mã số thuế, địa chỉ trụ sở, địa chỉ giao hàng, thông tin liên hệ, điều khoản thanh toán dự kiến."
+   },
+   {
+    "id": "AP33_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra Khách hàng đã\ncó",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · P. Kinh doanh / Cửa hàng. Rà soát danh mục Khách hàng đã có trên hệ thống để tránh trùng lặp. Nếu đã có, chuyển sang cập nhật thông tin."
+   },
+   {
+    "id": "AP33_T3",
+    "type": "userTask",
+    "name": "04 · Thiết lập mẫu Khách\nhàng",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · NV P. CNTT. Dựng sẵn các mẫu Khách hàng theo nhóm (NPP, TMĐT, Showroom, Xuất khẩu) với thiết lập chuẩn. Mẫu mới tạo ra mặc định ở trạng thái khóa để đảm bảo kiểm soát."
+   },
+   {
+    "id": "AP33_T4",
+    "type": "userTask",
+    "name": "05 · Tạo Khách hàng mới trên\nhệ thống",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · P. Kinh doanh / Cửa hàng. Tạo Khách hàng theo mẫu phù hợp; điền tên, địa chỉ, điều khoản thanh toán, phương thức giao hàng, hạn mức tín dụng dự kiến."
+   },
+   {
+    "id": "AP33_T5",
+    "type": "userTask",
+    "name": "06 · Khai báo Địa chỉ giao\nhàng & Thuộc tính",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · P. Kinh doanh / Cửa hàng. Khai báo danh sách địa chỉ giao hàng (nhiều điểm giao cho cùng Khách hàng); gán thuộc tính mở rộng: Kênh bán hàng, Vùng miền phục vụ phân tích và báo giá."
+   },
+   {
+    "id": "AP33_T6",
+    "type": "userTask",
+    "name": "07 · Gửi phê duyệt Khách\nhàng",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · P. Kinh doanh / Cửa hàng. Gửi yêu cầu phê duyệt; thông tin Khách hàng chuyển sang Phòng Kế toán để kiểm tra hạch toán trước khi được phép giao dịch."
+   },
+   {
+    "id": "AP33_T7",
+    "type": "userTask",
+    "name": "08 · Kiểm tra hạch toán &\nduyệt",
+    "lane": 3,
+    "x": 1830,
+    "doc": "Bước 8 · NV Kế toán. Kiểm tra nhóm hạch toán kế toán, nhóm thuế, hạn mức tín dụng phù hợp với chính sách công ty; phê duyệt nếu hợp lệ."
+   },
+   {
+    "id": "AP33_T8",
+    "type": "userTask",
+    "name": "09 · Khóa Khách hàng khi cần",
+    "lane": 1,
+    "x": 2040,
+    "doc": "Bước 9 · P. Kinh doanh / Cửa hàng. Khi Khách hàng dừng hợp tác hoặc vi phạm điều khoản, khóa Khách hàng để chặn phát sinh đơn hàng mới."
+   },
+   {
+    "id": "AP33_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2250
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP33_F0",
+    "from": "AP33_S",
+    "to": "AP33_T0"
+   },
+   {
+    "id": "AP33_F1",
+    "from": "AP33_T0",
+    "to": "AP33_T1"
+   },
+   {
+    "id": "AP33_F2",
+    "from": "AP33_T1",
+    "to": "AP33_T2"
+   },
+   {
+    "id": "AP33_F3",
+    "from": "AP33_T2",
+    "to": "AP33_T3"
+   },
+   {
+    "id": "AP33_F4",
+    "from": "AP33_T3",
+    "to": "AP33_T4"
+   },
+   {
+    "id": "AP33_F5",
+    "from": "AP33_T4",
+    "to": "AP33_T5"
+   },
+   {
+    "id": "AP33_F6",
+    "from": "AP33_T5",
+    "to": "AP33_T6"
+   },
+   {
+    "id": "AP33_F7",
+    "from": "AP33_T6",
+    "to": "AP33_T7"
+   },
+   {
+    "id": "AP33_F8",
+    "from": "AP33_T7",
+    "to": "AP33_T8"
+   },
+   {
+    "id": "AP33_F9",
+    "from": "AP33_T8",
+    "to": "AP33_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP34",
+  "id": "AP34",
+  "name": "Quản lý giá bán & Chiết khấu",
+  "stream": "O2C",
+  "code": "MD-02",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "Admin BAS",
+   "Phòng Kế toán"
+  ],
+  "width": 2376,
+  "nodes": [
+   {
+    "id": "AP34_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP34_T0",
+    "type": "userTask",
+    "name": "01 · Thu thập chính sách giá",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Kinh doanh. Tổng hợp chính sách giá theo nhóm Khách hàng (NPP, TMĐT, Showroom, KH xuất khẩu), xác định hiệu lực áp dụng từ ngày."
+   },
+   {
+    "id": "AP34_T1",
+    "type": "userTask",
+    "name": "02 · Tạo Bảng giá bán mới",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV P. Kinh doanh. Tạo Bảng giá bán theo nhóm Khách hàng, liệt kê mặt hàng và đơn giá tương ứng; lưu ở trạng thái Nháp để kiểm tra trước khi áp dụng."
+   },
+   {
+    "id": "AP34_T2",
+    "type": "serviceTask",
+    "name": "03 · Phê duyệt & kích hoạt\nBảng giá",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · NV P. Kinh doanh. Kiểm tra lại bảng giá; chuyển sang trạng thái Hoạt động để hệ thống tự áp dụng trên Đơn bán hàng phát sinh mới."
+   },
+   {
+    "id": "AP34_T3",
+    "type": "userTask",
+    "name": "04 · Đóng Bảng giá cũ",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · NV P. Kinh doanh. Khi chính sách giá thay đổi, đóng Bảng giá cũ để không áp dụng được nữa; đảm bảo chỉ một Bảng giá đang hoạt động cho cùng nhóm và mặt hàng tại một thời điểm."
+   },
+   {
+    "id": "AP34_T4",
+    "type": "userTask",
+    "name": "05 · Thiết lập Chương trình\nkhuyến mãi",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · Admin BAS. Khai báo Chương trình khuyến mãi với đối tượng áp dụng, kỳ hiệu lực và chính sách ưu đãi: chiết khấu %, giá Net, sản phẩm tặng kèm, tặng trên ngưỡng doanh số."
+   },
+   {
+    "id": "AP34_T5",
+    "type": "userTask",
+    "name": "06 · Kích hoạt Chương trình",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · Admin BAS. Chuyển Chương trình khuyến mãi sang trạng thái Hoạt động; hệ thống cho phép áp dụng trên Đơn bán hàng trong kỳ hiệu lực."
+   },
+   {
+    "id": "AP34_T6",
+    "type": "serviceTask",
+    "name": "07 · Áp dụng khuyến mãi trên\nđơn",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kinh doanh. Khi tạo Đơn bán hàng, áp dụng khuyến mãi phù hợp; hệ thống tự chèn dòng chiết khấu hoặc sản phẩm tặng theo chương trình."
+   },
+   {
+    "id": "AP34_T7",
+    "type": "userTask",
+    "name": "08 · Điều chỉnh dòng chiết\nkhấu",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · NV Kinh doanh. Khi cần điều chỉnh lại đơn (thay đổi số lượng, mặt hàng), xóa dòng chiết khấu cũ và tính lại để khớp với đơn mới."
+   },
+   {
+    "id": "AP34_T8",
+    "type": "userTask",
+    "name": "09 · Kiểm tra sau khi xuất\nhóa đơn",
+    "lane": 2,
+    "x": 2040,
+    "doc": "Bước 9 · NV Kế toán. Sau khi phát hành Hóa đơn bán hàng, kiểm tra dòng chiết khấu được tách đúng nhóm thuế; hóa đơn điện tử đẩy sang VNPT đúng thông tin."
+   },
+   {
+    "id": "AP34_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2250
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP34_F0",
+    "from": "AP34_S",
+    "to": "AP34_T0"
+   },
+   {
+    "id": "AP34_F1",
+    "from": "AP34_T0",
+    "to": "AP34_T1"
+   },
+   {
+    "id": "AP34_F2",
+    "from": "AP34_T1",
+    "to": "AP34_T2"
+   },
+   {
+    "id": "AP34_F3",
+    "from": "AP34_T2",
+    "to": "AP34_T3"
+   },
+   {
+    "id": "AP34_F4",
+    "from": "AP34_T3",
+    "to": "AP34_T4"
+   },
+   {
+    "id": "AP34_F5",
+    "from": "AP34_T4",
+    "to": "AP34_T5"
+   },
+   {
+    "id": "AP34_F6",
+    "from": "AP34_T5",
+    "to": "AP34_T6"
+   },
+   {
+    "id": "AP34_F7",
+    "from": "AP34_T6",
+    "to": "AP34_T7"
+   },
+   {
+    "id": "AP34_F8",
+    "from": "AP34_T7",
+    "to": "AP34_T8"
+   },
+   {
+    "id": "AP34_F9",
+    "from": "AP34_T8",
+    "to": "AP34_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP35",
+  "id": "AP35",
+  "name": "Quản lý Kế hoạch bán hàng",
+  "stream": "O2C",
+  "code": "MD-03",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "BLĐ KD"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP35_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP35_T0",
+    "type": "userTask",
+    "name": "01 · Rà soát doanh thu kỳ\ntrước",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV P. Kinh doanh. Xem báo cáo doanh thu theo mặt hàng, Khách hàng, kỳ để đánh giá kết quả thực tế làm căn cứ lập kế hoạch kỳ tiếp theo."
+   },
+   {
+    "id": "AP35_T1",
+    "type": "userTask",
+    "name": "02 · Phân tích tồn kho tại\nNPP",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV P. Kinh doanh. Phân tích tồn kho tại từng kho ký gửi NPP, kho showroom để xác định SKU nào cần đẩy bán, SKU nào cần hạn chế nhập thêm."
+   },
+   {
+    "id": "AP35_T2",
+    "type": "userTask",
+    "name": "03 · Phân tích HSD theo Lô",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · NV P. Kinh doanh. Rà soát các Lô hàng sắp hết hạn tại từng NPP để xây dựng chính sách ưu tiên bán sớm, tránh hàng cận date."
+   },
+   {
+    "id": "AP35_T3",
+    "type": "userTask",
+    "name": "04 · Lập Kế hoạch bán hàng",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · P. Kinh doanh. Lập Kế hoạch bán hàng theo SKU cho từng kỳ: số lượng dự kiến, đơn giá, thành tiền. Phục vụ theo dõi tiến độ thực hiện và điều phối sản xuất."
+   },
+   {
+    "id": "AP35_T4",
+    "type": "userTask",
+    "name": "05 · Phê duyệt kế hoạch",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · BLĐ KD. Ban Lãnh đạo Kinh doanh xem xét và phê duyệt Kế hoạch bán hàng; kế hoạch đã duyệt là căn cứ để so sánh với thực tế."
+   },
+   {
+    "id": "AP35_T5",
+    "type": "userTask",
+    "name": "06 · Theo dõi thực hiện vs\nkế hoạch",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · NV P. Kinh doanh. Định kỳ so sánh doanh thu thực tế đã phát hành hóa đơn với kế hoạch theo từng SKU, kỳ; báo cáo BLĐ để điều chỉnh chính sách khi lệch."
+   },
+   {
+    "id": "AP35_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP35_F0",
+    "from": "AP35_S",
+    "to": "AP35_T0"
+   },
+   {
+    "id": "AP35_F1",
+    "from": "AP35_T0",
+    "to": "AP35_T1"
+   },
+   {
+    "id": "AP35_F2",
+    "from": "AP35_T1",
+    "to": "AP35_T2"
+   },
+   {
+    "id": "AP35_F3",
+    "from": "AP35_T2",
+    "to": "AP35_T3"
+   },
+   {
+    "id": "AP35_F4",
+    "from": "AP35_T3",
+    "to": "AP35_T4"
+   },
+   {
+    "id": "AP35_F5",
+    "from": "AP35_T4",
+    "to": "AP35_T5"
+   },
+   {
+    "id": "AP35_F6",
+    "from": "AP35_T5",
+    "to": "AP35_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP36",
+  "id": "AP36",
+  "name": "Quản lý Báo giá bán hàng",
+  "stream": "O2C",
+  "code": "SQ-01",
+  "LH": 176,
+  "lanes": [
+   "Khách hàng",
+   "Phòng Kinh doanh",
+   "Trưởng BP KD"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP36_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP36_T0",
+    "type": "userTask",
+    "name": "01 · Gửi yêu cầu báo giá",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Khách hàng. Khách hàng liên hệ Phòng Kinh doanh đề nghị báo giá cho một số mặt hàng và số lượng cụ thể; có thể đi kèm điều khoản giao hàng, thanh toán mong muốn."
+   },
+   {
+    "id": "AP36_T1",
+    "type": "serviceTask",
+    "name": "02 · Lập Báo giá",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · NV P. Kinh doanh. Lập Báo giá cho Khách hàng với mặt hàng, số lượng; đơn giá được hệ thống tự gợi ý từ Bảng giá bán đang hoạt động cho nhóm Khách hàng tương ứng."
+   },
+   {
+    "id": "AP36_T2",
+    "type": "userTask",
+    "name": "03 · Gửi phê duyệt Báo giá",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · NV P. Kinh doanh. Gửi Báo giá đi phê duyệt nội bộ; Trưởng BP Kinh doanh xem xét trước khi phát hành chính thức cho Khách hàng."
+   },
+   {
+    "id": "AP36_T3",
+    "type": "userTask",
+    "name": "04 · Phê duyệt / Từ chối",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · Trưởng BP KD. Kiểm tra thông tin Khách hàng, mặt hàng, số lượng, đơn giá. Duyệt nếu hợp lệ; từ chối kèm lý do nếu chưa phù hợp để Nhân viên điều chỉnh."
+   },
+   {
+    "id": "AP36_T4",
+    "type": "userTask",
+    "name": "05 · In Báo giá, gửi Khách\nhàng",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · NV P. Kinh doanh. Sau khi Báo giá được duyệt, in theo mẫu và gửi Khách hàng qua email hoặc văn bản."
+   },
+   {
+    "id": "AP36_T5",
+    "type": "userTask",
+    "name": "06 · Phản hồi chấp nhận",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · Khách hàng. Khách hàng xác nhận đồng ý điều khoản trong Báo giá; gửi phản hồi bằng văn bản, email hoặc đơn đặt hàng chính thức."
+   },
+   {
+    "id": "AP36_T6",
+    "type": "userTask",
+    "name": "07 · Chuyển thành Đơn bán\nhàng",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · NV P. Kinh doanh. Chuyển Báo giá đã được Khách hàng chấp nhận thành Đơn bán hàng; các thông tin trên Báo giá kế thừa sang Đơn bán hàng mới, không cần nhập lại."
+   },
+   {
+    "id": "AP36_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP36_F0",
+    "from": "AP36_S",
+    "to": "AP36_T0"
+   },
+   {
+    "id": "AP36_F1",
+    "from": "AP36_T0",
+    "to": "AP36_T1"
+   },
+   {
+    "id": "AP36_F2",
+    "from": "AP36_T1",
+    "to": "AP36_T2"
+   },
+   {
+    "id": "AP36_F3",
+    "from": "AP36_T2",
+    "to": "AP36_T3"
+   },
+   {
+    "id": "AP36_F4",
+    "from": "AP36_T3",
+    "to": "AP36_T4"
+   },
+   {
+    "id": "AP36_F5",
+    "from": "AP36_T4",
+    "to": "AP36_T5"
+   },
+   {
+    "id": "AP36_F6",
+    "from": "AP36_T5",
+    "to": "AP36_T6"
+   },
+   {
+    "id": "AP36_F7",
+    "from": "AP36_T6",
+    "to": "AP36_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP37",
+  "id": "AP37",
+  "name": "Quản lý Hợp đồng nguyên tắc bán hàng",
+  "stream": "O2C",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "BLĐ / KH",
+   "Trưởng BP KD",
+   "Khách hàng / KD"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP37_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP37_T0",
+    "type": "userTask",
+    "name": "01 · Thương thảo hợp đồng\nnguyên tắc",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Kinh doanh / KH. và Khách hàng (ví dụ NPP lớn, chuỗi siêu thị) thương thảo cam kết tổng sản lượng và đơn giá trong một kỳ hiệu lực (quý, năm) để đảm bảo ổn định nguồn cung - nguồn cầu."
+   },
+   {
+    "id": "AP37_T1",
+    "type": "userTask",
+    "name": "02 · Ký Hợp đồng nguyên tắc",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · BLĐ / KH. Hai bên ký Hợp đồng nguyên tắc bán hàng với nội dung: tổng số lượng cam kết, đơn giá cố định hoặc công thức tính, kỳ hiệu lực, điều khoản giao hàng, thanh toán, thưởng phạt."
+   },
+   {
+    "id": "AP37_T2",
+    "type": "userTask",
+    "name": "03 · Ghi nhận Hợp đồng trên\nhệ thống",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · NV P. Kinh doanh. Ghi nhận Hợp đồng nguyên tắc đã ký lên hệ thống làm căn cứ quản lý: Khách hàng, danh mục mặt hàng, tổng số lượng cam kết, đơn giá. Đây là cam kết khung, chưa phát sinh xuất kho."
+   },
+   {
+    "id": "AP37_T3",
+    "type": "userTask",
+    "name": "04 · Phê duyệt Hợp đồng nội\nbộ",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · Trưởng BP KD. Trưởng BP Kinh doanh rà soát và phê duyệt Hợp đồng trên hệ thống để mở quyền tạo Đơn bán hàng đợt theo Hợp đồng."
+   },
+   {
+    "id": "AP37_T4",
+    "type": "userTask",
+    "name": "05 · Giao hàng từng đợt",
+    "lane": 3,
+    "x": 1200,
+    "doc": "Bước 5 · Khách hàng / KD. Khách hàng đặt hàng theo tiến độ thực tế (hàng tuần, hàng tháng). Mỗi đợt đặt là một lần rút từ tổng cam kết chung, không cần thương lượng giá lại."
+   },
+   {
+    "id": "AP37_T5",
+    "type": "userTask",
+    "name": "06 · Tạo Đơn bán hàng đợt từ\nHợp đồng",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · NV P. Kinh doanh. Tạo Đơn bán hàng cho từng đợt giao; thông tin kế thừa từ Hợp đồng nguyên tắc (giá, điều khoản). Sau khi giao, số lượng cam kết còn lại của Hợp đồng tự động giảm."
+   },
+   {
+    "id": "AP37_T6",
+    "type": "userTask",
+    "name": "07 · Theo dõi cam kết còn\nlại",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · NV P. Kinh doanh. Theo dõi tổng số lượng đã giao, số lượng còn lại của Hợp đồng; nhắc Khách hàng khi sắp hết cam kết hoặc khi hợp đồng gần hết hạn."
+   },
+   {
+    "id": "AP37_T7",
+    "type": "userTask",
+    "name": "08 · Tổng kết hợp đồng",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · Trưởng BP KD. Hết kỳ hiệu lực, tổng kết tình hình thực hiện: đã giao bao nhiêu, còn thiếu bao nhiêu; quyết định gia hạn, ký hợp đồng mới, hoặc đóng hợp đồng."
+   },
+   {
+    "id": "AP37_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP37_F0",
+    "from": "AP37_S",
+    "to": "AP37_T0"
+   },
+   {
+    "id": "AP37_F1",
+    "from": "AP37_T0",
+    "to": "AP37_T1"
+   },
+   {
+    "id": "AP37_F2",
+    "from": "AP37_T1",
+    "to": "AP37_T2"
+   },
+   {
+    "id": "AP37_F3",
+    "from": "AP37_T2",
+    "to": "AP37_T3"
+   },
+   {
+    "id": "AP37_F4",
+    "from": "AP37_T3",
+    "to": "AP37_T4"
+   },
+   {
+    "id": "AP37_F5",
+    "from": "AP37_T4",
+    "to": "AP37_T5"
+   },
+   {
+    "id": "AP37_F6",
+    "from": "AP37_T5",
+    "to": "AP37_T6"
+   },
+   {
+    "id": "AP37_F7",
+    "from": "AP37_T6",
+    "to": "AP37_T7"
+   },
+   {
+    "id": "AP37_F8",
+    "from": "AP37_T7",
+    "to": "AP37_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP38",
+  "id": "AP38",
+  "name": "Bán hàng thông thường",
+  "stream": "O2C",
+  "code": "SO-01",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "Phòng Kế toán",
+   "Bộ phận Giao vận",
+   "Bộ phận Kho"
+  ],
+  "width": 2376,
+  "nodes": [
+   {
+    "id": "AP38_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP38_T0",
+    "type": "userTask",
+    "name": "01 · Kiểm tra hạn mức & tồn\nkho",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV P. Kinh doanh. Kiểm tra: (1) Số dư công nợ & hạn mức tín dụng KH; (2) Trả trước nếu KH yêu cầu - đợi tiền về; (3) Tồn kho thành phẩm tại kho xuất. Nếu thiếu tồn: đề nghị bộ phận Sản xuất lập kế hoạch."
+   },
+   {
+    "id": "AP38_T1",
+    "type": "serviceTask",
+    "name": "02 · Lập Đơn bán hàng",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV P. Kinh doanh. Lập Đơn bán hàng với Khách hàng, mặt hàng, số lượng, ngày giao. Đơn giá do hệ thống tự gợi ý từ Bảng giá bán và Chương trình khuyến mãi đang hiệu lực."
+   },
+   {
+    "id": "AP38_T2",
+    "type": "userTask",
+    "name": "03 · Ghi chú yêu cầu đặc thù",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · NV Kinh doanh. Ghi chú các yêu cầu riêng của Khách hàng: Lô hàng HSD trên 6 tháng, quy cách đóng gói 10 thùng / pallet, ưu tiên giờ giao, điều kiện bốc xếp..."
+   },
+   {
+    "id": "AP38_T3",
+    "type": "userTask",
+    "name": "04 · Gửi phê duyệt Đơn bán\nhàng",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · NV P. Kinh doanh. Gửi Đơn bán hàng đi phê duyệt; đơn chuyển sang Kế toán kiểm tra hạn mức tín dụng trước khi cho phép xuất kho."
+   },
+   {
+    "id": "AP38_T4",
+    "type": "userTask",
+    "name": "05 · Phê duyệt / Từ chối đơn",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · NV Kế toán. Kế toán kiểm tra tổng tiền đơn + công nợ vs hạn mức tín dụng. Đạt: duyệt - đơn tự chuyển trạng thái Đã duyệt sẵn sàng giao hàng. Vượt hạn mức: từ chối, yêu cầu KH thanh toán nợ trước khi xét lại."
+   },
+   {
+    "id": "AP38_T5",
+    "type": "serviceTask",
+    "name": "06 · Yêu cầu vận chuyển tự\nsinh",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · NV Logistic. Khi Đơn bán hàng được duyệt, đối với Khách hàng có phương thức giao yêu cầu vận chuyển, hệ thống tự sinh Yêu cầu vận chuyển trên kế hoạch giao vận để sắp xếp xe, tài xế (chi tiết tại quy trình TR-01)."
+   },
+   {
+    "id": "AP38_T6",
+    "type": "userTask",
+    "name": "07 · Xuất kho",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kho. Kho tạo Phiếu xuất kho cho đơn đã duyệt; gán Lô hàng xuất theo nguyên tắc hết hạn trước - xuất trước (FEFO); ghi sổ phiếu xuất kho."
+   },
+   {
+    "id": "AP38_T7",
+    "type": "userTask",
+    "name": "08 · Giao hàng",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · NV Logistic. Logistic nhận hàng từ Kho theo Phiếu xuất kho; sắp xếp lịch giao và phương tiện vận chuyển; giao hàng đến Khách hàng và xác nhận đã giao."
+   },
+   {
+    "id": "AP38_T8",
+    "type": "userTask",
+    "name": "09 · Phát hành Hóa đơn bán\nhàng",
+    "lane": 1,
+    "x": 2040,
+    "doc": "Bước 9 · NV Kế toán. Sau khi giao hàng, Kế toán lập Hóa đơn bán hàng căn cứ theo Phiếu xuất kho đã post; phát hành hóa đơn điện tử qua VNPT để gửi Khách hàng."
+   },
+   {
+    "id": "AP38_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2250
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP38_F0",
+    "from": "AP38_S",
+    "to": "AP38_T0"
+   },
+   {
+    "id": "AP38_F1",
+    "from": "AP38_T0",
+    "to": "AP38_T1"
+   },
+   {
+    "id": "AP38_F2",
+    "from": "AP38_T1",
+    "to": "AP38_T2"
+   },
+   {
+    "id": "AP38_F3",
+    "from": "AP38_T2",
+    "to": "AP38_T3"
+   },
+   {
+    "id": "AP38_F4",
+    "from": "AP38_T3",
+    "to": "AP38_T4"
+   },
+   {
+    "id": "AP38_F5",
+    "from": "AP38_T4",
+    "to": "AP38_T5"
+   },
+   {
+    "id": "AP38_F6",
+    "from": "AP38_T5",
+    "to": "AP38_T6"
+   },
+   {
+    "id": "AP38_F7",
+    "from": "AP38_T6",
+    "to": "AP38_T7"
+   },
+   {
+    "id": "AP38_F8",
+    "from": "AP38_T7",
+    "to": "AP38_T8"
+   },
+   {
+    "id": "AP38_F9",
+    "from": "AP38_T8",
+    "to": "AP38_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP39",
+  "id": "AP39",
+  "name": "Bán hàng thương mại điện tử",
+  "stream": "O2C",
+  "code": "SO-02",
+  "LH": 176,
+  "lanes": [
+   "KD Online",
+   "Bộ phận Kho",
+   "Phòng Kế toán"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP39_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP39_T0",
+    "type": "userTask",
+    "name": "01 · Thu thập đơn hàng từ\nsàn",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV KD Online. Tải danh sách đơn hàng phát sinh trong ngày từ cổng quản trị của Shopee, Tiki, Lazada, TikTok Shop; phân loại theo đơn mới, đơn đã giao, đơn trả."
+   },
+   {
+    "id": "AP39_T1",
+    "type": "userTask",
+    "name": "02 · Chuẩn hóa dữ liệu theo\nmẫu",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV KD Online. Ánh xạ dữ liệu đơn hàng từ sàn sang mẫu nhập chuẩn của: mã Khách hàng (là mã sàn), mã mặt hàng, số lượng, đơn giá, ngày giao."
+   },
+   {
+    "id": "AP39_T2",
+    "type": "userTask",
+    "name": "03 · Nhập Đơn bán hàng hàng\nloạt",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · NV KD Online. Nhập file dữ liệu vào hệ thống, sinh Đơn bán hàng hàng loạt thay vì nhập tay từng đơn - tiết kiệm thời gian khi có hàng trăm đơn / ngày."
+   },
+   {
+    "id": "AP39_T3",
+    "type": "userTask",
+    "name": "04 · Kiểm tra log & đơn đã\ntạo",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · NV KD Online. Hệ thống báo cáo các dòng bị lỗi (mã hàng chưa tồn tại, Khách hàng sàn chưa khai báo). Xử lý lỗi và nhập bổ sung; mở các đơn đã tạo kiểm tra đơn giá, số lượng."
+   },
+   {
+    "id": "AP39_T4",
+    "type": "userTask",
+    "name": "05 · Xuất kho đơn TMĐT",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · NV Kho. Tạo Phiếu xuất kho hàng loạt từ các Đơn bán hàng TMĐT đã duyệt; xuất tại kho bán hàng TMĐT theo FEFO."
+   },
+   {
+    "id": "AP39_T5",
+    "type": "userTask",
+    "name": "06 · Phát hành Hóa đơn",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · NV Kế toán. Lập Hóa đơn bán hàng cho từng đơn TMĐT theo Phiếu xuất kho; hóa đơn điện tử đẩy qua VNPT về sàn / Khách hàng."
+   },
+   {
+    "id": "AP39_T6",
+    "type": "userTask",
+    "name": "07 · Theo dõi công nợ sàn",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kế toán. Theo dõi số dư công nợ của từng sàn TMĐT; đối chiếu doanh số bán với báo cáo từ sàn để phát hiện sai lệch."
+   },
+   {
+    "id": "AP39_T7",
+    "type": "userTask",
+    "name": "08 · Ghi nhận tiền sàn trả\nvề",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · NV Kế toán. Khi sàn chuyển tiền về tài khoản (sau khi trừ phí sàn), Kế toán ghi nhận thanh toán và cấn trừ công nợ; đối chiếu chênh lệch tiền thực nhận vs doanh số bán."
+   },
+   {
+    "id": "AP39_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP39_F0",
+    "from": "AP39_S",
+    "to": "AP39_T0"
+   },
+   {
+    "id": "AP39_F1",
+    "from": "AP39_T0",
+    "to": "AP39_T1"
+   },
+   {
+    "id": "AP39_F2",
+    "from": "AP39_T1",
+    "to": "AP39_T2"
+   },
+   {
+    "id": "AP39_F3",
+    "from": "AP39_T2",
+    "to": "AP39_T3"
+   },
+   {
+    "id": "AP39_F4",
+    "from": "AP39_T3",
+    "to": "AP39_T4"
+   },
+   {
+    "id": "AP39_F5",
+    "from": "AP39_T4",
+    "to": "AP39_T5"
+   },
+   {
+    "id": "AP39_F6",
+    "from": "AP39_T5",
+    "to": "AP39_T6"
+   },
+   {
+    "id": "AP39_F7",
+    "from": "AP39_T6",
+    "to": "AP39_T7"
+   },
+   {
+    "id": "AP39_F8",
+    "from": "AP39_T7",
+    "to": "AP39_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP40",
+  "id": "AP40",
+  "name": "Bán hàng ký gửi",
+  "stream": "O2C",
+  "code": "SO-03",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "KD",
+   "Bộ phận Kho",
+   "Phòng Kế toán",
+   "NPP"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP40_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP40_T0",
+    "type": "userTask",
+    "name": "01 · Ký hợp đồng ký gửi",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Kinh doanh / NPP. và NPP thống nhất danh mục SKU được ký gửi, tỷ lệ chiết khấu, chu kỳ báo cáo doanh thu, chính sách thu hồi hàng tồn cuối kỳ."
+   },
+   {
+    "id": "AP40_T1",
+    "type": "userTask",
+    "name": "02 · Điều chuyển hàng sang\nNPP",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · NV KD. Điều chuyển hàng từ kho tổng của sang kho ký gửi của NPP. Hàng vẫn thuộc sở hữu, chỉ đang đặt tại NPP chờ bán."
+   },
+   {
+    "id": "AP40_T2",
+    "type": "userTask",
+    "name": "03 · Xuất - Nhập điều chuyển",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · NV Kho. Ghi sổ Xuất tại kho tổng; Ghi sổ Nhận tại kho ký gửi của NPP. Trên sổ sách, tồn kho chuyển từ kho sang kho ký gửi."
+   },
+   {
+    "id": "AP40_T3",
+    "type": "userTask",
+    "name": "04 · Phát hành phiếu xuất\nhàng ký gửi đại lý",
+    "lane": 3,
+    "x": 990,
+    "doc": "Bước 4 · NV Kế toán. Phát hành phiếu xuất hàng ký gửi đại lý theo yêu cầu thuế Việt Nam; hóa đơn đẩy qua VNPT."
+   },
+   {
+    "id": "AP40_T4",
+    "type": "userTask",
+    "name": "05 · Báo cáo doanh thu đã\nbán",
+    "lane": 4,
+    "x": 1200,
+    "doc": "Bước 5 · NPP. Theo chu kỳ đã thống nhất (tuần, tháng), NPP tổng hợp số lượng thực tế bán ra từ kho ký gửi và gửi báo cáo về để đối chiếu."
+   },
+   {
+    "id": "AP40_T5",
+    "type": "userTask",
+    "name": "06 · Ghi nhận Đơn bán hàng",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · NV Kinh doanh. Căn cứ báo cáo NPP, Kinh doanh lập Đơn bán hàng với NPP là Khách hàng, mã kho xuất là kho ký gửi tương ứng - ghi nhận doanh thu cho."
+   },
+   {
+    "id": "AP40_T6",
+    "type": "userTask",
+    "name": "07 · Phát hành Hóa đơn bán\nhàng",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kế toán. Lập Hóa đơn bán hàng cho NPP theo Đơn bán hàng đã xuất; hóa đơn điện tử đẩy VNPT. Kết thúc quy trình ghi nhận doanh thu ký gửi."
+   },
+   {
+    "id": "AP40_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 3,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP40_F0",
+    "from": "AP40_S",
+    "to": "AP40_T0"
+   },
+   {
+    "id": "AP40_F1",
+    "from": "AP40_T0",
+    "to": "AP40_T1"
+   },
+   {
+    "id": "AP40_F2",
+    "from": "AP40_T1",
+    "to": "AP40_T2"
+   },
+   {
+    "id": "AP40_F3",
+    "from": "AP40_T2",
+    "to": "AP40_T3"
+   },
+   {
+    "id": "AP40_F4",
+    "from": "AP40_T3",
+    "to": "AP40_T4"
+   },
+   {
+    "id": "AP40_F5",
+    "from": "AP40_T4",
+    "to": "AP40_T5"
+   },
+   {
+    "id": "AP40_F6",
+    "from": "AP40_T5",
+    "to": "AP40_T6"
+   },
+   {
+    "id": "AP40_F7",
+    "from": "AP40_T6",
+    "to": "AP40_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP41",
+  "id": "AP41",
+  "name": "Bán hàng showroom và bán lẻ",
+  "stream": "O2C",
+  "code": "SO-04",
+  "LH": 176,
+  "lanes": [
+   "Showroom",
+   "Bộ phận Kho",
+   "Phòng Kế toán",
+   "Hệ thống",
+   "Showroom/NV KD"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP41_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP41_T0",
+    "type": "userTask",
+    "name": "01 · Kiểm tra tồn kho\nshowroom",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV Showroom. Trước khi tiếp nhận đơn, kiểm tra tồn kho thành phẩm tại showroom; nếu không đủ thì đề nghị điều chuyển từ kho tổng về."
+   },
+   {
+    "id": "AP41_T1",
+    "type": "userTask",
+    "name": "02 · Đề nghị điều chuyển",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV Showroom. Đề nghị điều chuyển thành phẩm từ kho tổng về showroom. Số lượng dựa trên nhu cầu dự kiến và quy cách bán hàng tại cửa hàng."
+   },
+   {
+    "id": "AP41_T2",
+    "type": "userTask",
+    "name": "03 · Xuất - Nhập điều chuyển",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · NV Kho. Kho tổng ghi sổ xuất; Showroom ghi sổ nhận. Hàng về tồn kho showroom và sẵn sàng bán lẻ."
+   },
+   {
+    "id": "AP41_T3",
+    "type": "userTask",
+    "name": "04 · Hóa đơn điều chuyển",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · NV Kế toán. Phát hành hóa đơn điều chuyển nội bộ theo yêu cầu thuế; hóa đơn đẩy VNPT."
+   },
+   {
+    "id": "AP41_T4",
+    "type": "userTask",
+    "name": "05 · Lập Đơn bán hàng bán lẻ",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · NV Showroom. Khi khách bán lẻ mua hàng, lập Đơn bán hàng với Khách hàng là Khách bán lẻ tại showroom; mã kho xuất là kho showroom."
+   },
+   {
+    "id": "AP41_T5",
+    "type": "serviceTask",
+    "name": "06 · Cảnh báo vượt tồn",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · Hệ thống. Khi số lượng bán vượt tồn kho showroom, hệ thống cảnh báo để tránh bán khống."
+   },
+   {
+    "id": "AP41_T6",
+    "type": "userTask",
+    "name": "07 · Phát hành Hóa đơn bán\nhàng",
+    "lane": 4,
+    "x": 1620,
+    "doc": "Bước 7 · NV Showroom/NV KD. Lập Hóa đơn bán hàng cho khách bán lẻ theo Phiếu xuất kho; hóa đơn điện tử đẩy VNPT."
+   },
+   {
+    "id": "AP41_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 4,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP41_F0",
+    "from": "AP41_S",
+    "to": "AP41_T0"
+   },
+   {
+    "id": "AP41_F1",
+    "from": "AP41_T0",
+    "to": "AP41_T1"
+   },
+   {
+    "id": "AP41_F2",
+    "from": "AP41_T1",
+    "to": "AP41_T2"
+   },
+   {
+    "id": "AP41_F3",
+    "from": "AP41_T2",
+    "to": "AP41_T3"
+   },
+   {
+    "id": "AP41_F4",
+    "from": "AP41_T3",
+    "to": "AP41_T4"
+   },
+   {
+    "id": "AP41_F5",
+    "from": "AP41_T4",
+    "to": "AP41_T5"
+   },
+   {
+    "id": "AP41_F6",
+    "from": "AP41_T5",
+    "to": "AP41_T6"
+   },
+   {
+    "id": "AP41_F7",
+    "from": "AP41_T6",
+    "to": "AP41_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP42",
+  "id": "AP42",
+  "name": "Bán hàng nội bộ",
+  "stream": "O2C",
+  "code": "SO-05",
+  "LH": 176,
+  "lanes": [
+   "Tổng cty/Nội bộ tập đoàn",
+   "Phòng Kinh doanh",
+   "Bộ phận Kho",
+   "Bộ phận Giao vận",
+   "Phòng Kế toán"
+  ],
+  "width": 1746,
+  "nodes": [
+   {
+    "id": "AP42_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP42_T0",
+    "type": "userTask",
+    "name": "01 · Tổng hợp & gửi Yêu cầu\ngiao hàng cho",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Tổng cty/Nội bộ tập đoàn. Tổng công ty/Công ty nội bộ tập đoàn tổng hợp các yêu cầu xuất hàng - liên quan đến - rồi gửi Bảng tổng hợp đơn hoặc Yêu cầu mua hàng tới."
+   },
+   {
+    "id": "AP42_T1",
+    "type": "userTask",
+    "name": "02 · Tổng hợp số lượng theo\ntừng NPP",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · P. Kinh doanh. Phòng Kinh doanh tiếp nhận yêu cầu, tổng hợp số lượng theo từng NPP trực thuộc Tổng công ty - làm cơ sở lập đơn cho các NPP."
+   },
+   {
+    "id": "AP42_T2",
+    "type": "userTask",
+    "name": "03 · Tạo Đơn bán hàng cho\nTổng công ty",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · P. Kinh doanh. Lên Đơn bán hàng cho Tổng công ty trên hệ thống, mỗi NPP là một địa chỉ giao hàng. Áp dụng giá bán nội bộ giữa công ty mẹ - công ty con."
+   },
+   {
+    "id": "AP42_T3",
+    "type": "userTask",
+    "name": "04 · Kiểm tồn kho & lên kế\nhoạch xuất",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · P. Kho vận và Sản xuất. Bộ phận Kho kiểm tra tồn kho thành phẩm tại nhà máy. Đủ tồn → lên kế hoạch xuất kho từ kho tổng. Không đủ → chạy quy trình lập kế hoạch & sản xuất MPS để bổ sung hàng đáp ứng yêu cầu."
+   },
+   {
+    "id": "AP42_T4",
+    "type": "userTask",
+    "name": "05 · Giao hàng tới NPP của\nTổng cty",
+    "lane": 3,
+    "x": 1200,
+    "doc": "Bước 5 · Công ty vận chuyển. thuê Công ty vận chuyển chuyển hàng đến các NPP/đại lý trực thuộc Tổng công ty. Quản lý qua Lệnh vận chuyển trong hệ thống."
+   },
+   {
+    "id": "AP42_T5",
+    "type": "userTask",
+    "name": "06 · Xuất Hóa đơn Tổng cuối\nngày",
+    "lane": 4,
+    "x": 1410,
+    "doc": "Bước 6 · P. Kế toán. Cuối ngày, Kế toán tổng hợp các đơn bán hàng nội bộ phát sinh trong ngày, lập Hóa đơn bán hàng cho Tổng công ty/Công ty nội bộ tập đoàn."
+   },
+   {
+    "id": "AP42_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 4,
+    "x": 1620
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP42_F0",
+    "from": "AP42_S",
+    "to": "AP42_T0"
+   },
+   {
+    "id": "AP42_F1",
+    "from": "AP42_T0",
+    "to": "AP42_T1"
+   },
+   {
+    "id": "AP42_F2",
+    "from": "AP42_T1",
+    "to": "AP42_T2"
+   },
+   {
+    "id": "AP42_F3",
+    "from": "AP42_T2",
+    "to": "AP42_T3"
+   },
+   {
+    "id": "AP42_F4",
+    "from": "AP42_T3",
+    "to": "AP42_T4"
+   },
+   {
+    "id": "AP42_F5",
+    "from": "AP42_T4",
+    "to": "AP42_T5"
+   },
+   {
+    "id": "AP42_F6",
+    "from": "AP42_T5",
+    "to": "AP42_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP43",
+  "id": "AP43",
+  "name": "Bán hàng xuất khẩu",
+  "stream": "O2C",
+  "code": "SO-06",
+  "LH": 176,
+  "lanes": [
+   "KD XNK",
+   "Phòng Kế toán",
+   "Bộ phận Kho"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP43_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP43_T0",
+    "type": "userTask",
+    "name": "01 · Lập Đơn bán xuất khẩu",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV KD XNK. Lập Đơn bán hàng với Khách hàng nước ngoài; khai báo mã tiền tệ (USD, EUR), phương thức giao hàng quốc tế (CIF, FOB, DDP), đơn giá ngoại tệ, số lượng."
+   },
+   {
+    "id": "AP43_T1",
+    "type": "userTask",
+    "name": "02 · Gửi phê duyệt đơn",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV KD XNK. Gửi Đơn bán xuất khẩu đi phê duyệt; đơn chuyển sang Kế toán kiểm tra hạn mức tín dụng và chính sách tỷ giá."
+   },
+   {
+    "id": "AP43_T2",
+    "type": "userTask",
+    "name": "03 · Phê duyệt đơn XK",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · NV Kế toán. Kiểm tra hạn mức tín dụng đặc biệt dành cho Khách hàng xuất khẩu; duyệt đơn nếu phù hợp chính sách."
+   },
+   {
+    "id": "AP43_T3",
+    "type": "userTask",
+    "name": "04 · Kiểm tra trả trước",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · NV KD XNK. Kiểm tra trả trước (nếu KH yêu cầu): đợi tiền về tài khoản. Đồng thời kiểm tra tồn kho tại kho xuất đủ đáp ứng đơn XK; nếu thiếu, phối hợp Sản xuất lập kế hoạch sản xuất bổ sung."
+   },
+   {
+    "id": "AP43_T4",
+    "type": "userTask",
+    "name": "05 · Báo Khách hàng book tàu",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · NV KD XNK. Sau khi đủ tồn kho và có lịch sản xuất rõ, xác nhận thời gian chuẩn bị hàng với kho XNK; thông báo KH book container/tàu. Nếu lịch SX thay đổi, báo lại KH điều chỉnh."
+   },
+   {
+    "id": "AP43_T5",
+    "type": "userTask",
+    "name": "06 · Điều chuyển về kho XNK",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · NV KD XNK / Kho. Điều chuyển thành phẩm từ kho tổng về kho xuất nhập khẩu - nơi có đủ điều kiện lưu trữ chờ thông quan."
+   },
+   {
+    "id": "AP43_T6",
+    "type": "userTask",
+    "name": "07 · Thông quan & xuất kho",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · NV KD XNK / Kho. Sau khi hoàn tất thủ tục hải quan, kho xuất hàng lên phương tiện vận chuyển quốc tế; ghi sổ Phiếu xuất kho."
+   },
+   {
+    "id": "AP43_T7",
+    "type": "userTask",
+    "name": "08 · Hóa đơn xuất khẩu",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · NV Kế toán. Lập Hóa đơn bán hàng xuất khẩu căn cứ Phiếu xuất; kiểm tra ngoại tệ, tỷ giá, mã thuế xuất khẩu; phát hành hóa đơn điện tử xuất khẩu qua VNPT."
+   },
+   {
+    "id": "AP43_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP43_F0",
+    "from": "AP43_S",
+    "to": "AP43_T0"
+   },
+   {
+    "id": "AP43_F1",
+    "from": "AP43_T0",
+    "to": "AP43_T1"
+   },
+   {
+    "id": "AP43_F2",
+    "from": "AP43_T1",
+    "to": "AP43_T2"
+   },
+   {
+    "id": "AP43_F3",
+    "from": "AP43_T2",
+    "to": "AP43_T3"
+   },
+   {
+    "id": "AP43_F4",
+    "from": "AP43_T3",
+    "to": "AP43_T4"
+   },
+   {
+    "id": "AP43_F5",
+    "from": "AP43_T4",
+    "to": "AP43_T5"
+   },
+   {
+    "id": "AP43_F6",
+    "from": "AP43_T5",
+    "to": "AP43_T6"
+   },
+   {
+    "id": "AP43_F7",
+    "from": "AP43_T6",
+    "to": "AP43_T7"
+   },
+   {
+    "id": "AP43_F8",
+    "from": "AP43_T7",
+    "to": "AP43_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP44",
+  "id": "AP44",
+  "name": "Quản lý đơn trả hàng bán",
+  "stream": "O2C",
+  "code": "SR-01",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "Bộ phận Kho",
+   "Bộ phận Quản lý chất lượng",
+   "Phòng Kế toán"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP44_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP44_T0",
+    "type": "userTask",
+    "name": "01 · Tiếp nhận yêu cầu trả",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV P. Kinh doanh. Khách hàng thông báo trả hàng do: hàng lỗi, hàng cận date, sai đơn đặt, điều chỉnh doanh số. Xác nhận lý do, mặt hàng, số lượng, tham chiếu Phiếu giao hàng gốc."
+   },
+   {
+    "id": "AP44_T1",
+    "type": "userTask",
+    "name": "02 · Lập Đơn trả hàng bán",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · NV P. Kinh doanh. Lập Đơn trả hàng bán tham chiếu Phiếu giao hàng gốc; số lượng trả không vượt quá số lượng đã giao và gửi phê duyệt"
+   },
+   {
+    "id": "AP44_T2",
+    "type": "userTask",
+    "name": "03 · Phê duyệt Đơn trả",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · TP. Kinh doanh. Phê duyệt Đơn trả để kiểm soát tính chính đáng của việc trả hàng."
+   },
+   {
+    "id": "AP44_T3",
+    "type": "userTask",
+    "name": "04 · Nhận hàng trả về kho",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · NV Kho. Khi hàng về, Kho tiếp nhận theo Đơn trả; gán đúng Lô hàng trả (cùng Lô đã xuất trước đây) để đảm bảo truy xuất; post nhận hàng."
+   },
+   {
+    "id": "AP44_T4",
+    "type": "userTask",
+    "name": "05 · Kiểm tra chất lượng\nhàng trả",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · NV QC. QC kiểm tra tình trạng hàng trả về. Đạt: có thể bán lại; Không đạt: chuyển sang quy trình xử lý hàng lỗi / tiêu hủy."
+   },
+   {
+    "id": "AP44_T5",
+    "type": "userTask",
+    "name": "06 · Hóa đơn điều chỉnh giảm",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · NV Kế toán. Sau khi hàng trả đã nhận, Kế toán phát hành Hóa đơn điều chỉnh giảm cho Khách hàng; công nợ phải thu Khách hàng tự động giảm."
+   },
+   {
+    "id": "AP44_T6",
+    "type": "userTask",
+    "name": "07 · Kiểm tra công nợ",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kế toán. Kiểm tra số dư công nợ Khách hàng sau khi điều chỉnh; đối chiếu Hóa đơn gốc vs Hóa đơn điều chỉnh giảm đảm bảo khớp số liệu."
+   },
+   {
+    "id": "AP44_T7",
+    "type": "userTask",
+    "name": "08 · Xử lý hàng hư hỏng",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · NV KT / Kho. Trường hợp hàng NPP gửi trả bị lỗi / hư hỏng: Kế toán ghi nhận chi phí sửa chữa bao bì, phân bổ chi phí vào Đơn bán hàng mới khi tái xuất; hoặc tiêu hủy nếu không sửa được."
+   },
+   {
+    "id": "AP44_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP44_F0",
+    "from": "AP44_S",
+    "to": "AP44_T0"
+   },
+   {
+    "id": "AP44_F1",
+    "from": "AP44_T0",
+    "to": "AP44_T1"
+   },
+   {
+    "id": "AP44_F2",
+    "from": "AP44_T1",
+    "to": "AP44_T2"
+   },
+   {
+    "id": "AP44_F3",
+    "from": "AP44_T2",
+    "to": "AP44_T3"
+   },
+   {
+    "id": "AP44_F4",
+    "from": "AP44_T3",
+    "to": "AP44_T4"
+   },
+   {
+    "id": "AP44_F5",
+    "from": "AP44_T4",
+    "to": "AP44_T5"
+   },
+   {
+    "id": "AP44_F6",
+    "from": "AP44_T5",
+    "to": "AP44_T6"
+   },
+   {
+    "id": "AP44_F7",
+    "from": "AP44_T6",
+    "to": "AP44_T7"
+   },
+   {
+    "id": "AP44_F8",
+    "from": "AP44_T7",
+    "to": "AP44_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP45",
+  "id": "AP45",
+  "name": "Xuất hàng và giao vận",
+  "stream": "O2C",
+  "code": "TR-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Giao vận",
+   "Hệ thống",
+   "Phòng Kế toán",
+   "Bộ phận Kho"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP45_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP45_T0",
+    "type": "userTask",
+    "name": "01 · Thiết lập Master Data",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV Logistic. Khai báo danh mục tuyến vận chuyển, xe tải - rơ moóc, tài xế, cầu bốc xếp (dock), loại đơn vị chứa hàng (pallet, carton). Đây là dữ liệu nền cho mọi giao vận."
+   },
+   {
+    "id": "AP45_T1",
+    "type": "serviceTask",
+    "name": "02 · Yêu cầu vận chuyển tự\nsinh",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Hệ thống. Khi Đơn bán hàng hoặc Đơn chuyển kho được duyệt với phương thức giao hàng cần vận chuyển, hệ thống tự sinh Yêu cầu vận chuyển trên bảng kế hoạch - không cần thao tác tay."
+   },
+   {
+    "id": "AP45_T2",
+    "type": "userTask",
+    "name": "03 · Lập kế hoạch vận chuyển",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · NV Logistic. Trên kế hoạch, gom các yêu cầu vận chuyển cùng tuyến hoặc cùng khu vực để tối ưu xe; điều chỉnh chuyến, tách đơn khi cần."
+   },
+   {
+    "id": "AP45_T3",
+    "type": "userTask",
+    "name": "04 · Tạo Lệnh vận chuyển",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · NV Logistic. Tạo Lệnh vận chuyển cho từng chuyến xe; có thể gộp nhiều yêu cầu chung tuyến vào một lệnh để tối ưu chi phí."
+   },
+   {
+    "id": "AP45_T4",
+    "type": "userTask",
+    "name": "05 · Gán Tài xế, Xe, Dock",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · NV Logistic. Gán cụ thể tài xế, xe tải, rơ moóc, cầu bốc xếp cho Lệnh vận chuyển; theo dõi trạng thái dock (đã đến, đang bốc, đã xuất phát)."
+   },
+   {
+    "id": "AP45_T5",
+    "type": "userTask",
+    "name": "06 · Tính chi phí vận chuyển",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · NV Logistic / KT. Tính chi phí vận chuyển theo tuyến: thủ công theo thỏa thuận hoặc tự động theo bảng cước (diện tích sàn, trọng lượng, gộp chuyến). Chi phí được phân bổ về các đơn hàng đi cùng chuyến."
+   },
+   {
+    "id": "AP45_T6",
+    "type": "userTask",
+    "name": "07 · Xuất kho theo Lệnh vận\nchuyển",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kho. Kho tạo Phiếu xuất kho theo Lệnh vận chuyển; gán vị trí, Lô; ghi sổ xuất kho. Có thể xuất gộp nhiều Đơn bán hàng cùng tuyến."
+   },
+   {
+    "id": "AP45_T7",
+    "type": "serviceTask",
+    "name": "08 · Post Lệnh & sinh đơn\nmua cước",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · NV Logistic / KT. Sau khi hoàn thành chuyến, ghi sổ Lệnh vận chuyển; nếu Nhà cung cấp vận tải có liên kết, hệ thống tự sinh Đơn mua hàng ghi nhận chi phí cước phải trả."
+   },
+   {
+    "id": "AP45_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP45_F0",
+    "from": "AP45_S",
+    "to": "AP45_T0"
+   },
+   {
+    "id": "AP45_F1",
+    "from": "AP45_T0",
+    "to": "AP45_T1"
+   },
+   {
+    "id": "AP45_F2",
+    "from": "AP45_T1",
+    "to": "AP45_T2"
+   },
+   {
+    "id": "AP45_F3",
+    "from": "AP45_T2",
+    "to": "AP45_T3"
+   },
+   {
+    "id": "AP45_F4",
+    "from": "AP45_T3",
+    "to": "AP45_T4"
+   },
+   {
+    "id": "AP45_F5",
+    "from": "AP45_T4",
+    "to": "AP45_T5"
+   },
+   {
+    "id": "AP45_F6",
+    "from": "AP45_T5",
+    "to": "AP45_T6"
+   },
+   {
+    "id": "AP45_F7",
+    "from": "AP45_T6",
+    "to": "AP45_T7"
+   },
+   {
+    "id": "AP45_F8",
+    "from": "AP45_T7",
+    "to": "AP45_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP46",
+  "id": "AP46",
+  "name": "Phát hành hóa đơn bán hàng",
+  "stream": "O2C",
+  "code": "AR-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Kho",
+   "Phòng Kế toán"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP46_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP46_T0",
+    "type": "userTask",
+    "name": "01 · Nhận Phiếu xuất kho",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV Kho / KT. Kho post xuất hàng sau khi giao; Kế toán lấy Phiếu xuất đã post làm căn cứ lập Hóa đơn bán hàng đảm bảo khớp giữa hàng đã giao và hóa đơn."
+   },
+   {
+    "id": "AP46_T1",
+    "type": "userTask",
+    "name": "02 · Lập Hóa đơn bán hàng",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · NV Kế toán. Lập Hóa đơn bán hàng cho Khách hàng, lấy dòng từ Phiếu xuất đã post; kiểm tra số lượng, đơn giá, thuế GTGT khớp với Đơn bán hàng gốc."
+   },
+   {
+    "id": "AP46_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra tiền, thuế,\nhạch toán",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · NV Kế toán. Rà soát nhóm thuế sản phẩm, nhóm sản phẩm, tổng tiền, tiền thuế, nhóm hạch toán Khách hàng - đảm bảo hóa đơn đúng quy định thuế Việt Nam trước khi phát hành."
+   },
+   {
+    "id": "AP46_T3",
+    "type": "userTask",
+    "name": "04 · Phát hành hóa đơn & tự\nđẩy VNPT",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · NV Kế toán. Phát hành hóa đơn. Nếu hệ thống đã thiết lập tự động kết nối VNPT, hóa đơn tự đẩy sang VNPT cấp mã và gửi Khách hàng; kiểm tra log hóa đơn điện tử."
+   },
+   {
+    "id": "AP46_T4",
+    "type": "userTask",
+    "name": "05 · Gửi VNPT thủ công",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · NV Kế toán. Trường hợp cài đặt không bật tự động, Kế toán mở hóa đơn, kiểm tra lại thông tin và gửi VNPT bằng thao tác thủ công."
+   },
+   {
+    "id": "AP46_T5",
+    "type": "userTask",
+    "name": "06 · Hóa đơn điều chỉnh giảm",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · NV Kế toán. Phát hành Hóa đơn điều chỉnh giảm cho các trường hợp: KH trả hàng, chiết khấu sau, giảm giá chất lượng. Hóa đơn điều chỉnh tham chiếu hóa đơn gốc, tự động cấn trừ công nợ."
+   },
+   {
+    "id": "AP46_T6",
+    "type": "userTask",
+    "name": "07 · Điều chỉnh thông tin\nngười mua",
+    "lane": 1,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kế toán. Khi phát hiện thông tin người mua sai sau khi hóa đơn đã ký (sai tên công ty, MST), phát hành hóa đơn điều chỉnh thông tin thay vì hủy hóa đơn gốc."
+   },
+   {
+    "id": "AP46_T7",
+    "type": "userTask",
+    "name": "08 · HĐ trả thưởng · khen\nthưởng · khuyến mại",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · NV Kế toán. Các trường hợp hạch toán riêng: (1) HĐ trả thưởng hàng - trích trước Nợ 641/Có 335 cuối quý, xuất Nợ 335/Có 155+33311; (2) HĐ trả thưởng trong kỳ Nợ 641/Có 33311+155; (3) HĐ khen thưởng phúc lợi Nợ 353/Có 33311+511; (4) HĐ khuyến mại - chiết khấu 100%; (5) HĐ thay thế."
+   },
+   {
+    "id": "AP46_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP46_F0",
+    "from": "AP46_S",
+    "to": "AP46_T0"
+   },
+   {
+    "id": "AP46_F1",
+    "from": "AP46_T0",
+    "to": "AP46_T1"
+   },
+   {
+    "id": "AP46_F2",
+    "from": "AP46_T1",
+    "to": "AP46_T2"
+   },
+   {
+    "id": "AP46_F3",
+    "from": "AP46_T2",
+    "to": "AP46_T3"
+   },
+   {
+    "id": "AP46_F4",
+    "from": "AP46_T3",
+    "to": "AP46_T4"
+   },
+   {
+    "id": "AP46_F5",
+    "from": "AP46_T4",
+    "to": "AP46_T5"
+   },
+   {
+    "id": "AP46_F6",
+    "from": "AP46_T5",
+    "to": "AP46_T6"
+   },
+   {
+    "id": "AP46_F7",
+    "from": "AP46_T6",
+    "to": "AP46_T7"
+   },
+   {
+    "id": "AP46_F8",
+    "from": "AP46_T7",
+    "to": "AP46_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP47",
+  "id": "AP47",
+  "name": "Mô tả bước thực hiện",
+  "stream": "O2C",
+  "code": "",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kinh doanh",
+   "KD / Admin BAS",
+   "Phòng Kế toán"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP47_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP47_T0",
+    "type": "userTask",
+    "name": "01 · Phân nhóm Khách hàng áp\ndụng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · NV Kinh doanh. Phân loại Khách hàng theo nhóm (NPP, TMĐT, đại lý lớn) trên hồ sơ Khách hàng. Đây là điều kiện tiên quyết để hệ thống tính trả thưởng theo đúng chính sách từng nhóm."
+   },
+   {
+    "id": "AP47_T1",
+    "type": "userTask",
+    "name": "02 · Thiết lập Điều khoản\ntrả thưởng",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · NV KD / Admin BAS. Khai báo Điều khoản thương mại cho từng nhóm Khách hàng; chọn phương thức tính: chiết khấu % theo doanh số, đạt ngưỡng doanh số hưởng chiết khấu cố định, tặng sản phẩm miễn phí. Khai báo kỳ hiệu lực."
+   },
+   {
+    "id": "AP47_T2",
+    "type": "userTask",
+    "name": "03 · Thu thập dữ liệu doanh\nsố",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · NV Kế toán. Thu thập dữ liệu doanh số bán trong kỳ tính thưởng cho từng Khách hàng - là căn cứ tính mức trả thưởng theo Điều khoản đã khai báo."
+   },
+   {
+    "id": "AP47_T3",
+    "type": "serviceTask",
+    "name": "04 · Tính & tạo Đề xuất trả\nthưởng",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · NV Kế toán. Hệ thống tự tính trả thưởng theo Điều khoản và doanh số thu thập; sinh ra Đề xuất trả thưởng cho từng Khách hàng với số tiền / sản phẩm tương ứng."
+   },
+   {
+    "id": "AP47_T4",
+    "type": "userTask",
+    "name": "05 · Phê duyệt Đề xuất",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · NV Kế toán. Kế toán có quyền phê duyệt (theo phân quyền) mở Đề xuất để sang bước thực hiện. Đề xuất chưa duyệt không thể phát sinh giao dịch."
+   },
+   {
+    "id": "AP47_T5",
+    "type": "userTask",
+    "name": "06 · Chọn phương thức trả",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · NV Kế toán. Chọn phương thức thực hiện: (1) Sản phẩm tặng kèm, (2) Chi tiền mặt, (3) Hóa đơn điều chỉnh cấn trừ công nợ, (4) Chiết khấu áp dụng trên Đơn bán hàng kế tiếp. Lựa chọn theo thỏa thuận với Khách hàng."
+   },
+   {
+    "id": "AP47_T6",
+    "type": "userTask",
+    "name": "07 · Thực hiện & ghi sổ",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · NV Kế toán. Tạo chứng từ tương ứng phương thức đã chọn: Hóa đơn điều chỉnh giảm, Phiếu chi tiền mặt, hoặc Phiếu xuất sản phẩm tặng; post ghi sổ công nợ giảm / chi tiền / xuất kho."
+   },
+   {
+    "id": "AP47_T7",
+    "type": "serviceTask",
+    "name": "08 · Áp dụng chiết khấu đơn\nkế tiếp",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · NV Kinh doanh. Khi Khách hàng có Đề xuất trả thưởng chọn phương thức chiết khấu: Kinh doanh lập Đơn bán hàng kế tiếp cho Khách hàng đó và áp dụng trả thưởng - hệ thống tự khấu trừ đúng số tiền chưa dùng."
+   },
+   {
+    "id": "AP47_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP47_F0",
+    "from": "AP47_S",
+    "to": "AP47_T0"
+   },
+   {
+    "id": "AP47_F1",
+    "from": "AP47_T0",
+    "to": "AP47_T1"
+   },
+   {
+    "id": "AP47_F2",
+    "from": "AP47_T1",
+    "to": "AP47_T2"
+   },
+   {
+    "id": "AP47_F3",
+    "from": "AP47_T2",
+    "to": "AP47_T3"
+   },
+   {
+    "id": "AP47_F4",
+    "from": "AP47_T3",
+    "to": "AP47_T4"
+   },
+   {
+    "id": "AP47_F5",
+    "from": "AP47_T4",
+    "to": "AP47_T5"
+   },
+   {
+    "id": "AP47_F6",
+    "from": "AP47_T5",
+    "to": "AP47_T6"
+   },
+   {
+    "id": "AP47_F7",
+    "from": "AP47_T6",
+    "to": "AP47_T7"
+   },
+   {
+    "id": "AP47_F8",
+    "from": "AP47_T7",
+    "to": "AP47_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP48",
+  "id": "AP48",
+  "name": "Quản lý thông tin Nhà cung cấp",
+  "stream": "P2P",
+  "code": "MD-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận yêu cầu",
+   "Bộ phận Cung ứng",
+   "Bộ phận CNTT",
+   "Phòng Kế toán"
+  ],
+  "width": 2376,
+  "nodes": [
+   {
+    "id": "AP48_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP48_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh nhu cầu mua\nhàng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Các phòng ban. Các phòng ban phát sinh nhu cầu mua hàng; khởi chạy quy trình Yêu cầu mua hàng nội bộ."
+   },
+   {
+    "id": "AP48_T1",
+    "type": "userTask",
+    "name": "02 · Lựa chọn, thu thập\nthông tin NCC",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · P. Cung Ứng. Tìm kiếm, đánh giá và thu thập thông tin Nhà cung cấp phù hợp nhu cầu mua: năng lực, uy tín, giá tham khảo, điều khoản."
+   },
+   {
+    "id": "AP48_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra NCC có trên hệ\nthống",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · P. Cung Ứng. Rà soát Danh mục Nhà cung cấp hiện có trên hệ thống. Nếu đã có, chuyển sang cập nhật thông tin; nếu chưa, chuyển tạo mới."
+   },
+   {
+    "id": "AP48_T3",
+    "type": "userTask",
+    "name": "04 · Tạo mới thông tin NCC",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Tạo hồ sơ Nhà cung cấp mới theo mẫu chuẩn, mặc định ở trạng thái khóa để đảm bảo kiểm soát. Điền thông tin cơ bản: tên pháp nhân, Mã số thuế, địa chỉ, điều khoản thanh toán."
+   },
+   {
+    "id": "AP48_T4",
+    "type": "userTask",
+    "name": "05 · Gửi yêu cầu phê duyệt\nNCC",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP. CNTT. Gửi yêu cầu phê duyệt; thông tin NCC chuyển sang Phòng Kế toán để kiểm tra hạch toán trước khi được phép giao dịch."
+   },
+   {
+    "id": "AP48_T5",
+    "type": "userTask",
+    "name": "06 · Kiểm tra & bổ sung hạch\ntoán",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · P. Kế toán. Rà soát và bổ sung nhóm hạch toán nhà cung cấp, nhóm kinh doanh, nhóm thuế, thông tin thuế phù hợp với chính sách công ty."
+   },
+   {
+    "id": "AP48_T6",
+    "type": "userTask",
+    "name": "07 · Duyệt & mở khóa NCC",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · P. Kế toán. Phê duyệt thông tin hạch toán. NCC tự động được mở khóa, sẵn sàng phát sinh giao dịch mua hàng."
+   },
+   {
+    "id": "AP48_T7",
+    "type": "userTask",
+    "name": "08 · Cập nhật thông tin NCC",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · BP. CNTT. Trường hợp NCC đã tồn tại: đối chiếu và cập nhật thông tin mới (địa chỉ, tài khoản ngân hàng, liên hệ) để đảm bảo hệ thống luôn chính xác."
+   },
+   {
+    "id": "AP48_T8",
+    "type": "userTask",
+    "name": "09 · Thực hiện mua hàng với\nNCC",
+    "lane": 1,
+    "x": 2040,
+    "doc": "Bước 9 · P. Cung Ứng. Nếu tiếp tục mua hàng, chuyển sang quy trình Mua hàng theo kế hoạch hoặc Mua hàng không thường xuyên. Nếu không, kết thúc quy trình."
+   },
+   {
+    "id": "AP48_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2250
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP48_F0",
+    "from": "AP48_S",
+    "to": "AP48_T0"
+   },
+   {
+    "id": "AP48_F1",
+    "from": "AP48_T0",
+    "to": "AP48_T1"
+   },
+   {
+    "id": "AP48_F2",
+    "from": "AP48_T1",
+    "to": "AP48_T2"
+   },
+   {
+    "id": "AP48_F3",
+    "from": "AP48_T2",
+    "to": "AP48_T3"
+   },
+   {
+    "id": "AP48_F4",
+    "from": "AP48_T3",
+    "to": "AP48_T4"
+   },
+   {
+    "id": "AP48_F5",
+    "from": "AP48_T4",
+    "to": "AP48_T5"
+   },
+   {
+    "id": "AP48_F6",
+    "from": "AP48_T5",
+    "to": "AP48_T6"
+   },
+   {
+    "id": "AP48_F7",
+    "from": "AP48_T6",
+    "to": "AP48_T7"
+   },
+   {
+    "id": "AP48_F8",
+    "from": "AP48_T7",
+    "to": "AP48_T8"
+   },
+   {
+    "id": "AP48_F9",
+    "from": "AP48_T8",
+    "to": "AP48_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP49",
+  "id": "AP49",
+  "name": "Quản lý thông tin Mặt hàng",
+  "stream": "P2P",
+  "code": "MD-02",
+  "LH": 176,
+  "lanes": [
+   "R&D",
+   "Bộ phận yêu cầu",
+   "Bộ phận CNTT",
+   "Phòng Kế toán"
+  ],
+  "width": 2586,
+  "nodes": [
+   {
+    "id": "AP49_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP49_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh yêu cầu tạo\nmã NVL/TP mới",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. R&D. Trong quá trình nghiên cứu phát triển sản phẩm, R&D phát sinh yêu cầu tạo mã Nguyên vật liệu, Bán thành phẩm hoặc Thành phẩm mới."
+   },
+   {
+    "id": "AP49_T1",
+    "type": "userTask",
+    "name": "02 · Phát sinh nhu cầu mua\nVT/CCDC mới",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Phòng ban khác. Các phòng ban khác có nhu cầu mua mặt hàng chưa có mã trên hệ thống (vật tư, công cụ dụng cụ mới)."
+   },
+   {
+    "id": "AP49_T2",
+    "type": "userTask",
+    "name": "03 · Kiểm tra mã đã tồn tại",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · BP. CNTT. Rà soát danh mục mặt hàng trên hệ thống để tránh trùng lặp. Đã có thì chuyển cập nhật; chưa có thì tạo mới."
+   },
+   {
+    "id": "AP49_T3",
+    "type": "userTask",
+    "name": "04 · Tạo mới mặt hàng trên\nhệ thống",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Khởi tạo hồ sơ mặt hàng, mặc định trạng thái khóa để kiểm soát. Khai báo đơn vị tính cơ sở, các đơn vị tính khác, nhóm mặt hàng, thiết lập theo dõi Lô / Serie."
+   },
+   {
+    "id": "AP49_T4",
+    "type": "userTask",
+    "name": "05 · Có cần mã hóa thông\ntin?",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP. CNTT. Kiểm tra mặt hàng có yêu cầu mã hóa công thức/thành phần để che thông tin bảo mật không. Nếu có, chuyển bước 6; nếu không, bỏ qua."
+   },
+   {
+    "id": "AP49_T5",
+    "type": "userTask",
+    "name": "06 · Khai báo thông tin mã\nhóa",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · BP. CNTT. Điền thông tin mã hóa theo quy tắc bảo mật nội bộ - hạn chế user không có quyền xem thành phần chi tiết."
+   },
+   {
+    "id": "AP49_T6",
+    "type": "userTask",
+    "name": "07 · Gửi yêu cầu phê duyệt",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · BP. CNTT. Gửi yêu cầu phê duyệt; hồ sơ mặt hàng chuyển sang Kế toán để kiểm tra hạch toán."
+   },
+   {
+    "id": "AP49_T7",
+    "type": "userTask",
+    "name": "08 · Kiểm tra & bổ sung hạch\ntoán",
+    "lane": 3,
+    "x": 1830,
+    "doc": "Bước 8 · P. Kế toán. Rà soát nhóm mặt hàng; bổ sung nhóm hạch toán tồn kho, nhóm sản phẩm, nhóm thuế sản phẩm phù hợp với chính sách kế toán."
+   },
+   {
+    "id": "AP49_T8",
+    "type": "userTask",
+    "name": "09 · Phê duyệt & mở khóa mã\nhàng",
+    "lane": 3,
+    "x": 2040,
+    "doc": "Bước 9 · P. Kế toán. Phê duyệt; mặt hàng tự động mở khóa, sẵn sàng cho các phòng ban sử dụng trong giao dịch mua, bán, tồn kho."
+   },
+   {
+    "id": "AP49_T9",
+    "type": "userTask",
+    "name": "10 · Cập nhật thông tin mặt\nhàng",
+    "lane": 2,
+    "x": 2250,
+    "doc": "Bước 10 · BP. CNTT. Trường hợp mặt hàng đã có, cập nhật thông tin theo yêu cầu của phòng ban liên quan; giữ dữ liệu luôn chính xác."
+   },
+   {
+    "id": "AP49_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2460
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP49_F0",
+    "from": "AP49_S",
+    "to": "AP49_T0"
+   },
+   {
+    "id": "AP49_F1",
+    "from": "AP49_T0",
+    "to": "AP49_T1"
+   },
+   {
+    "id": "AP49_F2",
+    "from": "AP49_T1",
+    "to": "AP49_T2"
+   },
+   {
+    "id": "AP49_F3",
+    "from": "AP49_T2",
+    "to": "AP49_T3"
+   },
+   {
+    "id": "AP49_F4",
+    "from": "AP49_T3",
+    "to": "AP49_T4"
+   },
+   {
+    "id": "AP49_F5",
+    "from": "AP49_T4",
+    "to": "AP49_T5"
+   },
+   {
+    "id": "AP49_F6",
+    "from": "AP49_T5",
+    "to": "AP49_T6"
+   },
+   {
+    "id": "AP49_F7",
+    "from": "AP49_T6",
+    "to": "AP49_T7"
+   },
+   {
+    "id": "AP49_F8",
+    "from": "AP49_T7",
+    "to": "AP49_T8"
+   },
+   {
+    "id": "AP49_F9",
+    "from": "AP49_T8",
+    "to": "AP49_T9"
+   },
+   {
+    "id": "AP49_F10",
+    "from": "AP49_T9",
+    "to": "AP49_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP50",
+  "id": "AP50",
+  "name": "Quản lý giá mua theo Hợp đồng nguyên tắc",
+  "stream": "P2P",
+  "code": "MD-03a",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Cung ứng",
+   "BLĐ",
+   "Bộ phận CNTT"
+  ],
+  "width": 1536,
+  "nodes": [
+   {
+    "id": "AP50_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP50_T0",
+    "type": "userTask",
+    "name": "01 · Nhận Bảng giá mới từ\nNCC",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Cung Ứng. Hàng năm hoặc theo kỳ hợp đồng, NCC gửi Bảng giá mới. P. Cung Ứng tập hợp và chuẩn hóa theo mẫu."
+   },
+   {
+    "id": "AP50_T1",
+    "type": "userTask",
+    "name": "02 · Trình ký Bảng giá",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · P. Cung Ứng. Trình Bảng giá mới lên Ban Lãnh đạo xem xét và phê duyệt, làm căn cứ ký Hợp đồng nguyên tắc mua hàng."
+   },
+   {
+    "id": "AP50_T2",
+    "type": "userTask",
+    "name": "03 · Chấp nhận Bảng giá?",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · BLĐ. BLĐ xem xét và duyệt. Không duyệt: đàm phán lại với NCC. Duyệt: chuyển tạo Bảng giá trên hệ thống."
+   },
+   {
+    "id": "AP50_T3",
+    "type": "userTask",
+    "name": "04 · Tạo Bảng giá mua mới",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · BP. CNTT. Tạo Bảng giá mua trên hệ thống - khai báo mặt hàng, đơn vị tính, đơn giá, ngày bắt đầu hiệu lực, Nhà cung cấp. Sau khi tạo, Đơn mua hàng cho NCC này tự lấy giá từ Bảng giá."
+   },
+   {
+    "id": "AP50_T4",
+    "type": "userTask",
+    "name": "05 · Đóng Bảng giá cũ",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · BP. CNTT. Đặt ngày kết thúc cho Bảng giá cũ - đảm bảo chỉ một Bảng giá đang hoạt động cho cùng NCC và mặt hàng tại một thời điểm, tránh áp dụng sai giá."
+   },
+   {
+    "id": "AP50_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 1410
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP50_F0",
+    "from": "AP50_S",
+    "to": "AP50_T0"
+   },
+   {
+    "id": "AP50_F1",
+    "from": "AP50_T0",
+    "to": "AP50_T1"
+   },
+   {
+    "id": "AP50_F2",
+    "from": "AP50_T1",
+    "to": "AP50_T2"
+   },
+   {
+    "id": "AP50_F3",
+    "from": "AP50_T2",
+    "to": "AP50_T3"
+   },
+   {
+    "id": "AP50_F4",
+    "from": "AP50_T3",
+    "to": "AP50_T4"
+   },
+   {
+    "id": "AP50_F5",
+    "from": "AP50_T4",
+    "to": "AP50_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP51",
+  "id": "AP51",
+  "name": "Mua hàng không thường xuyên (yêu cầu báo giá)",
+  "stream": "P2P",
+  "code": "MD-03b",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Cung ứng",
+   "BLĐ"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP51_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP51_T0",
+    "type": "userTask",
+    "name": "01 · Nhận Yêu cầu mua hàng\nđã duyệt",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Cung Ứng. Nhận Yêu cầu mua hàng đã được phòng ban duyệt ngoài hệ thống, chuyển từ quy trình PO-02b (mua không thường xuyên cần báo giá). RFQ chỉ kích hoạt khi mã hàng chưa có HĐNT - nếu đã có HĐNT, dùng PO-02a (lấy giá từ HĐNT) thay vì đi qua RFQ."
+   },
+   {
+    "id": "AP51_T1",
+    "type": "userTask",
+    "name": "02 · Xin báo giá từ ≥ 3 NCC",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · P. Cung Ứng. Gửi yêu cầu báo giá cho tối thiểu 3 Nhà cung cấp khác nhau để đảm bảo cạnh tranh về giá và điều khoản."
+   },
+   {
+    "id": "AP51_T2",
+    "type": "userTask",
+    "name": "03 · Ghi nhận Báo giá trên\nhệ thống",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · P. Cung Ứng. Nhập các báo giá thu thập được vào hệ thống - mỗi NCC một báo giá để làm căn cứ so sánh và lưu vết."
+   },
+   {
+    "id": "AP51_T3",
+    "type": "userTask",
+    "name": "04 · Chấm điểm & chọn NCC",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · P. Cung Ứng. So sánh nhiều tiêu chí: đơn giá, thời gian giao hàng, điều khoản thanh toán, chất lượng, uy tín. Chấm điểm và chọn NCC tối ưu."
+   },
+   {
+    "id": "AP51_T4",
+    "type": "userTask",
+    "name": "05 · Lập Tờ trình so sánh\ngiá",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · P. Cung Ứng. Lập Tờ trình cho Báo giá được chọn, đính kèm các báo giá còn lại để BLĐ đối chiếu tính minh bạch."
+   },
+   {
+    "id": "AP51_T5",
+    "type": "userTask",
+    "name": "06 · Duyệt Tờ trình?",
+    "lane": 1,
+    "x": 1410,
+    "doc": "Bước 6 · BLĐ. BLĐ xem xét Tờ trình. Duyệt: Báo giá chuyển trạng thái đã chọn. Không duyệt: làm lại bước chọn NCC khác."
+   },
+   {
+    "id": "AP51_T6",
+    "type": "userTask",
+    "name": "07 · Kích hoạt Báo giá được\nchọn",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · P. Cung Ứng. Báo giá được kích hoạt, chuyển sang quy trình Mua hàng không thường xuyên: tạo Đơn mua hàng từ Báo giá đã duyệt."
+   },
+   {
+    "id": "AP51_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP51_F0",
+    "from": "AP51_S",
+    "to": "AP51_T0"
+   },
+   {
+    "id": "AP51_F1",
+    "from": "AP51_T0",
+    "to": "AP51_T1"
+   },
+   {
+    "id": "AP51_F2",
+    "from": "AP51_T1",
+    "to": "AP51_T2"
+   },
+   {
+    "id": "AP51_F3",
+    "from": "AP51_T2",
+    "to": "AP51_T3"
+   },
+   {
+    "id": "AP51_F4",
+    "from": "AP51_T3",
+    "to": "AP51_T4"
+   },
+   {
+    "id": "AP51_F5",
+    "from": "AP51_T4",
+    "to": "AP51_T5"
+   },
+   {
+    "id": "AP51_F6",
+    "from": "AP51_T5",
+    "to": "AP51_T6"
+   },
+   {
+    "id": "AP51_F7",
+    "from": "AP51_T6",
+    "to": "AP51_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP52",
+  "id": "AP52",
+  "name": "Mua hàng theo kế hoạch sản xuất",
+  "stream": "P2P",
+  "code": "PO-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Cung ứng",
+   "Phòng Kế toán",
+   "Bộ phận Kho"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP52_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP52_T0",
+    "type": "userTask",
+    "name": "01 · Chạy MRP & lên nhu cầu\nNVL",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · P. Cung Ứng. Dựa trên Kế hoạch sản xuất và Lệnh sản xuất đã phát hành, chạy MRP để hệ thống tính toán nhu cầu NVL còn thiếu - căn cứ lập kế hoạch mua."
+   },
+   {
+    "id": "AP52_T1",
+    "type": "userTask",
+    "name": "02 · Tạo / sửa Đơn mua hàng",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · P. Cung Ứng. Từ đề xuất MRP, Cung Ứng xác nhận và tạo Đơn mua hàng - gộp theo NCC, đơn vị tính, ngày giao để tối ưu chi phí vận chuyển."
+   },
+   {
+    "id": "AP52_T2",
+    "type": "userTask",
+    "name": "03 · Gửi yêu cầu duyệt đơn",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · P. Cung Ứng. Gửi Đơn mua hàng đi phê duyệt - chuyển sang Kế toán kiểm tra giá trước khi cho phép đặt hàng chính thức với NCC."
+   },
+   {
+    "id": "AP52_T3",
+    "type": "userTask",
+    "name": "04 · Kiểm tra giá mua vs\nBảng giá",
+    "lane": 1,
+    "x": 990,
+    "doc": "Bước 4 · P. Kế toán. Đối chiếu đơn giá trên Đơn mua hàng với Bảng giá mua (Hợp đồng nguyên tắc). Nếu lệch, hệ thống cảnh báo để Kế toán xem xét nguyên nhân."
+   },
+   {
+    "id": "AP52_T4",
+    "type": "userTask",
+    "name": "05 · Duyệt Đơn mua hàng",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · P. Kế toán. Nếu giá hợp lệ, phê duyệt - Đơn mua hàng chuyển trạng thái đã duyệt, sẵn sàng gửi NCC. Nếu không, từ chối, trả về Cung Ứng để điều chỉnh."
+   },
+   {
+    "id": "AP52_T5",
+    "type": "userTask",
+    "name": "06 · Thông báo lịch nhập kho",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · P. Cung Ứng. Sau khi duyệt, Cung Ứng thông báo lịch dự kiến nhập kho cho Bộ phận Kho vận chuẩn bị nhân lực, thiết bị bốc dỡ, vị trí lưu kho."
+   },
+   {
+    "id": "AP52_T6",
+    "type": "userTask",
+    "name": "07 · Nhập kho",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · BP. Kho. Khi hàng về, Kho tạo Phiếu nhập kho, gán Lô và vị trí kho, ghi nhận số lượng thực nhận; post ghi sổ để tồn kho cập nhật."
+   },
+   {
+    "id": "AP52_T7",
+    "type": "userTask",
+    "name": "08 · Ghi nhận Hóa đơn đầu\nvào",
+    "lane": 1,
+    "x": 1830,
+    "doc": "Bước 8 · P. Kế toán. Sau khi Kho đã post nhập, Kế toán lập Hóa đơn mua hàng căn cứ theo Phiếu nhập kho, ghi nhận công nợ phải trả Nhà cung cấp."
+   },
+   {
+    "id": "AP52_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 1,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP52_F0",
+    "from": "AP52_S",
+    "to": "AP52_T0"
+   },
+   {
+    "id": "AP52_F1",
+    "from": "AP52_T0",
+    "to": "AP52_T1"
+   },
+   {
+    "id": "AP52_F2",
+    "from": "AP52_T1",
+    "to": "AP52_T2"
+   },
+   {
+    "id": "AP52_F3",
+    "from": "AP52_T2",
+    "to": "AP52_T3"
+   },
+   {
+    "id": "AP52_F4",
+    "from": "AP52_T3",
+    "to": "AP52_T4"
+   },
+   {
+    "id": "AP52_F5",
+    "from": "AP52_T4",
+    "to": "AP52_T5"
+   },
+   {
+    "id": "AP52_F6",
+    "from": "AP52_T5",
+    "to": "AP52_T6"
+   },
+   {
+    "id": "AP52_F7",
+    "from": "AP52_T6",
+    "to": "AP52_T7"
+   },
+   {
+    "id": "AP52_F8",
+    "from": "AP52_T7",
+    "to": "AP52_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP53",
+  "id": "AP53",
+  "name": "Mua hàng không thường xuyên (CÓ HĐNT)",
+  "stream": "P2P",
+  "code": "PO-02a",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận yêu cầu",
+   "Trưởng phòng",
+   "Bộ phận Cung ứng",
+   "BLĐ",
+   "Phòng Kế toán"
+  ],
+  "width": 2796,
+  "nodes": [
+   {
+    "id": "AP53_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP53_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh nhu cầu mua\nhàng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Các phòng ban. Phòng ban phát sinh nhu cầu mua mặt hàng/vật tư ngoài kế hoạch sản xuất - thường là CCDC, dịch vụ, hàng mua lần đầu."
+   },
+   {
+    "id": "AP53_T1",
+    "type": "userTask",
+    "name": "02 · Duyệt Yêu cầu mua hàng\nnội bộ",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Trưởng phòng. Trưởng phòng xem xét tính hợp lý của nhu cầu, mức giá tham khảo và thời điểm cần nhận hàng. Duyệt Yêu cầu mua hàng nội bộ (qua chứng từ giấy hoặc email) trước khi chuyển sang Phòng Cung Ứng."
+   },
+   {
+    "id": "AP53_T2",
+    "type": "userTask",
+    "name": "03 · Tiếp nhận Yêu cầu mua\nhàng đã duyệt",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · P. Cung Ứng. Cung Ứng tiếp nhận Yêu cầu mua hàng đã được phòng ban duyệt từ ngoài hệ thống. Kiểm tra tính đầy đủ thông tin: nhu cầu, số lượng, mức giá tham khảo, thời điểm cần nhận hàng - làm căn cứ nhập vào hệ thống."
+   },
+   {
+    "id": "AP53_T3",
+    "type": "userTask",
+    "name": "04 · Tạo Yêu cầu mua hàng",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · P. Cung Ứng. Cung Ứng nhập Yêu cầu mua hàng đã duyệt vào hệ thống D365 BC làm căn cứ lập Tờ trình và Đơn mua hàng - bám đúng nội dung phòng ban đã yêu cầu (mặt hàng, số lượng, mức giá tham khảo, thời điểm cần nhận hàng)."
+   },
+   {
+    "id": "AP53_T4",
+    "type": "userTask",
+    "name": "05 · Lập Tờ trình cho Yêu\ncầu",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · P. Cung Ứng. Cung Ứng lập Tờ trình từ Yêu cầu mua hàng đã nhập, lấy giá từ Bảng giá HĐNT (tham khảo MD-03a). Đính kèm Yêu cầu mua hàng vào Tờ trình. Không cần xin báo giá vì đã có HĐNT."
+   },
+   {
+    "id": "AP53_T5",
+    "type": "userTask",
+    "name": "06 · BLĐ duyệt Tờ trình?",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · BLĐ. BLĐ xem xét Tờ trình. Duyệt: tiếp tục tạo Đơn mua hàng. Không duyệt: trả về Cung Ứng để chọn NCC khác hoặc thương lượng lại."
+   },
+   {
+    "id": "AP53_T6",
+    "type": "userTask",
+    "name": "07 · Tạo Đơn mua hàng",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · P. Cung Ứng. Từ Yêu cầu đã duyệt, Cung Ứng tạo Đơn mua hàng kế thừa thông tin: NCC, mặt hàng, số lượng, đơn giá, ngày giao."
+   },
+   {
+    "id": "AP53_T7",
+    "type": "userTask",
+    "name": "08 · Gửi yêu cầu duyệt Đơn",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · P. Cung Ứng. Gửi Đơn mua hàng đi phê duyệt - chuyển sang Kế toán kiểm tra trước khi đặt hàng chính thức với NCC."
+   },
+   {
+    "id": "AP53_T8",
+    "type": "userTask",
+    "name": "09 · Kiểm tra giá & duyệt\nĐơn",
+    "lane": 4,
+    "x": 2040,
+    "doc": "Bước 9 · P. Kế toán. Kế toán kiểm tra giá, điều khoản thanh toán, hạch toán. Duyệt nếu hợp lệ - Đơn chuyển trạng thái đã duyệt."
+   },
+   {
+    "id": "AP53_T9",
+    "type": "userTask",
+    "name": "10 · Yêu cầu trả trước?",
+    "lane": 4,
+    "x": 2250,
+    "doc": "Bước 10 · P. Kế toán. Nếu NCC yêu cầu thanh toán trước một phần: Kế toán ghi nhận trả trước và thực hiện thanh toán theo quy định trước khi NCC giao hàng."
+   },
+   {
+    "id": "AP53_T10",
+    "type": "userTask",
+    "name": "11 · Ghi nhận Hóa đơn đầu\nvào",
+    "lane": 4,
+    "x": 2460,
+    "doc": "Bước 11 · P. Kế toán. Sau khi Kho nhập hàng, Kế toán lập Hóa đơn mua hàng căn cứ Phiếu nhập kho - ghi công nợ phải trả NCC."
+   },
+   {
+    "id": "AP53_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 4,
+    "x": 2670
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP53_F0",
+    "from": "AP53_S",
+    "to": "AP53_T0"
+   },
+   {
+    "id": "AP53_F1",
+    "from": "AP53_T0",
+    "to": "AP53_T1"
+   },
+   {
+    "id": "AP53_F2",
+    "from": "AP53_T1",
+    "to": "AP53_T2"
+   },
+   {
+    "id": "AP53_F3",
+    "from": "AP53_T2",
+    "to": "AP53_T3"
+   },
+   {
+    "id": "AP53_F4",
+    "from": "AP53_T3",
+    "to": "AP53_T4"
+   },
+   {
+    "id": "AP53_F5",
+    "from": "AP53_T4",
+    "to": "AP53_T5"
+   },
+   {
+    "id": "AP53_F6",
+    "from": "AP53_T5",
+    "to": "AP53_T6"
+   },
+   {
+    "id": "AP53_F7",
+    "from": "AP53_T6",
+    "to": "AP53_T7"
+   },
+   {
+    "id": "AP53_F8",
+    "from": "AP53_T7",
+    "to": "AP53_T8"
+   },
+   {
+    "id": "AP53_F9",
+    "from": "AP53_T8",
+    "to": "AP53_T9"
+   },
+   {
+    "id": "AP53_F10",
+    "from": "AP53_T9",
+    "to": "AP53_T10"
+   },
+   {
+    "id": "AP53_F11",
+    "from": "AP53_T10",
+    "to": "AP53_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP54",
+  "id": "AP54",
+  "name": "Mua hàng không thường xuyên (CẦN BÁO GIÁ)",
+  "stream": "P2P",
+  "code": "PO-02b",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận yêu cầu",
+   "Trưởng phòng",
+   "Bộ phận Cung ứng",
+   "BLĐ",
+   "Phòng Kế toán"
+  ],
+  "width": 2796,
+  "nodes": [
+   {
+    "id": "AP54_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP54_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh nhu cầu mua\nhàng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · Các phòng ban. Phòng ban phát sinh nhu cầu mua mặt hàng/vật tư ngoài kế hoạch sản xuất - thường là CCDC, dịch vụ, hàng mua lần đầu."
+   },
+   {
+    "id": "AP54_T1",
+    "type": "userTask",
+    "name": "02 · Duyệt Yêu cầu mua hàng\nnội bộ",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Trưởng phòng. Trưởng phòng xem xét tính hợp lý của nhu cầu, mức giá tham khảo và thời điểm cần nhận hàng. Duyệt Yêu cầu mua hàng nội bộ (qua chứng từ giấy hoặc email) trước khi chuyển sang Phòng Cung Ứng."
+   },
+   {
+    "id": "AP54_T2",
+    "type": "userTask",
+    "name": "03 · Tiếp nhận Yêu cầu mua\nhàng đã duyệt",
+    "lane": 2,
+    "x": 780,
+    "doc": "Bước 3 · P. Cung Ứng. Cung Ứng tiếp nhận Yêu cầu mua hàng đã được phòng ban duyệt từ ngoài hệ thống. Kiểm tra tính đầy đủ thông tin: nhu cầu, số lượng, mức giá tham khảo, thời điểm cần nhận hàng - làm căn cứ nhập vào hệ thống."
+   },
+   {
+    "id": "AP54_T3",
+    "type": "userTask",
+    "name": "04 · Tạo Yêu cầu mua hàng",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · P. Cung Ứng. Cung Ứng nhập Yêu cầu mua hàng đã duyệt vào hệ thống D365 BC làm căn cứ kích hoạt RFQ và tạo Đơn mua hàng - bám đúng nội dung phòng ban đã yêu cầu (mặt hàng, số lượng, mức giá tham khảo, thời điểm cần nhận hàng)."
+   },
+   {
+    "id": "AP54_T4",
+    "type": "userTask",
+    "name": "05 · Xin báo giá & lập Tờ\ntrình",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · P. Cung Ứng. Cung Ứng thực hiện quy trình RFQ (MD-03b): xin tối thiểu 3 báo giá, ghi nhận lên hệ thống, chấm điểm chọn NCC tối ưu, lập Tờ trình so sánh giá đính kèm các báo giá. Sau khi báo giá được chọn kích hoạt, tiếp tục bước 7."
+   },
+   {
+    "id": "AP54_T5",
+    "type": "userTask",
+    "name": "06 · BLĐ duyệt Tờ trình?",
+    "lane": 3,
+    "x": 1410,
+    "doc": "Bước 6 · BLĐ. BLĐ xem xét Tờ trình. Duyệt: tiếp tục tạo Đơn mua hàng. Không duyệt: trả về Cung Ứng để chọn NCC khác hoặc thương lượng lại."
+   },
+   {
+    "id": "AP54_T6",
+    "type": "userTask",
+    "name": "07 · Tạo Đơn mua hàng",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · P. Cung Ứng. Từ Yêu cầu đã duyệt, Cung Ứng tạo Đơn mua hàng kế thừa thông tin: NCC, mặt hàng, số lượng, đơn giá, ngày giao."
+   },
+   {
+    "id": "AP54_T7",
+    "type": "userTask",
+    "name": "08 · Gửi yêu cầu duyệt Đơn",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · P. Cung Ứng. Gửi Đơn mua hàng đi phê duyệt - chuyển sang Kế toán kiểm tra trước khi đặt hàng chính thức với NCC."
+   },
+   {
+    "id": "AP54_T8",
+    "type": "userTask",
+    "name": "09 · Kiểm tra giá & duyệt\nĐơn",
+    "lane": 4,
+    "x": 2040,
+    "doc": "Bước 9 · P. Kế toán. Kế toán kiểm tra giá, điều khoản thanh toán, hạch toán. Duyệt nếu hợp lệ - Đơn chuyển trạng thái đã duyệt."
+   },
+   {
+    "id": "AP54_T9",
+    "type": "userTask",
+    "name": "10 · Yêu cầu trả trước?",
+    "lane": 4,
+    "x": 2250,
+    "doc": "Bước 10 · P. Kế toán. Nếu NCC yêu cầu thanh toán trước một phần: Kế toán ghi nhận trả trước và thực hiện thanh toán theo quy định trước khi NCC giao hàng."
+   },
+   {
+    "id": "AP54_T10",
+    "type": "userTask",
+    "name": "11 · Ghi nhận Hóa đơn đầu\nvào",
+    "lane": 4,
+    "x": 2460,
+    "doc": "Bước 11 · P. Kế toán. Sau khi Kho nhập hàng, Kế toán lập Hóa đơn mua hàng căn cứ Phiếu nhập kho - ghi công nợ phải trả NCC."
+   },
+   {
+    "id": "AP54_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 4,
+    "x": 2670
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP54_F0",
+    "from": "AP54_S",
+    "to": "AP54_T0"
+   },
+   {
+    "id": "AP54_F1",
+    "from": "AP54_T0",
+    "to": "AP54_T1"
+   },
+   {
+    "id": "AP54_F2",
+    "from": "AP54_T1",
+    "to": "AP54_T2"
+   },
+   {
+    "id": "AP54_F3",
+    "from": "AP54_T2",
+    "to": "AP54_T3"
+   },
+   {
+    "id": "AP54_F4",
+    "from": "AP54_T3",
+    "to": "AP54_T4"
+   },
+   {
+    "id": "AP54_F5",
+    "from": "AP54_T4",
+    "to": "AP54_T5"
+   },
+   {
+    "id": "AP54_F6",
+    "from": "AP54_T5",
+    "to": "AP54_T6"
+   },
+   {
+    "id": "AP54_F7",
+    "from": "AP54_T6",
+    "to": "AP54_T7"
+   },
+   {
+    "id": "AP54_F8",
+    "from": "AP54_T7",
+    "to": "AP54_T8"
+   },
+   {
+    "id": "AP54_F9",
+    "from": "AP54_T8",
+    "to": "AP54_T9"
+   },
+   {
+    "id": "AP54_F10",
+    "from": "AP54_T9",
+    "to": "AP54_T10"
+   },
+   {
+    "id": "AP54_F11",
+    "from": "AP54_T10",
+    "to": "AP54_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP55",
+  "id": "AP55",
+  "name": "Kiểm tra chất lượng hàng mua",
+  "stream": "P2P",
+  "code": "QC-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Kho",
+   "Hệ thống",
+   "Bộ phận Quản lý chất lượng"
+  ],
+  "width": 2586,
+  "nodes": [
+   {
+    "id": "AP55_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP55_T0",
+    "type": "userTask",
+    "name": "01 · Thông báo QC lên kế\nhoạch kiểm tra",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Kho. Sau khi lên kế hoạch nhập kho, Kho thông báo Phòng QLCL để chuẩn bị kiểm tra lô NVL sắp về (nhân lực, thiết bị kiểm, mẫu)."
+   },
+   {
+    "id": "AP55_T1",
+    "type": "serviceTask",
+    "name": "02 · Gán Cách ly cho Lô hàng",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · Hệ thống. Sau khi Kho post nhập kho, hệ thống tự động gán trạng thái Cách ly cho lô mới - không cho phép xuất dùng đến khi có kết quả QC."
+   },
+   {
+    "id": "AP55_T2",
+    "type": "serviceTask",
+    "name": "03 · Sinh phiếu kiểm tra\nchất lượng",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · Hệ thống. Căn cứ điều kiện kích hoạt QC đã thiết lập (theo mặt hàng, nhóm mặt hàng, loại nhập), hệ thống tự sinh phiếu kiểm tra chất lượng cho lô hàng."
+   },
+   {
+    "id": "AP55_T3",
+    "type": "userTask",
+    "name": "04 · Điều chỉnh phiếu QC\n(nếu cần)",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · P. QLCL. QLCL rà soát và điều chỉnh các chỉ tiêu kiểm tra, phương pháp lấy mẫu, số mẫu trước khi thực hiện kiểm tra thực tế."
+   },
+   {
+    "id": "AP55_T4",
+    "type": "userTask",
+    "name": "05 · Thực hiện kiểm tra NVL",
+    "lane": 2,
+    "x": 1200,
+    "doc": "Bước 5 · P. QLCL. Tiến hành kiểm tra tại phòng QC - kiểm tra cảm quan, lý hóa, vi sinh tùy theo loại NVL và yêu cầu chỉ tiêu."
+   },
+   {
+    "id": "AP55_T5",
+    "type": "userTask",
+    "name": "06 · Cập nhật kết quả vào hệ\nthống",
+    "lane": 2,
+    "x": 1410,
+    "doc": "Bước 6 · P. QLCL. Nhập kết quả đo lường vào phiếu QC, đính kèm chứng từ kiểm tra, chứng từ phân tích của bên thứ ba nếu có."
+   },
+   {
+    "id": "AP55_T6",
+    "type": "userTask",
+    "name": "07 · Kết quả QC",
+    "lane": 2,
+    "x": 1620,
+    "doc": "Bước 7 · P. QLCL. Đạt: chuyển kích hoạt Lô. Không đạt hoàn toàn: trả hàng NCC. Đạt một phần: tách Lô con cho phần không đạt."
+   },
+   {
+    "id": "AP55_T7",
+    "type": "serviceTask",
+    "name": "08 · Kích hoạt Lô đạt",
+    "lane": 2,
+    "x": 1830,
+    "doc": "Bước 8 · P. QLCL. Post phiếu QC; trạng thái Lô tự động chuyển từ Cách ly sang Kích hoạt - sẵn sàng xuất dùng cho sản xuất."
+   },
+   {
+    "id": "AP55_T8",
+    "type": "userTask",
+    "name": "09 · Tách Lô con phần không\nđạt",
+    "lane": 2,
+    "x": 2040,
+    "doc": "Bước 9 · P. QLCL. Tạo Lô con cho phần số lượng không đạt chất lượng để quản lý riêng, tránh lẫn lộn với phần đạt khi xuất kho."
+   },
+   {
+    "id": "AP55_T9",
+    "type": "userTask",
+    "name": "10 · Xử lý phần đạt · trả\nphần không đạt",
+    "lane": 2,
+    "x": 2250,
+    "doc": "Bước 10 · P. QLCL / CU. Phần đạt chuyển sang Kích hoạt. Phần không đạt chuyển sang quy trình Trả hàng NCC để đổi hàng hoặc hoàn tiền."
+   },
+   {
+    "id": "AP55_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 2,
+    "x": 2460
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP55_F0",
+    "from": "AP55_S",
+    "to": "AP55_T0"
+   },
+   {
+    "id": "AP55_F1",
+    "from": "AP55_T0",
+    "to": "AP55_T1"
+   },
+   {
+    "id": "AP55_F2",
+    "from": "AP55_T1",
+    "to": "AP55_T2"
+   },
+   {
+    "id": "AP55_F3",
+    "from": "AP55_T2",
+    "to": "AP55_T3"
+   },
+   {
+    "id": "AP55_F4",
+    "from": "AP55_T3",
+    "to": "AP55_T4"
+   },
+   {
+    "id": "AP55_F5",
+    "from": "AP55_T4",
+    "to": "AP55_T5"
+   },
+   {
+    "id": "AP55_F6",
+    "from": "AP55_T5",
+    "to": "AP55_T6"
+   },
+   {
+    "id": "AP55_F7",
+    "from": "AP55_T6",
+    "to": "AP55_T7"
+   },
+   {
+    "id": "AP55_F8",
+    "from": "AP55_T7",
+    "to": "AP55_T8"
+   },
+   {
+    "id": "AP55_F9",
+    "from": "AP55_T8",
+    "to": "AP55_T9"
+   },
+   {
+    "id": "AP55_F10",
+    "from": "AP55_T9",
+    "to": "AP55_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP56",
+  "id": "AP56",
+  "name": "Trả hàng Nhà cung cấp",
+  "stream": "P2P",
+  "code": "RT-01",
+  "LH": 176,
+  "lanes": [
+   "Bộ phận Kho",
+   "Bộ phận Cung ứng",
+   "NCC",
+   "Phòng Kế toán"
+  ],
+  "width": 1956,
+  "nodes": [
+   {
+    "id": "AP56_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP56_T0",
+    "type": "userTask",
+    "name": "01 · Phát sinh nhu cầu trả\nhàng",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. Kho / QLCL. Sau kiểm tra chất lượng, phát hiện hàng hỏng/không đạt QC. Kho và QLCL đề nghị trả hàng cho NCC để đổi hàng hoặc hoàn tiền."
+   },
+   {
+    "id": "AP56_T1",
+    "type": "userTask",
+    "name": "02 · Tiếp nhận yêu cầu trả",
+    "lane": 1,
+    "x": 570,
+    "doc": "Bước 2 · P. Cung Ứng. Cung Ứng nhận thông tin hàng lỗi, xem xét mức độ lỗi, số lượng và hình thức xử lý phù hợp với cam kết hợp đồng."
+   },
+   {
+    "id": "AP56_T2",
+    "type": "userTask",
+    "name": "03 · Liên hệ NCC thương\nlượng",
+    "lane": 1,
+    "x": 780,
+    "doc": "Bước 3 · P. Cung Ứng. Liên hệ NCC thỏa thuận phương án xử lý: trả hàng, đổi hàng cùng loại, hoặc giảm giá bù trừ công nợ."
+   },
+   {
+    "id": "AP56_T3",
+    "type": "userTask",
+    "name": "04 · NCC đồng ý nhận lại\nhàng?",
+    "lane": 2,
+    "x": 990,
+    "doc": "Bước 4 · NCC. Nếu đồng ý: chuyển lập Đơn trả hàng. Nếu không (do hết hạn đổi, vận chuyển khó): kết thúc quy trình, ghi nhận theo phương án khác."
+   },
+   {
+    "id": "AP56_T4",
+    "type": "userTask",
+    "name": "05 · Lập Đơn trả hàng mua",
+    "lane": 1,
+    "x": 1200,
+    "doc": "Bước 5 · P. Cung Ứng. Lập Đơn trả hàng mua trên hệ thống, tham chiếu Phiếu nhập kho gốc; số lượng trả không vượt quá số đã nhận."
+   },
+   {
+    "id": "AP56_T5",
+    "type": "userTask",
+    "name": "06 · Xuất kho hàng trả",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · BP. Kho. Kho xác nhận xuất hàng trả theo Đơn trả; gán Lô không đạt QC đã tách trước đó; ghi nhận giảm tồn kho."
+   },
+   {
+    "id": "AP56_T6",
+    "type": "userTask",
+    "name": "07 · Lập Hóa đơn điều chỉnh\ngiảm",
+    "lane": 3,
+    "x": 1620,
+    "doc": "Bước 7 · P. Kế toán. Kế toán lập Hóa đơn điều chỉnh giảm cho NCC - giảm công nợ phải trả đúng giá trị hàng đã trả; cân bằng sổ sách."
+   },
+   {
+    "id": "AP56_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 3,
+    "x": 1830
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP56_F0",
+    "from": "AP56_S",
+    "to": "AP56_T0"
+   },
+   {
+    "id": "AP56_F1",
+    "from": "AP56_T0",
+    "to": "AP56_T1"
+   },
+   {
+    "id": "AP56_F2",
+    "from": "AP56_T1",
+    "to": "AP56_T2"
+   },
+   {
+    "id": "AP56_F3",
+    "from": "AP56_T2",
+    "to": "AP56_T3"
+   },
+   {
+    "id": "AP56_F4",
+    "from": "AP56_T3",
+    "to": "AP56_T4"
+   },
+   {
+    "id": "AP56_F5",
+    "from": "AP56_T4",
+    "to": "AP56_T5"
+   },
+   {
+    "id": "AP56_F6",
+    "from": "AP56_T5",
+    "to": "AP56_T6"
+   },
+   {
+    "id": "AP56_F7",
+    "from": "AP56_T6",
+    "to": "AP56_E"
+   }
+  ]
+ },
+ {
+  "varName": "autoAP57",
+  "id": "AP57",
+  "name": "Xử lý hóa đơn mua hàng và công nợ phải trả",
+  "stream": "P2P",
+  "code": "AP-01",
+  "LH": 176,
+  "lanes": [
+   "Phòng Kế toán"
+  ],
+  "width": 2166,
+  "nodes": [
+   {
+    "id": "AP57_S",
+    "type": "startEvent",
+    "name": "Bắt đầu quy trình",
+    "lane": 0,
+    "x": 150
+   },
+   {
+    "id": "AP57_T0",
+    "type": "serviceTask",
+    "name": "01 · Khai báo định mức &\nhạch toán",
+    "lane": 0,
+    "x": 360,
+    "doc": "Bước 1 · BP. CNTT / Kế toán. Khai báo định mức xăng xe theo xe/nhân viên; khai báo hạn mức chi phí nhóm; thiết lập mã hóa nhóm hạch toán cho hàng hóa, chi phí, dịch vụ, Tài sản cố định. Là dữ liệu nền cho hệ thống tự kiểm tra."
+   },
+   {
+    "id": "AP57_T1",
+    "type": "userTask",
+    "name": "02 · Nhận hóa đơn điện tử từ\nVNPT",
+    "lane": 0,
+    "x": 570,
+    "doc": "Bước 2 · Kế toán phải trả. Mở cổng E-document, nhận hóa đơn điện tử đầu vào từ VNPT. Áp dụng cho hóa đơn không quản lý tồn kho (xăng, VPP, CCDC nhỏ) và hóa đơn dịch vụ (điện, nước, kiểm toán)."
+   },
+   {
+    "id": "AP57_T2",
+    "type": "serviceTask",
+    "name": "03 · Kiểm tra định mức & hạn\nmức",
+    "lane": 0,
+    "x": 780,
+    "doc": "Bước 3 · Kế toán phải trả. Hệ thống tự kiểm tra định mức xăng xe, số tiền chi trong ngày có thỏa điều kiện không. Thỏa: tiếp tục. Vượt hạn mức: cảnh báo, Kế toán xử lý ngoại lệ theo quy định nội bộ."
+   },
+   {
+    "id": "AP57_T3",
+    "type": "userTask",
+    "name": "04 · Xử lý E-document trạng\nthái Lỗi",
+    "lane": 0,
+    "x": 990,
+    "doc": "Bước 4 · Kế toán phải trả. Kiểm tra các E-document báo Lỗi (Nhà cung cấp chưa khai báo, mặt hàng chưa tạo, sai thông tin thuế); xử lý lỗi, bổ sung dữ liệu, sau đó tiếp tục quy trình."
+   },
+   {
+    "id": "AP57_T4",
+    "type": "userTask",
+    "name": "05 · Khởi tạo chứng từ từ\nE-document",
+    "lane": 0,
+    "x": 1200,
+    "doc": "Bước 5 · Kế toán phải trả. Từ E-document đã đủ dữ liệu, tạo hoặc cập nhật Đơn mua hàng/Hóa đơn mua hàng tương ứng. Kế toán kiểm tra preview trước khi post."
+   },
+   {
+    "id": "AP57_T5",
+    "type": "userTask",
+    "name": "06 · Ghi nhận hóa đơn theo\nnhóm",
+    "lane": 0,
+    "x": 1410,
+    "doc": "Bước 6 · Kế toán phải trả. Theo từng nhóm: (1) HĐ hàng hóa; (2) HĐ chi phí (tiếp khách, VPP, chi khác); (3) HĐ dịch vụ (kiểm toán, tư vấn); (4) HĐ mua Tài sản cố định; (5) HĐ phân bổ chi phí mua hàng/ Thuế nhập khẩu. Xem slide Tổng quan 6 nhóm HĐ."
+   },
+   {
+    "id": "AP57_T6",
+    "type": "userTask",
+    "name": "07 · Hóa đơn điều chỉnh /\nthay thế",
+    "lane": 0,
+    "x": 1620,
+    "doc": "Bước 7 · Kế toán phải trả. NCC phát hành Hóa đơn điều chỉnh giảm/tăng hoặc Hóa đơn thay thế: kiểm tra trên cổng VNPT, lấy về hệ thống. Lập Hóa đơn điều chỉnh giảm hoặc Hóa đơn mới tương ứng."
+   },
+   {
+    "id": "AP57_T7",
+    "type": "userTask",
+    "name": "08 · Đảo bút toán & kiểm tra",
+    "lane": 0,
+    "x": 1830,
+    "doc": "Bước 8 · Kế toán phải trả. Phát hiện bút toán chi phí đã ghi sổ sai: dùng chức năng đảo bút toán trên Hóa đơn đã post. Xem lại hóa đơn đã ghi sổ tại Sổ cái Nhà cung cấp; chạy báo cáo công nợ phải trả định kỳ."
+   },
+   {
+    "id": "AP57_E",
+    "type": "endEvent",
+    "name": "Kết thúc quy trình",
+    "lane": 0,
+    "x": 2040
+   }
+  ],
+  "flows": [
+   {
+    "id": "AP57_F0",
+    "from": "AP57_S",
+    "to": "AP57_T0"
+   },
+   {
+    "id": "AP57_F1",
+    "from": "AP57_T0",
+    "to": "AP57_T1"
+   },
+   {
+    "id": "AP57_F2",
+    "from": "AP57_T1",
+    "to": "AP57_T2"
+   },
+   {
+    "id": "AP57_F3",
+    "from": "AP57_T2",
+    "to": "AP57_T3"
+   },
+   {
+    "id": "AP57_F4",
+    "from": "AP57_T3",
+    "to": "AP57_T4"
+   },
+   {
+    "id": "AP57_F5",
+    "from": "AP57_T4",
+    "to": "AP57_T5"
+   },
+   {
+    "id": "AP57_F6",
+    "from": "AP57_T5",
+    "to": "AP57_T6"
+   },
+   {
+    "id": "AP57_F7",
+    "from": "AP57_T6",
+    "to": "AP57_T7"
+   },
+   {
+    "id": "AP57_F8",
+    "from": "AP57_T7",
+    "to": "AP57_E"
+   }
+  ]
+ }
+]

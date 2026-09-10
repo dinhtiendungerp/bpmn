@@ -113,6 +113,33 @@ Tổng quát hoá từ tài liệu đào tạo triển khai ERP, đã bỏ tên 
 
 Mẫu minh họa, chưa phải đặc tả được phê duyệt để triển khai cho khách hàng. Mẫu trống cố ý có cảnh báo chưa hoàn chỉnh. Sửa vị trí mẫu không tự tái bố trí các file người dùng đã lưu.
 
+### Thư viện quy trình
+
+`examples/processes/` chứa 57 quy trình đã tổng quát hoá từ cùng bộ tài liệu, chia theo bốn luồng nghiệp vụ:
+
+| Thư mục | Số quy trình | Nội dung |
+|---|---|---|
+| `P2P/` | 10 | Danh mục nhà cung cấp và mặt hàng, giá hợp đồng, mua theo kế hoạch, mua không thường xuyên, kiểm chất lượng hàng mua, trả hàng, hóa đơn và công nợ phải trả |
+| `O2C/` | 15 | Danh mục khách hàng, bảng giá và chiết khấu, các kênh bán, trả hàng bán, giao vận, hóa đơn và thu tiền |
+| `MFG/` | 10 | Định mức và công đoạn, kế hoạch sản xuất, lệnh sản xuất, kiểm chất lượng trong sản xuất, tính giá thành |
+| `R2R/` | 22 | Danh mục tài khoản, tiền mặt và ngân hàng, tạm ứng, tài sản cố định, công cụ dụng cụ, ngân sách, bút toán và chốt kỳ |
+
+Mỗi quy trình là một pool nhiều lane theo người thực hiện, các bước chạy tuần tự và **được đánh số trên tên node** (`01 · `, `02 · `…) đúng thứ tự bảng bước gốc. `<bpmn:documentation>` của mỗi node giữ mô tả đầy đủ, hiện trong Passport khi nhấp vào node.
+
+Dựng lại toàn bộ từ `examples/processes/source.json`:
+
+```bash
+npm run bpmn:processes
+```
+
+Chỉ có XML, **không dựng sẵn HTML** — mỗi artifact nặng khoảng 2 MB, nhân 57 là quá lớn cho repo. Cần xem thì render từng file:
+
+```bash
+npm run bpmn:render -- examples/processes/P2P/PO-01-mua-hang-theo-ke-hoach-san-xuat.bpmn output/po-01.html "Mua hàng theo kế hoạch sản xuất"
+```
+
+Toàn bộ 57 file đều sạch qua `bpmn:validate` và `bpmn:layout`. Đây là bản số hoá quy trình mẫu để tham khảo và chỉnh sửa, không phải quy trình đã được phê duyệt của bất kỳ tổ chức nào.
+
 ## Phạm vi hiện tại
 
 - Tập trung **BPMN 2.0 Process & Collaboration**. Không tuyên bố đủ toàn bộ BPMN 2.0.2. Choreography/Conversation chưa hỗ trợ.
@@ -136,6 +163,8 @@ Mẫu minh họa, chưa phải đặc tả được phê duyệt để triển k
 | `scripts/` | CLI validate/render, tạo mẫu, đóng gói source |
 | `scripts/check-layout.mjs` | Kiểm hình học BPMNDI: nhãn chồng nhau, node tràn lane, đường xuyên node |
 | `examples/bpmn/` | 14 file XML có BPMNDI |
+| `examples/processes/` | 57 quy trình nghiệp vụ theo luồng P2P / O2C / MFG / R2R |
+| `scripts/build-processes.mjs` | Dựng lại thư viện quy trình từ `source.json` |
 | `tests/`, `docs/` | Kiểm tra, kiến trúc, phạm vi QA |
 | `.claude/skills/bpmn-studio/` | Skill hướng dẫn Claude tự vẽ và render BPMN từ repo này |
 

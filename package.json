@@ -19,6 +19,7 @@
     "bpmn:validate": "node scripts/validate-bpmn.mjs",
     "bpmn:layout": "node scripts/check-layout.mjs",
     "bpmn:examples": "node scripts/build-artifacts.mjs",
+    "bpmn:processes": "node scripts/build-processes.mjs",
     "build:pages": "node scripts/build-pages.mjs"
   },
   "dependencies": {
