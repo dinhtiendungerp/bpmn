@@ -13,14 +13,15 @@
     "test": "npm run build && node --test tests/*.test.mjs",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
-    "test:bpmn": "node --test tests/bpmn.test.mjs",
+    "test:bpmn": "node --test tests/bpmn.test.mjs tests/dsl.test.mjs",
     "typecheck": "tsc --noEmit",
     "bpmn:render": "node scripts/render-bpmn.mjs",
     "bpmn:validate": "node scripts/validate-bpmn.mjs",
     "bpmn:layout": "node scripts/check-layout.mjs",
     "bpmn:examples": "node scripts/build-artifacts.mjs",
     "bpmn:processes": "node scripts/build-processes.mjs",
-    "build:pages": "node scripts/build-pages.mjs"
+    "build:pages": "node scripts/build-pages.mjs",
+    "bpmn:dsl": "node scripts/dsl-to-bpmn.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

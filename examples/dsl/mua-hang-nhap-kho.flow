@@ -1,0 +1,55 @@
+# Mua hàng và nhập kho - ví dụ đủ các cấu trúc hay gặp
+title "Mua hàng và nhập kho"
+id MuaHangNhapKho
+number on
+let han_ncc "48 giờ"
+
+lane yc   "Bộ phận yêu cầu"
+lane mua  "Phòng Mua hàng"
+lane kho  "Kho"
+lane qc   "QC"
+lane kt   "Kế toán"
+pool ncc  "Nhà cung cấp"
+
+yc:  s      start      "Phát sinh nhu cầu"
+yc:  lapyc  user       "Lập đề nghị mua hàng" "Ghi mặt hàng, số lượng, ngày cần."
+mua: duyet  user       "Duyệt đề nghị & chọn NCC"
+mua: ok     ?          "Được duyệt?"
+yc:  bosung user       "Bổ sung đề nghị"
+mua: po     service    "Tạo và gửi PO"
+mua: qh     !timer~ on po "NCC chưa xác nhận sau @han_ncc" PT48H
+mua: nhac   send       "Nhắc NCC xác nhận"
+mua: nhacxong end      "Đã nhắc"
+kho: nhan   user       "Nhận hàng, đối chiếu PO"
+kho: tach   +
+qc:  kiem   user       "Kiểm tra chất lượng"
+kho: cat    user       "Cất hàng vào vị trí"
+kho: gop    +
+qc:  dat    ?          "Đạt chất lượng?"
+kho: tra    user       "Trả hàng cho NCC"
+kho: tu_choi end:error "Hàng không đạt"
+kt:  hd     user       "Đối chiếu hoá đơn 3 bên"
+kt:  xong   end        "Hoàn tất nhập kho"
+yc:  huy    end        "Đề nghị bị huỷ"
+
+s > lapyc > duyet "đề nghị mua"
+duyet > ok
+ok > po "duyệt"
+ok > bosung "cần bổ sung"
+ok > huy "từ chối"
+bosung ~> duyet "đề nghị đã sửa"
+po > nhan "PO đã xác nhận"
+qh > nhac > nhacxong
+nhan > tach
+tach > kiem "mẫu kiểm"
+tach > cat
+kiem > gop
+cat > gop
+gop > dat
+dat > hd "đạt" default
+dat > tra "không đạt"
+tra > tu_choi
+hd > xong
+
+po => ncc "Đơn mua hàng"
+ncc => nhan "Hàng + phiếu giao"

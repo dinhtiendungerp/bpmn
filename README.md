@@ -72,6 +72,31 @@ npm test
 
 Script ứng dụng hỗ trợ Linux; Windows dùng WSL. Stack web: React 19, TypeScript, Vinext/Vite, Cloudflare Worker. Không cần API key cho chức năng BPMN.
 
+## Viết quy trình bằng DSL
+
+Thay vì viết XML và tự tính toạ độ, viết quy trình thành file `.flow`, mỗi dòng một lane, một bước hoặc một luồng:
+
+```
+title "Duyệt đề nghị mua hàng"
+lane yc  "Người yêu cầu"
+lane duy "Trưởng bộ phận"
+yc:  s    start "Phát sinh nhu cầu"
+yc:  lap        "Lập đề nghị mua"
+duy: ok   ?     "Duyệt?"
+duy: xong end   "Đã duyệt"
+yc:  sua        "Sửa đề nghị"
+s > lap > ok "đề nghị mua"
+ok > xong "duyệt"
+ok > sua "trả lại"
+sua ~> lap "đề nghị đã sửa"
+```
+
+```bash
+npm run bpmn:dsl -- work/de-nghi.flow work/de-nghi.bpmn --questions work/cau-hoi.md
+```
+
+Script tự xếp cột, hàng trong lane, đường nối và nhãn, rồi ghi file `.bpmn` qua được `bpmn:validate` và `bpmn:layout`. Nó cũng in ra những chỗ quy trình còn bỏ ngỏ: bước chưa có người làm, chuyển giao giữa hai lane không ghi chuyển cái gì, nhánh thiếu điều kiện, việc song song không gộp lại. `--questions` ghi các câu đó ra file để mang vào buổi khảo sát sau. Cú pháp: `docs/DSL.md`. Ví dụ đủ cấu trúc: `examples/dsl/mua-hang-nhap-kho.flow`.
+
 ## Chương riêng
 
 `buildStandaloneHTML()` nhận `views`, cùng schema của Archify:
@@ -165,12 +190,14 @@ Toàn bộ 57 file đều sạch qua `bpmn:validate` và `bpmn:layout`. Đây l�
 | `examples/bpmn/` | 14 file XML có BPMNDI |
 | `examples/processes/` | 57 quy trình nghiệp vụ theo luồng P2P / O2C / MFG / R2R |
 | `scripts/build-processes.mjs` | Dựng lại thư viện quy trình từ `source.json` |
+| `lib/bpmn/dsl.mjs`, `scripts/dsl-to-bpmn.mjs` | DSL văn bản: parse, finding nghiệp vụ, tự bố cục, sinh BPMN XML |
+| `examples/dsl/` | Quy trình mẫu viết bằng DSL |
 | `tests/`, `docs/` | Kiểm tra, kiến trúc, phạm vi QA |
 | `.claude/skills/bpmn-studio/` | Skill hướng dẫn Claude tự vẽ và render BPMN từ repo này |
 
 ## Dùng với Claude
 
-`.claude/skills/bpmn-studio/SKILL.md` là bản hướng dẫn để Claude tạo diagram từ mô tả nghiệp vụ mà không cần đọc lại mã nguồn: quy ước tọa độ BPMNDI, bảng màu, danh sách rule mà `validate-bpmn.mjs` và `check-layout.mjs` kiểm, và vòng lặp bắt buộc viết XML → validate → kiểm bố cục → render.
+`.claude/skills/bpmn-studio/SKILL.md` là bản hướng dẫn để Claude tạo diagram từ mô tả nghiệp vụ mà không cần đọc lại mã nguồn: cách gom dữ kiện khảo sát, viết DSL, đọc finding, rồi validate, kiểm bố cục và render. Phần viết XML tay chỉ còn dùng cho các cấu trúc DSL chưa hỗ trợ.
 
 Claude Code đọc thẳng skill trong repo khi làm việc ở thư mục này. Để dùng ở mọi nơi khác (Cowork, claude.ai), lưu cùng nội dung đó thành một skill trong tài khoản.
 
