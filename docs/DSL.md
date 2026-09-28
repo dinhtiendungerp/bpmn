@@ -50,7 +50,7 @@ Ví dụ đủ các cấu trúc (song song, sự kiện hẹn giờ, pool nhà c
 |---|---|
 | `title "Tên quy trình"` | Tên pool chính và tên process |
 | `id MaQuyTrinh` | Id của process. Bỏ trống thì lấy từ title, bỏ dấu |
-| `number on` | Đánh số bước `01 · `, `02 · `... theo thứ tự đọc từ trái sang phải |
+| `number on` | Đánh số task `01 · `, `02 · `... theo thứ tự khai báo bước trong file (sự kiện và cổng không đánh số) |
 | `let han "48 giờ"` | Khai báo tham số. Viết `@han` ở bất kỳ dòng nào phía sau, kể cả trong tên bước và thời hạn timer |
 | `lane kho "Kho"` | Một lane trong pool hiện tại |
 | `pool ncc "Nhà cung cấp"` | Mở một pool mới. Các dòng `lane` sau đó thuộc pool này |
